@@ -1,11 +1,11 @@
 import React from "react";
 
-function Player(){
+function Play() {
     return (
         <div>
-            Hello Player
+            Play Button
         </div>
     );
 }
 
-export default Player;
+export default Play;

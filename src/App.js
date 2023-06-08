@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
-import Player from './Components/Player';
 import Login from './Components/Login';
+import Spotify from './Components/Spotify';
+
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <div className='App'>
-      {(token === '') ? <Login /> : <Player token={token} />}
+      {(token === '') ? <Login /> : <Spotify token={token}/> }
     </div>
   );
 }

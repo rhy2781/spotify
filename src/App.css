@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: gray;
   height: 100vh;
 }
 
@@ -56,4 +55,81 @@
 .Login:active {
   position:relative;
   top:1px;
+}
+
+/* Player that will be displayed at the bottom of the screen */
+.Player{
+  display: flex;
+  flex-direction:row;
+  background-color: #191414;
+}
+/* First third of the player containing track information*/
+.Player_1_3{ 
+  width: 33%;
+  outline-width: 1px; /* Remove */
+  outline: red dotted; /* Remove */
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding: 10px;
+}
+.current_track_details_container{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.current_track_cover{
+  width: 100%;
+  max-width: 60px;
+  border-radius: 7%;
+}
+.current_track_name{
+  font-size: large;
+  color: white;
+  padding: 2px;
+}
+.current_track_artists{
+  font-size: medium;
+  color: grey;
+}
+/* Second third of the player containing player controls */
+.Player_2_3{ 
+  width: 33%;
+  outline-width: 1px; /* Remove */
+  outline: red dotted; /* Remove */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  padding: 10px;
+}
+.play_button{
+  background-color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 10px;;
+
+}
+.play_icon{
+  position: relative;
+  top: calc(50% - 35%);
+  width: 70%;
+  height: 70%;
+}
+.previous_button, .next_button, .shuffle_button, .repeat_button{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 10px;;
+
+}
+.previous_icon, .next_icon, .shuffle_icon, .repeat_icon{
+  position: relative;
+  top: calc(50% - 35%);
+  width: 70%;
+  height: 70%;
+  color: white;
 }

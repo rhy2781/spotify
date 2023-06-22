@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 import Login from './Components/Login';
-import Spotify from './Components/Spotify';
+import Canvas from './Components/Canvas';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className='App'>
-      {(token === '') ? <Login /> : <Spotify token={token}/> }
+      {(token === '') ? <Login /> : <Canvas token={token} />}
     </div>
   );
 }

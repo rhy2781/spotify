@@ -23,6 +23,9 @@ function Player(props) {
     const [shuffle, setShuffle] = useState(false);
     const [volume, setVolume] = useState(0);
     const [repeat, setRepeat] = useState(0);
+    const [progress_duration, setProgressDuration] = useState("0:00");
+    const [total_duration, setTotalDuration] = useState("-0:00");
+    const [progressBarGraphic, setProgressBarGraphic] = useState(0);
 
 
     useEffect(() => {
@@ -69,9 +72,10 @@ function Player(props) {
                 });
 
             }));
-
-            player.connect();
+            player.connect();      
         };
+
+        const newTimer = setInterval(progress, 1000); // Update every second
 
     }, []);
 
@@ -121,8 +125,38 @@ function Player(props) {
             })
         }
     }
-    
 
+    async function progress(){
+        const response = await fetch('https://api.spotify.com/v1/me/player', {
+            method: 'GET',
+            headers:{
+                'Authorization': `Bearer ${props.token}`
+            }
+        })
+        if(response.status == 200){
+            const json = await response.json()
+            const progress_min = Math.floor((json.progress_ms / 1000) / 60);
+            const progress_sec = Math.floor((json.progress_ms / 1000) % 60);
+            if(progress_sec < 10){
+                setProgressDuration(`${progress_min}:0${progress_sec}`);
+            }
+            else{
+                setProgressDuration(`${progress_min}:${progress_sec}`);
+            }
+
+            const duration_min = Math.floor(((json.item.duration_ms - json.progress_ms ) / 1000) / 60);
+            const duration_sec = Math.floor(((json.item.duration_ms - json.progress_ms ) / 1000) % 60);
+
+            if(duration_sec < 10){
+                setTotalDuration(`${duration_min}   :0${duration_sec}`);
+            }
+            else{
+                setTotalDuration(`${duration_min}   :${duration_sec}`);
+            }
+            setProgressBarGraphic((json.progress_ms / json.item.duration_ms) * 100)
+        }
+    }
+    
     if (is_active) {
         return (
             <div>
@@ -141,21 +175,34 @@ function Player(props) {
                         </div>
                     </div>
                     <div className="Player_2_3"> 
-                        <div className="shuffle_button" onClick={() => {toggleShuffle() }} >
-                            {shuffle ? <IoIosShuffle className="shuffle_icon" style={{color: "#1DB954"}}/> : <IoIosShuffle className="shuffle_icon"/>}
-                        </div>  
-                        <div className="previous_button" onClick={() => { player.previousTrack()}} >
-                            {<IoMdSkipBackward className="previous_icon"/>}
-                        </div>  
-                        <div className="play_button" onClick={() => { player.togglePlay()}}>
-                            {is_paused ? <IoIosPlay className="play_icon"/> : <IoIosPause className="play_icon"/>}  
+                        <div className="Player_2_3_buttons">
+                            <div className="shuffle_button" onClick={() => {toggleShuffle() }} >
+                                {shuffle ? <IoIosShuffle className="shuffle_icon" style={{color: "#1DB954"}}/> : <IoIosShuffle className="shuffle_icon"/>}
+                            </div>  
+                            <div className="previous_button" onClick={() => { player.previousTrack()}} >
+                                {<IoMdSkipBackward className="previous_icon"/>}
+                            </div>  
+                            <div className="play_button" onClick={() => { player.togglePlay()}}>
+                                {is_paused ? <IoIosPlay className="play_icon"/> : <IoIosPause className="play_icon"/>}  
+                            </div>
+                            <div className="next_button" onClick={() => { player.nextTrack()}} >
+                                {<IoMdSkipForward className="next_icon"/>}
+                            </div>  
+                            <div className="repeat_button" onClick={() => {toggleRepeat()}} >
+                                {repeat == 0 ? <LuRepeat className="repeat_icon"/> : repeat == 1 ? <LuRepeat className="repeat_icon" style={{color: "#1DB954"}}/> : <LuRepeat1 className="repeat_icon" style={{color: "#1DB954"}}/> }
+                            </div>  
                         </div>
-                        <div className="next_button" onClick={() => { player.nextTrack()}} >
-                            {<IoMdSkipForward className="next_icon"/>}
-                        </div>  
-                        <div className="repeat_button" onClick={() => {toggleRepeat()}} >
-                            {repeat == 0 ? <LuRepeat className="repeat_icon"/> : repeat == 1 ? <LuRepeat className="repeat_icon" style={{color: "#1DB954"}}/> : <LuRepeat1 className="repeat_icon" style={{color: "#1DB954"}}/> }
-                        </div>  
+                        <div className="Player_2_3_bottom">
+                            <div>
+                                {progress_duration}
+                            </div>
+                            <div className="progress_bar">
+                                <div className="progress" style={{width: `${progressBarGraphic}%`}}></div>
+                            </div>
+                            <div>
+                                {total_duration}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

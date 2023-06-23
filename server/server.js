@@ -28,7 +28,7 @@ app.use(cors());
 
 app.get('/login', function (req, res) {
     const state = generateRandomString(16);
-    const scope = 'user-read-private user-read-email streaming';
+    const scope = 'user-read-private user-read-email streaming user-read-playback-state';
     res.redirect('http://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',

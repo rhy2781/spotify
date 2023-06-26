@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {IoIosPlay, IoIosPause, IoMdSkipBackward, IoMdSkipForward, IoIosShuffle} from 'react-icons/io';
 import {LuRepeat, LuRepeat1} from 'react-icons/lu';
+import {BsVolumeUp} from 'react-icons/bs';
+
 const track = {
     name: "",
     album: {
@@ -77,7 +79,13 @@ function Player(props) {
 
         const newTimer = setInterval(progress, 1000); // Update every second
 
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
     }, []);
+
+    function handleBeforeUnload(){
+        player.disconnect();
+    }
 
     async function toggleShuffle(){
         if(shuffle){
@@ -156,6 +164,11 @@ function Player(props) {
             setProgressBarGraphic((json.progress_ms / json.item.duration_ms) * 100)
         }
     }
+
+    async function adjust_volume(i){
+        player.setVolume(i);
+        setVolume(i);
+    }
     
     if (is_active) {
         return (
@@ -202,6 +215,22 @@ function Player(props) {
                             <div>
                                 {total_duration}
                             </div>
+                        </div>
+                    </div>
+                    <div className="Player_3_3">
+                        <div className="volume_container">
+                            <BsVolumeUp className="sound_icon"/>
+                            <input 
+                                className="slider" 
+                                type="range" 
+                                min={0} 
+                                max={1} 
+                                step={"any"} 
+                                value={volume} 
+                                onChange={event => { 
+                                    adjust_volume(event.target.valueAsNumber)
+                                }} 
+                            />
                         </div>
                     </div>
                 </div>

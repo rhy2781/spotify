@@ -17,17 +17,22 @@ const track = {
 
 
 function Player(props) {
+    // Variables for spotify player object
+    const [player, setPlayer] = useState(undefined); 
+    const [is_active, setActive] = useState(false); 
 
-    const [is_paused, setPaused] = useState(false);
-    const [is_active, setActive] = useState(false);
-    const [player, setPlayer] = useState(undefined);
-    const [current_track, setTrack] = useState(track);
+    // Variables for state
+    const [is_paused, setPaused] = useState(false); 
+    const [current_track, setTrack] = useState(track); 
     const [shuffle, setShuffle] = useState(false);
-    const [volume, setVolume] = useState(0);
+    const [volume, setVolume] = useState(0); 
     const [repeat, setRepeat] = useState(0);
-    const [progress_duration, setProgressDuration] = useState("0:00");
-    const [total_duration, setTotalDuration] = useState("-0:00");
-    const [progressBarGraphic, setProgressBarGraphic] = useState(0);
+
+    // Variables for song progress
+    const [progress_duration_display, setProgressDurationDisplay] = useState("0:00"); // string display
+    const [total_duration_display, setTotalDurationDisplay] = useState("-0:00"); // string display
+    const [total_duration_ms, setTotalDurationMS] = useState(0); // used to progress seek
+    const [progressBarGraphic, setProgressBarGraphic] = useState(0); // value to display on progress bar
 
 
     useEffect(() => {
@@ -77,7 +82,7 @@ function Player(props) {
             player.connect();      
         };
 
-        const newTimer = setInterval(progress, 1000); // Update every second
+        const newTimer = setInterval(progress, 1000); // Update every half second
 
         window.addEventListener('beforeunload', handleBeforeUnload);
 
@@ -146,28 +151,37 @@ function Player(props) {
             const progress_min = Math.floor((json.progress_ms / 1000) / 60);
             const progress_sec = Math.floor((json.progress_ms / 1000) % 60);
             if(progress_sec < 10){
-                setProgressDuration(`${progress_min}:0${progress_sec}`);
+                setProgressDurationDisplay(`${progress_min}:0${progress_sec}`);
             }
             else{
-                setProgressDuration(`${progress_min}:${progress_sec}`);
+                setProgressDurationDisplay(`${progress_min}:${progress_sec}`);
             }
 
             const duration_min = Math.floor(((json.item.duration_ms - json.progress_ms ) / 1000) / 60);
             const duration_sec = Math.floor(((json.item.duration_ms - json.progress_ms ) / 1000) % 60);
 
             if(duration_sec < 10){
-                setTotalDuration(`${duration_min}   :0${duration_sec}`);
+                setTotalDurationDisplay(`-${duration_min}   :0${duration_sec}`);
             }
             else{
-                setTotalDuration(`${duration_min}   :${duration_sec}`);
+                setTotalDurationDisplay(`-${duration_min}   :${duration_sec}`);
             }
-            setProgressBarGraphic((json.progress_ms / json.item.duration_ms) * 100)
+            setTotalDurationMS(json.item.duration_ms);
+            setProgressBarGraphic((json.progress_ms / json.item.duration_ms))
         }
     }
 
     async function adjust_volume(i){
         player.setVolume(i);
         setVolume(i);
+    }
+
+    async function handleProgressChange(i){
+        const seek_to = Math.floor(total_duration_ms * i);
+        player.togglePlay();
+        player.seek(seek_to);
+        setProgressBarGraphic(seek_to / total_duration_ms);
+        player.togglePlay();
     }
     
     if (is_active) {
@@ -188,7 +202,7 @@ function Player(props) {
                         </div>
                     </div>
                     <div className="Player_2_3"> 
-                        <div className="Player_2_3_buttons">
+                        <div className="Player_2_3_top">
                             <div className="shuffle_button" onClick={() => {toggleShuffle() }} >
                                 {shuffle ? <IoIosShuffle className="shuffle_icon" style={{color: "#1DB954"}}/> : <IoIosShuffle className="shuffle_icon"/>}
                             </div>  
@@ -196,7 +210,7 @@ function Player(props) {
                                 {<IoMdSkipBackward className="previous_icon"/>}
                             </div>  
                             <div className="play_button" onClick={() => { player.togglePlay()}}>
-                                {is_paused ? <IoIosPlay className="play_icon"/> : <IoIosPause className="play_icon"/>}  
+                                {is_paused ? <IoIosPlay className="play_icon"/> : <IoIosPause className="pause_icon"/>}  
                             </div>
                             <div className="next_button" onClick={() => { player.nextTrack()}} >
                                 {<IoMdSkipForward className="next_icon"/>}
@@ -207,13 +221,23 @@ function Player(props) {
                         </div>
                         <div className="Player_2_3_bottom">
                             <div>
-                                {progress_duration}
+                                {progress_duration_display}
                             </div>
-                            <div className="progress_bar">
-                                <div className="progress" style={{width: `${progressBarGraphic}%`}}></div>
+                            <div className="slider_encased">
+                                <input 
+                                        className="test"
+                                        type="range" 
+                                        min={0} 
+                                        max={1} 
+                                        step={"any"} 
+                                        value={progressBarGraphic} 
+                                        onChange={event => { 
+                                            handleProgressChange(event.target.valueAsNumber);
+                                        }} 
+                                    />
                             </div>
                             <div>
-                                {total_duration}
+                                {total_duration_display}
                             </div>
                         </div>
                     </div>

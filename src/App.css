@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   height: 100vh;
+  background-color: var(--black);
+
 }
 
 :root {
@@ -34,7 +36,8 @@
 .Player {
   display: flex;
   flex-direction: row;
-  background-color: var(--black);
+  outline: red dotted; /* DEBUG */
+  outline-width: 1px; /* DEBUG */
 }
 
 /* First third of the player containing track information*/
@@ -44,6 +47,8 @@
   flex-direction: row;
   text-align: left;
   padding: 10px;
+  outline: red dotted; /* DEBUG */
+  outline-width: 1px; /* DEBUG */
 }
 
 .current_track_details_container {
@@ -55,7 +60,6 @@
 .current_track_cover {
   width: 100%;
   max-width: 60px;
-  border-radius: 7%;
 }
 
 .current_track_name {
@@ -75,7 +79,7 @@
   width: 33%;
 }
 
-.Player_2_3_buttons {
+.Player_2_3_top {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -90,10 +94,10 @@
   border-radius: 50%;
   text-align: center;
   padding: 10px;
-  ;
 }
 
-.play_icon {
+.play_icon,
+.pause_icon {
   position: relative;
   top: calc(50% - 50%);
   width: 100%;
@@ -128,7 +132,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items:center;
   padding: 1px;
   font-size: 12px;
   color: var(--white);
@@ -174,6 +178,7 @@
   align-items: center;
 }
 .slider{
+  width: 80%;
   accent-color: var(--white);
   height: 8px;
 }
@@ -187,3 +192,23 @@
 .volume_container:hover .slider::-webkit-slider-thumb{
   opacity: 1;
 }
+
+.slider_encased:hover .test{
+  accent-color: var(--green);
+}
+.slider_encased:hover .test::-webkit-slider-thumb{
+  opacity: 1;
+}
+.test{
+  accent-color: var(--white);
+  width : calc(25vw);
+  outline:red dotted;/* Remove */
+  outline-width: 1px; /* Remove*/
+}
+.test::-webkit-slider-thumb{
+  opacity: 0;
+}
+/* .debug{
+  outline:red dotted;
+  outline-width: 1px;
+} */

@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 import Login from './Components/Login';
-import Canvas from './Components/Canvas';
+import Canvas from './Redo/Canvas';
 
 
 function App() {

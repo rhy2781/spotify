@@ -262,7 +262,7 @@ function Player(props) {
         )
     } else {
         return (
-            <div>
+            <div className="Player">
                 Please Transfer Playback to Web SDK
             </div>
         )

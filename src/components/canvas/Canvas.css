@@ -1,0 +1,40 @@
+.Top {
+    height: calc(100vh - 70px - 2vmin);
+}
+
+.Player {
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1vmin;
+
+    outline: white solid 1px;
+}
+
+
+.Controls {
+    width: 150%;
+    outline: red dotted 1px;
+}
+
+
+/* No playback state*/
+.NoPlayback {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.PlaybackButton {
+    padding: 1%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 10px;
+}

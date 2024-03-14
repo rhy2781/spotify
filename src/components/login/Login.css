@@ -1,0 +1,26 @@
+.Login {
+    background-color: var(--black);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.LoginText{
+    padding: 1%;
+}
+
+.LoginButton{
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 10px;
+}
+
+.LoginButton:active {
+    position: relative;
+    top: 1%
+}

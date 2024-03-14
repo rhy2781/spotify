@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import WebPlayback from './components/WebPlayback';
-import Login from './components/Login';
+import Login from './components/login/Login';
 import './App.css';
-import Canvas from './components/Canvas';
+import Canvas from './components/canvas/Canvas';
 
 function App() {
 
@@ -24,9 +23,9 @@ function App() {
   }, []);
 
   return (
-    <>
-      {(token === ' ') ? <Login /> : <Canvas />}
-    </>
+    <div className='App'>
+      {(token === ' ') ? <Login /> : <Canvas token={token} />}
+    </div>
   );
 }
 

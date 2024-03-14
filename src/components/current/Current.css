@@ -1,0 +1,37 @@
+.Current {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    outline: gold dotted 1px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.CurrentImageContainer {
+    outline: red solid 1px;
+    overflow: hidden;
+}
+
+.CurrentImageContainer img {
+    height: 100%;
+    width: auto;
+}
+
+.CurrentDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left:1%;
+}
+
+.CurrentTrack {}
+
+.CurrentArtists {
+    display: flex;
+    flex-direction: row;
+}
+
+.Artist {
+    padding-right: 1%;
+}

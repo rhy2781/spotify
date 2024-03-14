@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import WebPlayback from './components/WebPlayback';
+import Login from './components/Login';
 import './App.css';
+import Canvas from './components/Canvas';
 
 function App() {
+
+  const [token, setToken] = useState(' ');
+
+  // request token initially
+  useEffect(() => {
+    async function getAuthenticated() {
+      await fetch(`${process.env.REACT_APP_BACKEND}/auth/token`)
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.token) {
+            setToken(response.token)
+          }
+        })
+    }
+
+    getAuthenticated()
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {(token === ' ') ? <Login /> : <Canvas />}
+    </>
   );
 }
 

@@ -54,14 +54,5 @@ router.post('/repeat', (req, res) => {
     }
 })
 
-router.get('/update', async (req, res) => {
-    // console.log('update request received')
-    try {
-        res.send({"temp":"temp"})
-    }
-    catch (error) {
-        console.log(error)
-    }
-})
 
 module.exports = router

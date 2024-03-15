@@ -8,7 +8,6 @@ router.get('', (req, res) => {
 const credentials = require('../credentials')
 
 router.post('', (req, res) => {
-    console.log(req.body)
     if(req.body.device != null){
         fetch('https://api.spotify.com/v1/me/player', {
             method: 'PUT',

@@ -174,9 +174,11 @@ function Canvas(props) {
                 <div>
                     Please transfer playback to the Web SDK
                 </div>
-                <div onClick={handleTransfer}>
-                    Testing
-                </div>
+                {device &&
+                    <div onClick={handleTransfer}>
+                        Testing
+                    </div>
+                }
                 {/* <a className="PlaybackButton" onClick={() => handleTransfer()}>
                     Click
                 </a> */}

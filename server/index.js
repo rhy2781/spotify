@@ -8,7 +8,6 @@ var options = {
     origin: 'http://localhost:3000'
 }
 app.use(cors(options))
-
 app.use(express.json())
 
 /**
@@ -30,6 +29,10 @@ app.get('/test', (req, res) => {
 
 const transfer = require('./routes/transfer')
 app.use('/transfer', transfer)
+
+
+const controls = require('./routes/controls')
+app.use('/controls', controls)
 
 
 app.listen(port, () => {

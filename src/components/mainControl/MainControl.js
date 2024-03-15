@@ -7,7 +7,7 @@ import './MainControl.css'
 function MainControl(props) {
 
     async function toggleShuffle() {
-        await fetch(`${process.env.REACT_APP_BACKEND}/player/shuffle`, {
+        await fetch(`${process.env.REACT_APP_BACKEND}/controls/shuffle`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ function MainControl(props) {
     }
 
     async function toggleRepeat() {
-        await fetch(`${process.env.REACT_APP_BACKEND}/player/repeat`, {
+        await fetch(`${process.env.REACT_APP_BACKEND}/controls/repeat`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

@@ -5,6 +5,7 @@ import ProgressBar from "../progressBar/ProgressBar";
 import Current from "../current/Current";
 import MainControl from "../mainControl/MainControl";
 import SideControl from "../sideControl/SideControl";
+import Playlists from "../playlists/Playlists";
 
 
 const track = {
@@ -131,10 +132,10 @@ function Canvas(props) {
         return (
             <div>
                 <div className="Top">
+                    <Playlists />
                     <div>
-                        current access token {props.token}
+                        This would be where the main section is
                     </div>
-                    This is the top component
                 </div>
                 <div className="Player">
                     <Current

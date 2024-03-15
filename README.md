@@ -25,4 +25,4 @@ To install all of our node packages, we use the command
 ### Node SSL Legacy
 If you run into `Error: error:0308010C:digital envelope routines::unsupported`, you simply need to reference a legacy version of node SSL using the following command
 
-`export NODE_OPTIONS=--openssl-legacy-provider`
+`export NODE_OPTIONS=--openssl-legacy-provider` 

@@ -9,6 +9,8 @@ var options = {
 }
 app.use(cors(options))
 
+app.use(express.json())
+
 /**
  * Authentication routes
  */
@@ -24,6 +26,10 @@ app.get('/test', (req, res) => {
         'redirect_uri': credentials.getRedirectUri(),
     })
 })
+
+
+const transfer = require('./routes/transfer')
+app.use('/transfer', transfer)
 
 
 app.listen(port, () => {

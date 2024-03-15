@@ -24,6 +24,8 @@ function Canvas(props) {
 
     const [player, setPlayer] = useState(undefined)
     const [active, setActive] = useState(false)
+    const [device, setDevice] = useState(null)
+
 
     const [pause, setPause] = useState(false)
     const [currentTrack, setCurrentTrack] = useState(track)
@@ -58,6 +60,7 @@ function Canvas(props) {
             // Ready
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
+                setDevice(device_id)
             });
 
             // Not Ready
@@ -114,6 +117,16 @@ function Canvas(props) {
     // }
 
 
+    const handleTransfer = async () => {
+        await fetch(`${process.env.REACT_APP_BACKEND}/transfer`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'device': device })
+        })
+    }
+
     if (active) {
         return (
             <div>
@@ -161,9 +174,12 @@ function Canvas(props) {
                 <div>
                     Please transfer playback to the Web SDK
                 </div>
-                <a className="PlaybackButton" href={`${process.env.REACT_APP_BACKEND}/test`}>
+                <div onClick={handleTransfer}>
+                    Testing
+                </div>
+                {/* <a className="PlaybackButton" onClick={() => handleTransfer()}>
                     Click
-                </a>
+                </a> */}
             </div >
         )
     }

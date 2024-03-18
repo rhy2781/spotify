@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { FaSpotify } from "react-icons/fa";
-
 
 import './Playlists.css'
 
@@ -13,7 +11,6 @@ function Playlists() {
         fetch(`${process.env.REACT_APP_BACKEND}/playlists`)
             .then((response) => response.json())
             .then((response) => {
-                console.log(response)
                 var temp = response.map((x) => {
                     return (
                         <div className="Playlist" key={x.uri}>
@@ -41,9 +38,7 @@ function Playlists() {
 
     return (
         <div className="Playlists">
-            {/* <ul> */}
             {display}
-            {/* </ul> */}
         </div>
     )
 }

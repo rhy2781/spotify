@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const credentials = require('../credentials')
+const { FaCommentsDollar } = require('react-icons/fa')
 var id = ""
 
 router.get('/', async (req, res) => {
@@ -26,16 +27,16 @@ router.get('/', async (req, res) => {
     })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response)
             const ret = response.items
+            console.log(ret)
 
-            var temp = ret.map((x) => ({
-                href: x.href,
-                images: x.images,
-                name: x.name,
-                tracks: x.tracks,
-                uri: x.uri
-            }))
+            var temp = response.items.filter(x => x.public === true)
+                .map((x) => ({
+                    href: x.href,
+                    name: x.name,
+                    uri: x.uri,
+                    image: x.images.length > 0 ? x.images[0].url : "none"
+                }))
             res.json(temp)
         })
 })

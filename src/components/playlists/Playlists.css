@@ -2,4 +2,30 @@
     height: 100%;
     width: 33%;
     outline: red dotted 1px;
+    overflow-y: scroll;
+}
+
+.Playlist {
+    outline: gold dotted 1px;
+    width: 100%;
+    overflow-x: hidden;
+    height: min-content;
+    display: flex;
+    flex-direction: row;
+}
+
+.PlaylistCover {
+    height: 70px;
+    width: 70px;
+}
+
+.PlaylistDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+}
+
+.temp {
+    padding: 1%;
 }

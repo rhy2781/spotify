@@ -35,6 +35,9 @@ const controls = require('./routes/controls')
 app.use('/controls', controls)
 
 
+const playlists = require('./routes/playlists')
+app.use('/playlists', playlists)
+
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)
 })

@@ -1,4 +1,5 @@
 .Playlists {
     height: 100%;
-    width: max-content;
+    width: 33%;
+    outline: red dotted 1px;
 }

@@ -1,8 +1,9 @@
 .Top {
-    height: calc(100vh - 70px - 2vmin);
+    height: calc(100vh - 70px - 4vmin);
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding: 1vmin;
 }
 
 .Player {
@@ -32,7 +33,7 @@
 }
 
 
-.PlaybackButton {
+.TransferButton {
     padding: 1%;
     width: 20%;
     display: flex;
@@ -40,4 +41,9 @@
     background-color: var(--green);
     color: var(--white);
     border-radius: 10px;
+}
+
+.TransferButton:active {
+    position: relative;
+    top: 1%;
 }

@@ -6,6 +6,7 @@ import Current from "../current/Current";
 import MainControl from "../mainControl/MainControl";
 import SideControl from "../sideControl/SideControl";
 import Playlists from "../playlists/Playlists";
+import MainContent from "../mainContent/MainContent";
 
 
 const track = {
@@ -105,19 +106,6 @@ function Canvas(props) {
         // eslint-disable-next-line
     }, []);
 
-
-    // async function refresh() {
-    //     await fetch(`${process.env.REACT_APP_BACKEND}/auth/refresh`, {
-    //         method: 'GET'
-    //     })
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //         console.log(response)
-    //         props.setToken(response.access_token)
-    //     })
-    // }
-
-
     const handleTransfer = async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/transfer`, {
             method: "POST",
@@ -133,9 +121,7 @@ function Canvas(props) {
             <div>
                 <div className="Top">
                     <Playlists />
-                    <div>
-                        This would be where the main section is
-                    </div>
+                    <MainContent />
                 </div>
                 <div className="Player">
                     <Current
@@ -176,13 +162,10 @@ function Canvas(props) {
                     Please transfer playback to the Web SDK
                 </div>
                 {device &&
-                    <div onClick={handleTransfer}>
+                    <div className="TransferButton" onClick={handleTransfer}>
                         Testing
                     </div>
                 }
-                {/* <a className="PlaybackButton" onClick={() => handleTransfer()}>
-                    Click
-                </a> */}
             </div >
         )
     }

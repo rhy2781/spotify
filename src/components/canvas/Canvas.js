@@ -23,20 +23,48 @@ const track = {
 
 
 function Canvas(props) {
-
+    // web playback
     const [player, setPlayer] = useState(undefined)
     const [active, setActive] = useState(false)
     const [device, setDevice] = useState(null)
 
-
+    // state variables to manage controls
     const [pause, setPause] = useState(false)
     const [currentTrack, setCurrentTrack] = useState(track)
     const [shuffle, setShuffle] = useState(false)
     const [repeat, setRepeat] = useState(0)
-    const [volume, setVolume] = useState(0)
-
     const [progressMS, setProgressMS] = useState(0)
     const [durationMS, setDurationMS] = useState(0)
+    const [volume, setVolume] = useState(0)
+
+    // state variable to manage page
+    const [pages, setPages] = useState(["spotify:home","spotify:playlist:asdfklnzxcvi","spotify:artist:adsfadf"])
+    const [pageIndex, setPageIndex] = useState(0)
+
+    // const addPage = (uri) => {
+    //     var temp = pages;
+    //     temp = temp.slice(pageIndex)
+    //     temp.append(uri)
+    //     setPages(temp)
+    //     setPageIndex(pageIndex + 1)
+    // }
+
+    // const prev = () => {
+    //     if(pages.temp.length == 1)
+    //         return
+    //     const temp = pageIndex - 1;
+    //     setPageIndex(temp)
+    // }
+
+    // const next = () => {
+    //     if(pages.temp.length - 1 == pageIndex){
+    //         return
+    //     }
+    //     else{
+    //         setPageIndex(pageIndex + 1);
+    //     }
+    // }
+
 
 
 
@@ -114,6 +142,9 @@ function Canvas(props) {
             },
             body: JSON.stringify({ 'device': device })
         })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     if (active) {
@@ -121,7 +152,9 @@ function Canvas(props) {
             <div>
                 <div className="Top">
                     <Playlists />
-                    <MainContent />
+                    <MainContent 
+                        pages={pages} 
+                    />
                 </div>
                 <div className="Player">
                     <Current
@@ -155,15 +188,12 @@ function Canvas(props) {
     else {
         return (
             <div className="NoPlayback">
-                <div>
-                    {props.token}
-                </div>
-                <div>
+                <div className="NoPlaybackText">
                     Please transfer playback to the Web SDK
                 </div>
                 {device &&
                     <div className="TransferButton" onClick={handleTransfer}>
-                        Testing
+                        Transfer Playback to this Web Browser
                     </div>
                 }
             </div >

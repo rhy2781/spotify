@@ -14,6 +14,9 @@ function MainControl(props) {
             },
             body: JSON.stringify({ 'state': props.shuffle })
         })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     async function toggleRepeat() {
@@ -23,6 +26,9 @@ function MainControl(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 'state': props.repeat })
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 

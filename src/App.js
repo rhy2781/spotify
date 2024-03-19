@@ -17,6 +17,9 @@ function App() {
             setToken(response.token)
           }
         })
+        .catch(err =>{
+          console.log(err)
+        })
     }
 
     getAuthenticated()

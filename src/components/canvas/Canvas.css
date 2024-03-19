@@ -32,6 +32,10 @@
     justify-content: center;
 }
 
+.NoPlaybackText {
+    padding: 1%;
+}
+
 
 .TransferButton {
     padding: 1%;
@@ -41,6 +45,10 @@
     background-color: var(--green);
     color: var(--white);
     border-radius: 10px;
+}
+
+.TransferButton:hover {
+    text-decoration: underline;
 }
 
 .TransferButton:active {

@@ -38,32 +38,33 @@ function Canvas(props) {
     const [volume, setVolume] = useState(0)
 
     // state variable to manage page
-    const [pages, setPages] = useState(["spotify:home","spotify:playlist:asdfklnzxcvi","spotify:artist:adsfadf"])
+    const [pages, setPages] = useState(["spotify:home"])
     const [pageIndex, setPageIndex] = useState(0)
 
-    // const addPage = (uri) => {
-    //     var temp = pages;
-    //     temp = temp.slice(pageIndex)
-    //     temp.append(uri)
-    //     setPages(temp)
-    //     setPageIndex(pageIndex + 1)
-    // }
+    function addPage(uri) {
+        setPages(prevPages => {
+            const temp = prevPages.slice(0, pageIndex + 1);
+            const res = [...temp, uri];
+            return res;
+        });
+        // setPageIndex(prevIndex => prevIndex + 1);
+        next();
+    }
 
-    // const prev = () => {
-    //     if(pages.temp.length == 1)
-    //         return
-    //     const temp = pageIndex - 1;
-    //     setPageIndex(temp)
-    // }
+    function prev() {
+        if (pageIndex == 0) {
+            return
+        }
+        setPageIndex(pageIndex => pageIndex - 1);
+    }
 
-    // const next = () => {
-    //     if(pages.temp.length - 1 == pageIndex){
-    //         return
-    //     }
-    //     else{
-    //         setPageIndex(pageIndex + 1);
-    //     }
-    // }
+    function next() {
+        if (pageIndex == pages.length - 1) {
+            return
+        }
+        setPageIndex(pageIndex => pageIndex + 1)
+    }
+
 
 
 
@@ -142,18 +143,22 @@ function Canvas(props) {
             },
             body: JSON.stringify({ 'device': device })
         })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     if (active) {
         return (
             <div>
                 <div className="Top">
-                    <Playlists />
-                    <MainContent 
-                        pages={pages} 
+                    <Playlists
+                        addPage={addPage}
+                    />
+                    <MainContent
+                        pages={pages}
+                        pageIndex={pageIndex}
+                        prev={prev}
                     />
                 </div>
                 <div className="Player">

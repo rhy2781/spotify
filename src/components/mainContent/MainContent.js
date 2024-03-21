@@ -1,13 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 import './MainContent.css'
 
 function MainContent(props) {
 
+    useEffect(() => {
+
+    }, [props.pageIndex, props.pages])
+
     return (
         <div className="MainContent">
-            {/* This is the main content. */}
-            {props.pages.map((p) => p + " /")}
+            <div>
+                {/* This is the main content. */}
+                {props.pages.map((p) => p + " /")}
+                {props.pageIndex}
+            </div>
+            <div>
+                <div onClick={props.prev}>
+                    Testing Previous
+                </div>
+                <div onClick={props.next}>
+                    Testing Next
+                </div>
+            </div>
         </div>
     )
 }

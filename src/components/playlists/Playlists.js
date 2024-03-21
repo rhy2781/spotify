@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import './Playlists.css'
 
 import blank from '../../images/blank.png'
-function Playlists() {
+function Playlists(props) {
 
     const [display, setDisplay] = useState([])
 
@@ -13,7 +13,7 @@ function Playlists() {
             .then((response) => {
                 var temp = response.map((x) => {
                     return (
-                        <div className="Playlist" key={x.uri}>
+                        <div className="Playlist" key={x.uri} onClick={() => {props.addPage(x.uri)}}>
                             <div className="temp">
                                 {x.image === "none" ? <img src={blank} className="PlaylistCover" /> : <img src={x.image} className="PlaylistCover" />}
                             </div>
@@ -33,8 +33,7 @@ function Playlists() {
             .catch((error) => {
                 console.error('Error fetching playlists:', error);
             });
-
-    }, [])
+    }, [props.pages])
 
     return (
         <div className="Playlists">

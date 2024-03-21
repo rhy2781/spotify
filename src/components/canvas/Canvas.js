@@ -38,34 +38,20 @@ function Canvas(props) {
     const [volume, setVolume] = useState(0)
 
     // state variable to manage page
-    const [pages, setPages] = useState(["spotify:home"])
+    const [pages, setPages] = useState([])
     const [pageIndex, setPageIndex] = useState(0)
 
+
     function addPage(uri) {
-        setPages(prevPages => {
-            const temp = prevPages.slice(0, pageIndex + 1);
-            const res = [...temp, uri];
-            return res;
+        setPageIndex(prevPageIndex => {
+            const newIndex = prevPageIndex + 1;
+            setPages(prevPages => {
+                const temp = prevPages.slice(0, newIndex);
+                return [...temp, uri];
+            });
+            return newIndex;
         });
-        // setPageIndex(prevIndex => prevIndex + 1);
-        next();
     }
-
-    function prev() {
-        if (pageIndex == 0) {
-            return
-        }
-        setPageIndex(pageIndex => pageIndex - 1);
-    }
-
-    function next() {
-        if (pageIndex == pages.length - 1) {
-            return
-        }
-        setPageIndex(pageIndex => pageIndex + 1)
-    }
-
-
 
 
 
@@ -154,11 +140,12 @@ function Canvas(props) {
                 <div className="Top">
                     <Playlists
                         addPage={addPage}
+                    // nextPage={nextPage}
                     />
                     <MainContent
                         pages={pages}
                         pageIndex={pageIndex}
-                        prev={prev}
+                    // prev={prev}
                     />
                 </div>
                 <div className="Player">

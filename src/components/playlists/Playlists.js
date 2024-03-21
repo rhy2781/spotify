@@ -13,7 +13,7 @@ function Playlists(props) {
             .then((response) => {
                 var temp = response.map((x) => {
                     return (
-                        <div className="Playlist" key={x.uri} onClick={() => {props.addPage(x.uri)}}>
+                        <div className="Playlist" key={x.uri} onClick={() => props.addPage(x.uri)}>
                             <div className="temp">
                                 {x.image === "none" ? <img src={blank} className="PlaylistCover" /> : <img src={x.image} className="PlaylistCover" />}
                             </div>
@@ -33,7 +33,7 @@ function Playlists(props) {
             .catch((error) => {
                 console.error('Error fetching playlists:', error);
             });
-    }, [props.pages])
+    }, [])
 
     return (
         <div className="Playlists">

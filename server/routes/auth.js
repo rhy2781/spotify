@@ -68,6 +68,37 @@ router.get('/callback', function (req, res) {
     }
 })
 
+
+router.get('/refresh', function (req, res) {
+    var refreshToken = credentials.getRefreshToken()
+    var clientId = credentials.getSpotifyClientId()
+    var clientSecret = credentials.getSpotifyClientSecret()
+
+    var authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret).toString('base64'))
+        },
+        form: {
+            grant_type: 'refresh_token',
+            refresh_token: refreshToken
+        },
+        json: true
+    }
+    request.post(authOptions, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            credentials.setSpotifyToken(body.access_token)
+            res.json({
+                access_token: body.access_token,
+                expiresIn: body.expires_in
+            })
+        }
+    })
+})
+
+
+
 router.get('/token', (req, res) => {
     res.json({
         token: credentials.getSpotifyToken()

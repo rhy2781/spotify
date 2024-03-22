@@ -43,9 +43,7 @@ function Canvas(props) {
 
 
     const addPage = (uri) => {
-        console.log(uri)
-        console.log(pages)
-        console.log(pageIndex)
+        if (uri.localeCompare(pages[pageIndex]) == 0) return;
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
     }
@@ -158,6 +156,7 @@ function Canvas(props) {
                 <div className="Player">
                     <Current
                         track={currentTrack}
+                        addPage={addPage}
                     />
                     <div className="Controls">
                         <MainControl

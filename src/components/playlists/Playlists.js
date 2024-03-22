@@ -7,6 +7,7 @@ function Playlists(props) {
 
     const [display, setDisplay] = useState([])
 
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND}/playlists`)
             .then((response) => response.json())
@@ -33,7 +34,7 @@ function Playlists(props) {
             .catch((error) => {
                 console.error('Error fetching playlists:', error);
             });
-    }, [])
+    }, [props.pageIndex])
 
     return (
         <div className="Playlists">

@@ -61,7 +61,6 @@ router.get('/callback', function (req, res) {
             if (!error && response.statusCode === 200) {
                 credentials.setSpotifyToken(body.access_token)
                 credentials.setRefreshToken(body.refresh_token)
-                credentials.setExpiresIn(body.expires_in)
                 res.redirect('http://localhost:3000/');
             }
         });

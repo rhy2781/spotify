@@ -28,7 +28,6 @@ function App() {
 
   // get refresh token for SDK callback function
   useEffect(() => {
-    // if (!token || !expiresIn) return
     const interval = setInterval(async () => {
       console.log('attempted')
       await fetch(`${process.env.REACT_APP_BACKEND}/auth/refresh`, {

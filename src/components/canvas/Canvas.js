@@ -42,16 +42,25 @@ function Canvas(props) {
     const [pageIndex, setPageIndex] = useState(0)
 
 
-    function addPage(uri) {
-        setPageIndex(prevPageIndex => {
-            const newIndex = prevPageIndex + 1;
-            setPages(prevPages => {
-                const temp = prevPages.slice(0, newIndex);
-                return [...temp, uri];
-            });
-            return newIndex;
-        });
+    const addPage = (uri) => {
+        console.log(uri)
+        console.log(pages)
+        console.log(pageIndex)
+        setPageIndex(pageIndex => pageIndex + 1)
+        setPages([...pages, uri])
     }
+
+    // updates variables visually
+    // function addPage(uri) {
+    //     setPageIndex(pageIndex => {
+    //         const newIndex = pageIndex + 1
+    //         setPages(prevPages => {
+    //             const temp = prevPages.slice(0, newIndex)
+    //             return [...temp, uri]
+    //         });
+    //         return newIndex
+    //     })
+    // }
 
 
 
@@ -136,10 +145,21 @@ function Canvas(props) {
 
     if (active) {
         return (
+            /**
+            <div>
+                <div onClick={addPage}>
+                    Testing
+                </div>
+                <div>
+                    {pageIndex}
+                </div>
+            </div>*/
+        
             <div>
                 <div className="Top">
                     <Playlists
                         addPage={addPage}
+                        pageIndex={pageIndex}
                     // nextPage={nextPage}
                     />
                     <MainContent

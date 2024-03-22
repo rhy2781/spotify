@@ -16,12 +16,12 @@ function MainContent(props) {
                 {props.pageIndex}
             </div>
             <div>
-                {/* <div onClick={}>
+                <div onClick={() => props.prevPage()}>
                     Testing Previous
                 </div>
-                <div onClick={}>
+                <div onClick={() => props.nextPage()}>
                     Testing Next
-                </div> */}
+                </div>
             </div>
         </div>
     )

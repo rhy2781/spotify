@@ -38,7 +38,7 @@ function Canvas(props) {
     const [volume, setVolume] = useState(0)
 
     // state variable to manage page
-    const [pages, setPages] = useState([])
+    const [pages, setPages] = useState(["spotify:home"])
     const [pageIndex, setPageIndex] = useState(0)
 
 
@@ -46,21 +46,18 @@ function Canvas(props) {
         console.log(uri)
         console.log(pages)
         console.log(pageIndex)
-        setPageIndex(pageIndex => pageIndex + 1)
-        setPages([...pages, uri])
+        setPages([...pages.slice(0, pageIndex + 1), uri])
+        setPageIndex(pageIndex + 1)
     }
 
-    // updates variables visually
-    // function addPage(uri) {
-    //     setPageIndex(pageIndex => {
-    //         const newIndex = pageIndex + 1
-    //         setPages(prevPages => {
-    //             const temp = prevPages.slice(0, newIndex)
-    //             return [...temp, uri]
-    //         });
-    //         return newIndex
-    //     })
-    // }
+    const prevPage = () => {
+        if (pageIndex == 0) return
+        setPageIndex(pageIndex - 1)
+    }
+    const nextPage = () => {
+        if (pageIndex == pages.length - 1) return
+        setPageIndex(pageIndex + 1)
+    }
 
 
 
@@ -145,27 +142,17 @@ function Canvas(props) {
 
     if (active) {
         return (
-            /**
-            <div>
-                <div onClick={addPage}>
-                    Testing
-                </div>
-                <div>
-                    {pageIndex}
-                </div>
-            </div>*/
-        
             <div>
                 <div className="Top">
                     <Playlists
                         addPage={addPage}
                         pageIndex={pageIndex}
-                    // nextPage={nextPage}
                     />
                     <MainContent
                         pages={pages}
                         pageIndex={pageIndex}
-                    // prev={prev}
+                        nextPage={nextPage}
+                        prevPage={prevPage}
                     />
                 </div>
                 <div className="Player">

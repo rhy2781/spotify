@@ -7,6 +7,7 @@ import MainControl from "../mainControl/MainControl";
 import SideControl from "../sideControl/SideControl";
 import Playlists from "../playlists/Playlists";
 import MainContent from "../mainContent/MainContent";
+import PageNavigation from "../pageNavigation/PageNavigation";
 
 
 const track = {
@@ -146,12 +147,16 @@ function Canvas(props) {
                         addPage={addPage}
                         pageIndex={pageIndex}
                     />
-                    <MainContent
-                        pages={pages}
-                        pageIndex={pageIndex}
-                        nextPage={nextPage}
-                        prevPage={prevPage}
-                    />
+                    <div className="Content">
+                        <PageNavigation 
+                            prevPage={prevPage}
+                            nextPage={nextPage}
+                        />
+                        <MainContent
+                            pages={pages}
+                            pageIndex={pageIndex}
+                        />
+                    </div>
                 </div>
                 <div className="Player">
                     <Current

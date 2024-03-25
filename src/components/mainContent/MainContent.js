@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 
+import PageNavigation from "../pageNavigation/PageNavigation"
 import './MainContent.css'
 
 function MainContent(props) {
@@ -14,14 +15,6 @@ function MainContent(props) {
                 {/* This is the main content. */}
                 {props.pages.map((p) => p + " /")}
                 {props.pageIndex}
-            </div>
-            <div>
-                <div onClick={() => props.prevPage()}>
-                    Testing Previous
-                </div>
-                <div onClick={() => props.nextPage()}>
-                    Testing Next
-                </div>
             </div>
         </div>
     )

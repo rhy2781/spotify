@@ -1,21 +1,23 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
-import PageNavigation from "../pageNavigation/PageNavigation"
+import HomeView from "../homeView/HomeView"
+import PlaylistView from "../playlistView/playlistView"
 import './MainContent.css'
+import ArtistView from "../ArtistView/ArtistView"
 
 function MainContent(props) {
 
-    useEffect(() => {
+    const [page, setPage] = useState("")
 
+    useEffect(() => {
+        setPage(props.pages[props.pageIndex].split(':')[1])
     }, [props.pageIndex, props.pages])
 
     return (
         <div className="MainContent">
-            <div>
-                {/* This is the main content. */}
-                {props.pages.map((p) => p + " /")}
-                {props.pageIndex}
-            </div>
+            {page === "home" && <HomeView />}
+            {page === "playlist" && <PlaylistView />}
+            {page === "artist" && <ArtistView />}
         </div>
     )
 }

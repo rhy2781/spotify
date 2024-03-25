@@ -38,7 +38,9 @@ function Playlists(props) {
 
     return (
         <div className="Playlists">
-            {display}
+            <div className="PlaylistContainer">
+                {display}
+            </div>
         </div>
     )
 }

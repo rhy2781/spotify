@@ -1,13 +1,18 @@
 .Playlists {
-    height: 100%;
+    width: 98%;
+    height: 98%;
+    padding: 0.5%;
     width: 33%;
-    outline: red dotted 1px;
+
     overflow-y: scroll;
 }
 
+.PlaylistContainer {
+
+    background-color: var(--dark-gray);
+}
+
 .Playlist {
-    outline: gold dotted 1px;
-    width: 100%;
     overflow-x: hidden;
     height: min-content;
     display: flex;

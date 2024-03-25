@@ -2,14 +2,12 @@
     display: flex;
     flex-direction: row;
     height: 100%;
-    outline: gold dotted 1px;
     white-space: nowrap;
     overflow-x: hidden;
     width: 100%;
 }
 
 .CurrentImageContainer {
-    outline: red solid 1px;
     overflow: hidden;
     height: 100%;
     width: min-content;

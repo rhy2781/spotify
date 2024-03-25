@@ -1,9 +1,14 @@
+.Canvas {
+    padding: 1vmin;
+}
+
+
 .Top {
     height: calc(100vh - 70px - 4vmin);
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 1vmin;
+    /* padding: 1vmin; */
     outline: red dotted 2px;
     /* padding-bottom: 1vmin; */
 }
@@ -11,7 +16,7 @@
 .Content {
     display: flex;
     flex-direction: column;
-    width: 66%;
+    width: 100%;
     outline: aqua dotted 1px;
 }
 

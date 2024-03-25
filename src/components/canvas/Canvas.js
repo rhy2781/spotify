@@ -142,7 +142,7 @@ function Canvas(props) {
 
     if (active) {
         return (
-            <div>
+            <div className="Canvas">
                 <div className="Top">
                     <Playlists
                         addPage={addPage}

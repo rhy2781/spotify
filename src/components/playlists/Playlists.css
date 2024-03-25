@@ -1,10 +1,12 @@
 .Playlists {
-    width: 98%;
-    height: 98%;
-    padding: 0.5%;
+    outline: gold dotted 1px;
+    width: 100%;
+    height: 100%;
+    /* padding: 0.5%; */
     width: 33%;
 
     overflow-y: scroll;
+    scroll-padding-bottom: 0;
 }
 
 .PlaylistContainer {
@@ -31,6 +33,7 @@
 
 }
 
+/** TODO */
 .temp {
     padding: 1%;
 }

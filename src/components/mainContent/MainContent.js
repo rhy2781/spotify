@@ -8,16 +8,21 @@ import ArtistView from "../ArtistView/ArtistView"
 function MainContent(props) {
 
     const [page, setPage] = useState("")
+    const [spotifyId, setSpotifyId] = useState("")
 
     useEffect(() => {
-        setPage(props.pages[props.pageIndex].split(':')[1])
+        const split = props.pages[props.pageIndex].split(':')
+        setPage(split[1])
+        setSpotifyId(split[2])
+
     }, [props.pageIndex, props.pages])
 
     return (
         <div className="MainContent">
             {page === "home" && <HomeView />}
             {page === "playlist" && <PlaylistView />}
-            {page === "artist" && <ArtistView />}
+            {page === "track" && <PlaylistView />}
+            {page === "artist" && <ArtistView spotifyId={spotifyId} />}
         </div>
     )
 }

@@ -7,10 +7,11 @@ function Current(props) {
     const [artists, setArtists] = useState([])
 
     useEffect(() => {
+        console.log(props.track.artists)
         const temp = props.track.artists.map((artist, index, arr) => (
-            <div key={index} className="Artist">
+            < div key={index} className="Artist" onClick={() => { props.addPage(artist.uri) }}>
                 {(index === arr.length - 1) ? ` ${artist.name}` : `${artist.name}, `}
-            </div>
+            </div >
         ));
 
         setArtists(temp);
@@ -26,13 +27,13 @@ function Current(props) {
                 />
             </div>
             <div className="CurrentDetails">
-                <div className="CurrentTrack">
+                <div className="CurrentTrack" onClick={() => props.addPage(props.track.uri)}>
                     {props.track.name}
                 </div>
                 <div className="CurrentArtists">
                     {artists}
                 </div>
-            </div> 
+            </div>
         </div>
     )
 }

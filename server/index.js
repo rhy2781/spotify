@@ -10,6 +10,11 @@ var options = {
 app.use(cors(options))
 app.use(express.json())
 
+const qs = require('qs')
+app.set('query parser',
+  (str) => qs.parse(str)
+)
+
 /**
  * Authentication routes
  */
@@ -37,6 +42,9 @@ app.use('/controls', controls)
 
 const playlists = require('./routes/playlists')
 app.use('/playlists', playlists)
+
+const artist = require('./routes/artist')
+app.use('/artist', artist)
 
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)

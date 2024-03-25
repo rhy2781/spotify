@@ -39,7 +39,7 @@ function Canvas(props) {
     const [volume, setVolume] = useState(0)
 
     // state variable to manage page
-    const [pages, setPages] = useState(["spotify:home"])
+    const [pages, setPages] = useState(["spotify:home:home"])
     const [pageIndex, setPageIndex] = useState(0)
 
 
@@ -47,6 +47,7 @@ function Canvas(props) {
         if (uri.localeCompare(pages[pageIndex]) == 0) return;
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
+        console.log(uri)
     }
 
     const prevPage = () => {
@@ -148,7 +149,7 @@ function Canvas(props) {
                         pageIndex={pageIndex}
                     />
                     <div className="Content">
-                        <PageNavigation 
+                        <PageNavigation
                             prevPage={prevPage}
                             nextPage={nextPage}
                         />

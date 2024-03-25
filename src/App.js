@@ -27,24 +27,24 @@ function App() {
   }, []);
 
   // get refresh token for SDK callback function
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      console.log('attempted')
-      await fetch(`${process.env.REACT_APP_BACKEND}/auth/refresh`, {
-        method: 'GET'
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          setToken(response.access_token)
-          setExpiresIn(response.expiresIn)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }, (expiresIn - 60) * 1000)
+  // useEffect(() => {
+  //   const interval = setInterval(async () => {
+  //     console.log('attempted')
+  //     await fetch(`${process.env.REACT_APP_BACKEND}/auth/refresh`, {
+  //       method: 'GET'
+  //     })
+  //       .then((response) => response.json())
+  //       .then((response) => {
+  //         setToken(response.access_token)
+  //         setExpiresIn(response.expiresIn)
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //   }, (expiresIn - 60) * 1000)
 
-    return () => clearInterval(interval)
-  }, [token, expiresIn])
+  //   return () => clearInterval(interval)
+  // }, [token])
 
 
   return (

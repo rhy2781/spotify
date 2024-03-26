@@ -34,16 +34,18 @@ function ArtistView(props) {
                         const sec = Math.floor((element.duration_ms / 1000) % 60).toString().padStart(2, '0')
                         return (
                             <div className="TopTrack" key={index}>
-                                <div>
+                                <div className="TopTrackNumber">
                                     {index + 1}
                                 </div>
-                                {/* <div className="TopTrackImage">
-                                    <img src={element.album.images[0].url} alt={element.uri} />
-                                </div> */}
-                                <div>
+                                <div className="TopTrackImage">
+                                    <div className="TopTrackImageContainer">
+                                        <img src={element.album.images[0].url} alt={element.uri} />
+                                    </div>
+                                </div>
+                                <div className="TopTrackName">
                                     {element.name}
                                 </div>
-                                <div>
+                                <div className="TopTrackTime">
                                     {min}:{sec}
                                 </div>
                             </div>
@@ -62,8 +64,8 @@ function ArtistView(props) {
                 <div>
                     <div className="ArtistHeader">
                         <div className="ArtistImage">
-                                <img src={data.images[0].url} />
-                            </div>
+                            <img src={data.images[0].url} />
+                        </div>
                         <div className="ArtistDetails">
                             <div className="ArtistName">
                                 {data.name}

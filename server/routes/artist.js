@@ -30,4 +30,27 @@ router.get('/', async (req, res) => {
         })
 })
 
+
+router.get('/tracks', async (req, res) => {
+    const artist_spotify_id = req.query.id
+    console.log(artist_spotify_id)
+
+    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/top-tracks`,
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            }
+        })
+        .then((response) => response.json())
+        .then((response) =>
+            res.json({
+                tracks: response.tracks
+            })
+        )
+        .catch(err => {
+            console.log(err)
+        })
+})
+
 module.exports = router;

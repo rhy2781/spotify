@@ -7,6 +7,7 @@ function ArtistView(props) {
 
     const [data, setData] = useState({})
     const [tracks, setTracks] = useState([])
+    const [showAll, setShowAll] = useState(false)
 
     useEffect(() => {
         const getData = async () => {
@@ -57,6 +58,14 @@ function ArtistView(props) {
         getTopTracks()
 
     }, [props.spotifyId])
+    useEffect(() => {
+
+    }, showAll)
+
+    const handleShow = () => {
+        if (showAll) { setShowAll(false) }
+        else { setShowAll(true) }
+    }
 
     return (
         <div className="ArtistView">
@@ -75,10 +84,17 @@ function ArtistView(props) {
                             </div>
                         </div>
                     </div>
+                    <div className="ArtistHeading">
+                        Popular
+                    </div>
                     <div className="ArtistTracks">
                         <div className="TopTracks">
-                            {tracks}
+                            {tracks.slice(0, 5)}
+                            {showAll && tracks.slice(5, 10)}
                         </div>
+                    </div>
+                    <div className="ShowText" onClick={() => { handleShow() }}>
+                        {showAll ? "Show Less" : " Show More"}
                     </div>
                 </div>
             }

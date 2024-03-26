@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import PageNavigation from '../pageNavigation/PageNavigation'
 import './ArtistView.css'
 
 function ArtistView(props) {
@@ -34,11 +35,15 @@ function ArtistView(props) {
                         return (
                             <div className="TopTrack" key={index}>
                                 <div>
-                                    {index}
+                                    {index + 1}
                                 </div>
                                 <div className="TopTrackImage">
-                                    <img src={element.album.images[0].url} alt={element.uri} />
+                                    box
+
                                 </div>
+                                {/* <div className="TopTrackImage">
+                                    <img src={element.album.images[0].url} alt={element.uri} />
+                                </div> */}
                                 <div>
                                     {element.name}
                                 </div>
@@ -59,15 +64,10 @@ function ArtistView(props) {
     return (
         <div className="ArtistView">
             {(Object.keys(data).length > 0 && Object.keys(tracks).length > 0) &&
-                <div>
-                    {/* This is the artist view */}
+                <div className="Temp">
+                    temp
                     <div className="ArtistHeader">
-                        asdf
-                        {/* <div className="ArtistImage">
-                            <div className="ArtistImageContainer">
-                                <img src={data.images[0].url} />
-                            </div>
-                        </div>
+
                         <div className="ArtistDetails">
                             <div className="ArtistName">
                                 {data.name}
@@ -75,37 +75,17 @@ function ArtistView(props) {
                             <div>
                                 {data.followers.toLocaleString()} Followers
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                     <div className="ArtistTracks">
                         <div className="TopTracks">
-
-                            {/* {tracks} */}
-                        </div>
-                    </div>
-                    {/* <div className="ArtistTracks">
-                        <div>
-                            Top Tracks
-                        </div>
-                        <div className="TopTracks">
                             {tracks}
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             }
-
-
-            {/* {Object.keys(tracks).length > 0 &&
-                <div className="ArtistTracks">
-                    <div>
-                        Top Tracks
-                    </div>
-                    <div className="TopTracks">
-                        {tracks}
-                    </div>
-                </div>
-            } */}
-        </div >
+        </div>
     )
 }
+
 export default ArtistView

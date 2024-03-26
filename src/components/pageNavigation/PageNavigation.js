@@ -11,6 +11,7 @@ function PageNavigation(props) {
                     <IoArrowBackSharp />
                 </div>
             </div>
+            <div className="Spacer" />
             <div className="NavigationBox">
                 <div className="NavigationCircle" onClick={() => { props.nextPage() }}>
                     <IoArrowForwardSharp />

@@ -8,6 +8,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    /* outline: goldenrod solid 1px; */
 }
 
 .Content {
@@ -16,7 +17,8 @@
     width: 100%;
     height: 100%;
     /* padding-left: 1vmin; */
-    outline: green dotted 1px;
+    /* outline: green solid 1px; */
+    /* overflow: hidden; */
 }
 
 .Player {
@@ -25,7 +27,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 1vmin;
-    /* outline: yellow dotted 1px; */
+    outline: goldenrod solid 1px;
 }
 
 

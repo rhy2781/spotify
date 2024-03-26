@@ -1,88 +1,10 @@
 .ArtistView {
-    outline: red dotted 2px;
-    /* height: calc(100% - 5vmin - 2%); */
-    height: 100%;
-    overflow: hidden;
-    /* overflow-y: scroll; */
-}
-
-.ArtistHeader {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    padding: 1%;
-    outline: violet dotted 5px;
-}
-
-.ArtistImage {
-    padding: 1%;
-}
-
-.ArtistImageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.ArtistImageContainer img {
-    width: 110%;
-}
-
-.ArtistDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    width: 100%;
-    height: min-content;
-}
-
-.ArtistName {
-    font-size: 60px;
-    font-weight: bolder;
-}
-
-
-
-
-
-
-
-
-
-.ArtistTracks {
-    min-height: 100%;
-    outline: mediumturquoise dotted 1px;
-
-}
-
-
-
-.TopTracks {
-
-    /* min-height: 100%; */
-    /* overflow: hidden; */
-    outline: gold dotted 1px;
+    outline: blue dotted 1px;
+    height: calc(100% - 6vmin);
     overflow-y: scroll;
-    /* height: 70%; */
 }
 
-.TopTrack {
-    display: flex;
-    flex-direction: row;
-    outline: aqua dotted 1px;
-}
-
-.TopTrackImage {
-    height: 50px;
-}
-
-.TopTrackImage img {
+.Temp {
     height: 100%;
-    width: auto;
+    width: 100%;
 }

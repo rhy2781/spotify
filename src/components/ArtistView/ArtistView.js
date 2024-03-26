@@ -37,10 +37,6 @@ function ArtistView(props) {
                                 <div>
                                     {index + 1}
                                 </div>
-                                <div className="TopTrackImage">
-                                    box
-
-                                </div>
                                 {/* <div className="TopTrackImage">
                                     <img src={element.album.images[0].url} alt={element.uri} />
                                 </div> */}
@@ -54,7 +50,6 @@ function ArtistView(props) {
                         )
                     })
                     setTracks(view)
-
                 })
         }
         getTopTracks()
@@ -64,10 +59,11 @@ function ArtistView(props) {
     return (
         <div className="ArtistView">
             {(Object.keys(data).length > 0 && Object.keys(tracks).length > 0) &&
-                <div className="Temp">
-                    temp
+                <div>
                     <div className="ArtistHeader">
-
+                        <div className="ArtistImage">
+                                <img src={data.images[0].url} />
+                            </div>
                         <div className="ArtistDetails">
                             <div className="ArtistName">
                                 {data.name}

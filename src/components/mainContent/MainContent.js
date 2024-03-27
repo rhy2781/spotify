@@ -4,6 +4,7 @@ import HomeView from "../homeView/HomeView"
 import PlaylistView from "../playlistView/playlistView"
 import './MainContent.css'
 import ArtistView from "../ArtistView/ArtistView"
+import PageNavigation from "../pageNavigation/PageNavigation"
 
 function MainContent(props) {
 
@@ -19,10 +20,14 @@ function MainContent(props) {
 
     return (
         <div className="MainContent">
+            <PageNavigation
+                prevPage={props.prevPage}
+                nextPage={props.nextPage}
+            />
             {page === "home" && <HomeView />}
             {page === "playlist" && <PlaylistView />}
             {page === "track" && <PlaylistView />}
-            {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage}/>}
+            {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage} />}
         </div>
     )
 }

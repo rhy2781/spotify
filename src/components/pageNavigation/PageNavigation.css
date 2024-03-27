@@ -6,13 +6,13 @@
     font-size: large;
     height: 4vmin;
     padding: 1vmin;
-    outline: red dotted 1px;
+    /* outline: red dotted 1px; */
 }
 
 .NavigationBox {
     width: 4vmin;
     height: 4vmin;
-    outline: orange solid 1px;
+    /* outline: orange solid 1px; */
 }
 
 .NavigationCircle {

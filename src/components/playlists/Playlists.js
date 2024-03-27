@@ -37,10 +37,8 @@ function Playlists(props) {
     }, [props.pageIndex])
 
     return (
-        <div className="Playlists">
-            <div className="PlaylistContainer">
-                {display}
-            </div>
+        <div className="PlaylistContainer">
+            {display}
         </div>
     )
 }

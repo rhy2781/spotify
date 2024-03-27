@@ -139,29 +139,33 @@ function Canvas(props) {
         return (
             <div className="Canvas">
                 <div className="Top">
-                    <Playlists
-                        addPage={addPage}
-                        pageIndex={pageIndex}
-                    />
-                    <div className="Content">
-                        <PageNavigation
-                            prevPage={prevPage}
-                            nextPage={nextPage}
+                    <div className="Playlists">
+                        <Playlists
+                            addPage={addPage}
+                            pageIndex={pageIndex}
                         />
+                    </div>
+                    <div className="Content">
                         <MainContent
                             addPage={addPage}
                             pages={pages}
                             pageIndex={pageIndex}
+                            prevPage={prevPage}
+                            nextPage={nextPage}
                         />
                     </div>
                 </div>
-                <div className="Player">
-                    <Current
-                        track={currentTrack}
-                        addPage={addPage}
-                    />
+
+                <div className="Bottom">
+                    <div className="Current">
+                        <Current
+                            track={currentTrack}
+                            addPage={addPage}
+                        />
+                    </div>
                     <div className="Controls">
-                        <MainControl
+                        This is the player component
+                        {/* <MainControl
                             player={player}
                             pause={pause}
                             shuffle={shuffle}
@@ -174,13 +178,16 @@ function Canvas(props) {
                             pause={pause}
                             durationMS={durationMS}
                             ms={progressMS}
-                        />
+                        /> */}
                     </div>
-                    <SideControl
-                        player={player}
-                        volume={volume}
-                        setVolume={setVolume}
-                    />
+                    <div className="SideControls">
+                        This is the side component
+                        {/* <SideControl
+                            player={player}
+                            volume={volume}
+                            setVolume={setVolume}
+                        /> */}
+                    </div>
                 </div>
             </div>
         )

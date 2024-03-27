@@ -19,8 +19,9 @@ function Current(props) {
     }, [props.track])
 
     return (
-        <div className="Current">
-            <div className="CurrentImageContainer">
+        <div>
+            This is the current container
+            {/* <div className="CurrentImageContainer">
                 <img
                     src={props.track.album.images[0].url}
                     alt={props.track.uri}
@@ -33,7 +34,7 @@ function Current(props) {
                 <div className="CurrentArtists">
                     {artists}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

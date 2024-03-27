@@ -2,13 +2,21 @@
     padding: 1vmin;
 }
 
-
+/* Top Section */
 .Top {
     height: calc(100vh - 70px - 4vmin);
     width: 100%;
     display: flex;
     flex-direction: row;
-    outline: goldenrod solid 1px;
+    /* outline: white solid 1px; */
+}
+
+.Playlists {
+    height: 100%;
+    width: 33%;
+    overflow-y: scroll;
+    padding-left: 1vmin;
+    outline: yellow solid 1px;
 }
 
 .Content {
@@ -17,24 +25,49 @@
     width: 66%;
     height: 100%;
     padding-left: 1vmin;
-    /* outline: green solid 1px; */
-    /* overflow: hidden; */
+    outline: yellow solid 1px;
 }
 
-.Player {
+/* Bottom Section*/
+.Bottom {
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    padding: 1vmin;
+    /* outline: white solid 1px; */
+}
+
+
+.Current {
+    width: 100%;
+    outline: yellow solid 1px;
+}
+
+.Controls {
+    width: 150%;
+    outline: yellow solid 1px;
+}
+
+.SideControls {
+    width: 100%;
+    outline: yellow solid 1px;
+}
+
+
+/* .Player {
     height: 70px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 1vmin;
-    /* outline: goldenrod solid 1px; */
-}
+    outline: goldenrod solid 1px;
+} */
 
 
 
-.Controls {
+/* .Controls {
     width: 150%;
-}
+} */
 
 
 /* No playback state*/

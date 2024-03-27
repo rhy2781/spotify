@@ -58,9 +58,6 @@ function Canvas(props) {
         setPageIndex(pageIndex + 1)
     }
 
-
-
-
     // spotify player object integration
     useEffect(() => {
         const script = document.createElement("script");
@@ -110,7 +107,6 @@ function Canvas(props) {
             player.connect();
         };
 
-        //     // setInterval(progress, 1000); // Update every half second
         window.addEventListener('beforeunload', () => player.disconnect()); // disconnect player on reload
         window.addEventListener('close', () => player.disconnect()); // disconnect player when window closes
 

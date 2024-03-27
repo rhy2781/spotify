@@ -1,28 +1,81 @@
+
+> spotify@0.1.0 server
+> node server
+
+Application listening on port 5001
+6mEQK9m2krja6X1cfsAjfl
+6mEQK9m2krja6X1cfsAjfl
 {
-  external_urls: { spotify: 'https://open.spotify.com/artist/7tYKF4w9nC0nq9CsPZTHyP' },
-  followers: { href: null, total: 18536212 },
-  genres: [ 'pop', 'r&b', 'rap' ],
-  href: 'https://api.spotify.com/v1/artists/7tYKF4w9nC0nq9CsPZTHyP?locale=*',
-  id: '7tYKF4w9nC0nq9CsPZTHyP',
-  images: [
+  href: 'https://api.spotify.com/v1/artists/6mEQK9m2krja6X1cfsAjfl/albums?include_groups=album&offset=0&limit=20&locale=*',
+  items: [
     {
-      url: 'https://i.scdn.co/image/ab6761610000e5eb0895066d172e1f51f520bc65',
-      height: 640,
-      width: 640
+      album_group: 'album',
+      album_type: 'album',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/31LvSRXGPVhYs2EZFK0BEU',
+      id: '31LvSRXGPVhYs2EZFK0BEU',
+      images: [Array],
+      name: 'Ado "Ready For My Show Playlist"',
+      release_date: '2024-02-06',
+      release_date_precision: 'day',
+      total_tracks: 25,
+      type: 'album',
+      uri: 'spotify:album:31LvSRXGPVhYs2EZFK0BEU'
     },
     {
-      url: 'https://i.scdn.co/image/ab676161000051740895066d172e1f51f520bc65',
-      height: 320,
-      width: 320
+      album_group: 'album',
+      album_type: 'album',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/2tGokYNjX87AAodtbLBYuf',
+      id: '2tGokYNjX87AAodtbLBYuf',
+      images: [Array],
+      name: "Ado's Utattemita Album",
+      release_date: '2023-12-13',
+      release_date_precision: 'day',
+      total_tracks: 10,
+      type: 'album',
+      uri: 'spotify:album:2tGokYNjX87AAodtbLBYuf'
     },
     {
-      url: 'https://i.scdn.co/image/ab6761610000f1780895066d172e1f51f520bc65',
-      height: 160,
-      width: 160
+      album_group: 'album',
+      album_type: 'album',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/7Ixqxq13tWhrbnIabk3172',
+      id: '7Ixqxq13tWhrbnIabk3172',
+      images: [Array],
+      name: "UTA'S SONGS ONE PIECE FILM RED",
+      release_date: '2022-08-10',
+      release_date_precision: 'day',
+      total_tracks: 8,
+      type: 'album',
+      uri: 'spotify:album:7Ixqxq13tWhrbnIabk3172'
+    },
+    {
+      album_group: 'album',
+      album_type: 'album',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/4muEF5biWb506ZojGMfHb7',
+      id: '4muEF5biWb506ZojGMfHb7',
+      images: [Array],
+      name: 'Kyougen',
+      release_date: '2022-01-26',
+      release_date_precision: 'day',
+      total_tracks: 14,
+      type: 'album',
+      uri: 'spotify:album:4muEF5biWb506ZojGMfHb7'
     }
   ],
-  name: 'SZA',
-  popularity: 91,
-  type: 'artist',
-  uri: 'spotify:artist:7tYKF4w9nC0nq9CsPZTHyP'
+  limit: 20,
+  next: null,
+  offset: 0,
+  previous: null,
+  total: 4
 }

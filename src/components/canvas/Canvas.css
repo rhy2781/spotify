@@ -8,13 +8,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* outline: goldenrod solid 1px; */
+    outline: goldenrod solid 1px;
 }
 
 .Content {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 66%;
     height: 100%;
     padding-left: 1vmin;
     /* outline: green solid 1px; */
@@ -27,7 +27,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 1vmin;
-    outline: goldenrod solid 1px;
+    /* outline: goldenrod solid 1px; */
 }
 
 

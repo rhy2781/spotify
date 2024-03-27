@@ -16,7 +16,8 @@ function ArtistView(props) {
     const [hoverTrack, setHoverTrack] = useState(11)
 
     // state variable for album display
-    const [albumData, setAlbumData] = useState({})
+    const [albumData, setAlbumData] = useState([])
+    const [album, setAlbum] = useState([])
 
 
     const handleMouseEnter = (index) => { setHoverTrack(index) }
@@ -61,19 +62,23 @@ function ArtistView(props) {
 
             return (
                 <div className="TopTrack" key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-                    <div className="TopTrackNumber" onClick={() => { props.addPage(element.uri) }}>
-                        {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
-                    </div>
-                    <div className="TopTrackImage">
-                        <div className="TopTrackImageContainer">
-                            <img src={element.album.images[0].url} alt={element.uri} />
+                    <div className="Container">
+                        <div className="TopTrackNumber" onClick={() => { props.addPage(element.uri) }}>
+                            {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
+                        </div>
+                        <div className="TopTrackImage">
+                            <div className="TopTrackImageContainer">
+                                <img src={element.album.images[0].url} alt={element.uri} />
+                            </div>
+                        </div>
+                        <div className="TopTrackName">
+                            {element.name}
                         </div>
                     </div>
-                    <div className="TopTrackName">
-                        {element.name}
-                    </div>
-                    <div className="TopTrackTime">
-                        {min}:{sec}
+                    <div className="TopTrackTimeBox">
+                        <div className="TopTrackTime">
+                            {min}:{sec}
+                        </div>
                     </div>
                 </div>
             )
@@ -82,10 +87,58 @@ function ArtistView(props) {
         setTracks(visual)
     }, [trackData, hoverTrack])
 
+    // get album data for artist
+    useEffect(() => {
+        const getAlbums = async () => {
+            await fetch(`${process.env.REACT_APP_BACKEND}/artist/albums?id=${props.spotifyId}`, {
+                headers: {
+                    method: 'GET'
+                }
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    setAlbumData(response.album)
+                    console.log(response.album)
+                })
+        }
+        getAlbums();
+
+    }, [props.spotifyId])
+
+    useEffect(() => {
+        // console.log(albumData)
+        const visual = albumData.map((element) => {
+            return (
+                <div>
+                    <div>
+                        <img src={element.images[0].url}    />
+                    </div>
+                    <div>
+                        {element.name}
+                    </div>
+                    <div>
+                        {element.uri}
+                    </div>
+                    <div>
+                        {element.release_date}
+                    </div>
+                </div>
+            )
+        })
+        setAlbum(visual)
+
+    }, [albumData])
+
+
+
     const handleShow = () => {
         if (showAll) { setShowAll(false) }
         else { setShowAll(true) }
     }
+
+
+
+
 
     return (
         <div className="ArtistView">
@@ -116,6 +169,7 @@ function ArtistView(props) {
                     <div className="ShowText" onClick={() => { handleShow() }}>
                         {showAll ? "Show Less" : " Show More"}
                     </div>
+                    {album}
                 </div>
             }
         </div>

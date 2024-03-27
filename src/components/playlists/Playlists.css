@@ -1,15 +1,13 @@
 .Playlists {
     height: 100%;
-    width: 33%;
-
+    min-width: 33%;
     overflow-y: scroll;
     scroll-padding-bottom: 0;
-    outline: yellow solid 1px;
+    /* outline: yellow solid 1px; */
     padding-left: 1vmin;
 }
 
 .PlaylistContainer {
-
     background-color: var(--dark-gray);
 }
 
@@ -31,8 +29,3 @@
     text-align: left;
 
 }
-
-/** TODO */
-/* .temp {
-    padding: 1%;
-} */

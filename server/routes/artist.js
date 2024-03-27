@@ -53,4 +53,18 @@ router.get('/tracks', async (req, res) => {
         })
 })
 
+router.get('/albums', async (req, res) => {
+    const artist_spotify_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=album`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+        .then((response) => response.json())
+        .then((response) => res.json({"album":response.items}))
+})
+
+
 module.exports = router;
+

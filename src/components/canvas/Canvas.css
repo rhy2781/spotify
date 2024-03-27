@@ -34,7 +34,7 @@
     flex-direction: row;
     height: 70px;
     padding: 1vmin;
-    /* outline: white solid 1px; */
+    outline: white solid 1px;
 }
 
 
@@ -52,24 +52,10 @@
 
 .SideControls {
     width: 100%;
+    display: flex;
     outline: yellow solid 1px;
 }
 
-
-/* .Player {
-    height: 70px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1vmin;
-    outline: goldenrod solid 1px;
-} */
-
-
-
-/* .Controls {
-    width: 150%;
-} */
 
 
 /* No playback state*/

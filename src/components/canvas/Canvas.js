@@ -164,8 +164,7 @@ function Canvas(props) {
                         />
                     </div>
                     <div className="Controls">
-                        This is the player component
-                        {/* <MainControl
+                        <MainControl
                             player={player}
                             pause={pause}
                             shuffle={shuffle}
@@ -178,15 +177,14 @@ function Canvas(props) {
                             pause={pause}
                             durationMS={durationMS}
                             ms={progressMS}
-                        /> */}
+                        />
                     </div>
                     <div className="SideControls">
-                        This is the side component
-                        {/* <SideControl
+                        <SideControl
                             player={player}
                             volume={volume}
                             setVolume={setVolume}
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>

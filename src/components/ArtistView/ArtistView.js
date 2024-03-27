@@ -2,12 +2,25 @@ import React, { useEffect, useState } from "react";
 
 import PageNavigation from '../pageNavigation/PageNavigation'
 import './ArtistView.css'
+import { IoPlaySharp } from "react-icons/io5";
+
 
 function ArtistView(props) {
 
     const [data, setData] = useState({})
     const [tracks, setTracks] = useState([])
     const [showAll, setShowAll] = useState(false)
+    const [hoverTrack, setHoverTrack] = useState(11)
+
+
+    const handleMouseEnter = (index) => {
+        setHoverTrack(index)
+        console.log(index)
+    }
+    const handleMouseLeave = () => {
+        setHoverTrack(null)
+        console.log("mouse leave")
+    }
 
     useEffect(() => {
         const getData = async () => {
@@ -34,9 +47,9 @@ function ArtistView(props) {
                         const min = Math.floor((element.duration_ms / 1000) / 60)
                         const sec = Math.floor((element.duration_ms / 1000) % 60).toString().padStart(2, '0')
                         return (
-                            <div className="TopTrack" key={index}>
+                            <div className="TopTrack" key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
                                 <div className="TopTrackNumber">
-                                    {index + 1}
+                                    {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                                 </div>
                                 <div className="TopTrackImage">
                                     <div className="TopTrackImageContainer">
@@ -57,10 +70,11 @@ function ArtistView(props) {
         }
         getTopTracks()
 
-    }, [props.spotifyId])
+    }, [props.spotifyId, hoverTrack])
+
     useEffect(() => {
 
-    }, showAll)
+    }, [showAll, hoverTrack])
 
     const handleShow = () => {
         if (showAll) { setShowAll(false) }
@@ -86,6 +100,9 @@ function ArtistView(props) {
                     </div>
                     <div className="ArtistHeading">
                         Popular
+                        <div>
+                            {hoverTrack}
+                        </div>
                     </div>
                     <div className="ArtistTracks">
                         <div className="TopTracks">

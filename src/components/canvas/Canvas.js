@@ -47,7 +47,6 @@ function Canvas(props) {
         if (uri.localeCompare(pages[pageIndex]) == 0) return;
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
-        console.log(uri)
     }
 
     const prevPage = () => {
@@ -154,6 +153,7 @@ function Canvas(props) {
                             nextPage={nextPage}
                         />
                         <MainContent
+                            addPage={addPage}
                             pages={pages}
                             pageIndex={pageIndex}
                         />

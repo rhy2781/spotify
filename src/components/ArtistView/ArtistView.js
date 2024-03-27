@@ -8,12 +8,15 @@ import { IoPlaySharp } from "react-icons/io5";
 function ArtistView(props) {
 
     const [artistData, setArtistData] = useState({})
+
+    // state variables for track display
     const [trackData, setTrackData] = useState([])
-
-
     const [tracks, setTracks] = useState([])
     const [showAll, setShowAll] = useState(false)
     const [hoverTrack, setHoverTrack] = useState(11)
+
+    // state variable for album display
+    const [albumData, setAlbumData] = useState({})
 
 
     const handleMouseEnter = (index) => { setHoverTrack(index) }
@@ -58,7 +61,7 @@ function ArtistView(props) {
 
             return (
                 <div className="TopTrack" key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-                    <div className="TopTrackNumber">
+                    <div className="TopTrackNumber" onClick={() => { props.addPage(element.uri) }}>
                         {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                     </div>
                     <div className="TopTrackImage">
@@ -103,9 +106,6 @@ function ArtistView(props) {
                     </div>
                     <div className="ArtistHeading">
                         Popular
-                        <div>
-                            {hoverTrack}
-                        </div>
                     </div>
                     <div className="ArtistTracks">
                         <div className="TopTracks">

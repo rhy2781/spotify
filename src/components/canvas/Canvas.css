@@ -40,6 +40,8 @@
 
 .Current {
     width: 100%;
+    /* display: flex; */
+    /* flex-direction: row; */
     outline: yellow solid 1px;
 }
 

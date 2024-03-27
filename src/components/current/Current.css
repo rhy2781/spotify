@@ -1,31 +1,40 @@
-.Current {
+.CurrentContainer{
     display: flex;
     flex-direction: row;
     height: 100%;
-    white-space: nowrap;
-    overflow-x: hidden;
     width: 100%;
 }
 
+/* Current Track Image */
 .CurrentImageContainer {
     overflow: hidden;
     height: 100%;
     width: min-content;
 }
 
-
 .CurrentImageContainer img {
     height: 100%;
 }
 
+/* Details about Current Track*/
 .CurrentDetails {
     display: flex;
     flex-direction: column;
     text-align: left;
     padding-left: 1%;
+
+    outline: orange solid 1px;
+    width: 100%;
+
 }
 
-.CurrentTrack {}
+.CurrentTrack{
+    width: min-content;
+}
+
+.CurrentTrack:hover{
+    text-decoration: underline;
+}
 
 .CurrentArtists {
     display: flex;
@@ -34,4 +43,7 @@
 
 .Artist {
     padding-right: 1%;
+}
+.Artist:hover{
+    text-decoration: underline;
 }

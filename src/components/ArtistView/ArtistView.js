@@ -109,8 +109,8 @@ function ArtistView(props) {
         // console.log(albumData)
         const visual = albumData.map((element) => {
             return (
-                <div>
-                    <div>
+                <div className="ArtistAlbum">
+                    <div className="ArtistCoverArt">
                         <img src={element.images[0].url}    />
                     </div>
                     <div>
@@ -169,7 +169,9 @@ function ArtistView(props) {
                     <div className="ShowText" onClick={() => { handleShow() }}>
                         {showAll ? "Show Less" : " Show More"}
                     </div>
-                    {album}
+                    <div className="AlbumTrack">
+                        {album}
+                    </div>
                 </div>
             }
         </div>

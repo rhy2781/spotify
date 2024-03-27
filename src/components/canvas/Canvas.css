@@ -4,25 +4,25 @@
 
 /* Top Section */
 .Top {
-    height: calc(100vh - 70px - 4vmin);
+    height: calc(100vh - 70px - 3vmin);
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* outline: white solid 1px; */
+    outline: white solid 1px;
 }
 
 .Playlists {
     height: 100%;
     width: 33%;
     overflow-y: scroll;
-    padding-left: 1vmin;
-    outline: yellow solid 1px;
+    /* padding-left: 1vmin; */
+    /* outline: yellow solid 1px; */
 }
 
 .Content {
     display: flex;
     flex-direction: column;
-    width: 66%;
+    width: 67%;
     height: 100%;
     padding-left: 1vmin;
     outline: yellow solid 1px;
@@ -33,29 +33,26 @@
     display: flex;
     flex-direction: row;
     height: 70px;
-    padding: 1vmin;
-    outline: white solid 1px;
+    padding-top: 1vmin;
+    /* outline: white solid 1px; */
 }
 
 
 .Current {
-    width: 100%;
-    /* display: flex; */
-    /* flex-direction: row; */
-    outline: yellow solid 1px;
+    width: 25%;
+    /* outline: yellow solid 1px; */
 }
 
 .Controls {
-    width: 150%;
-    outline: yellow solid 1px;
+    width: 50%;
+    /* outline: yellow solid 1px; */
 }
 
 .SideControls {
-    width: 100%;
+    width: 25%;
     display: flex;
-    outline: yellow solid 1px;
+    /* outline: yellow solid 1px; */
 }
-
 
 
 /* No playback state*/

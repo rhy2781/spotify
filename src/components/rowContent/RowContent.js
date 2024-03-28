@@ -11,12 +11,13 @@ function RowContent(props) {
         const visual = props.data.map((element) => {
             return (
                 <div className="RowItem" onClick={() => props.addPage(element.uri)}>
-                    <div className="RowItemArt" style={{ backgroundImage: `url(${element.image})` }}>
-                        <div className="RowItemPlayBox">
-                            '<div className="RowItemPlayBox1">
-                                <div className="RowItemPlay">
-                                    <IoPlaySharp />
-                                </div>
+                    <div className="Inner">
+                        <div className="Image">
+                            <img src={element.image} />
+                        </div>
+                        <div className="PContainer">
+                            <div className="PlayIcon">
+                                <IoPlaySharp />
                             </div>
                         </div>
                     </div>
@@ -40,8 +41,10 @@ function RowContent(props) {
 
 
     return (
-        <div className="Row">
-            {display}
+        <div>
+            <div className="Row">
+                {display}
+            </div>
         </div>
     )
 }

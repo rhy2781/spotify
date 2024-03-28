@@ -3,43 +3,120 @@
     flex-direction: row;
     height: min-content;
     outline: gold solid 1px;
+    height: 30vmin;
+    width: 100%;
 }
 
 .RowItem {
     border-radius: 10px;
-    padding: 2vmin;
+    padding: 1vmin;
     width: 100%;
-    height: 20vmin;
     overflow-x: hidden;
     outline: red solid 1px;
-
-
-
+    overflow: hidden;
 }
+
+.RowItem:hover .PContainer {
+    opacity: 1;
+    z-index: 10;
+}
+
+.Inner {
+    outline: yellow solid 1px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.Image {
+    /* min-height: 100%; */
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    outline: red solid 1px;
+}
+
+.Image img {
+    height: 100%;
+    width: 100%;
+}
+
+.PContainer {
+    height: 100%;
+    opacity: 0;
+    position: relative;
+    bottom: 25%;
+    left: 65%;
+    color: black;
+}
+
+
+.PlayIcon {
+    background-color: var(--green);
+    border-radius: 50%;
+    padding: 1vmin;
+    height: 3vmin;
+    width: 3vmin;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.RowItemMainText {
+    position: relative;
+    bottom: 25%;
+    height: 10%;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.RowItemSubText {
+    position: relative;
+    bottom: 20%;
+    height: 10%;
+    outline: green solid 1px;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+
+
+
+
+
+
 
 .RowItemEmpty {
     border-radius: 10px;
     padding: 2vmin;
     width: 100%;
-    height: 20vmin;
+    height: auto;
+    /* height: 20vmin; */
     overflow-x: hidden;
 }
+
+/*
 
 .RowItem:hover {
     background-color: var(--gray);
 }
 
 .RowItemArt {
-    /* min-width: 20%; */
-    /* min-height: 20%; */
-    /* object-fit: cover; */
-    background-size: contain;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 
-    height: 80%;
-    width: auto;
     border-radius: 10px;
     overflow: hidden;
-    outline: red solid 1px;
+    outline: orange solid 1px;
+
+
+
 
 
     display: flex;
@@ -47,10 +124,14 @@
     justify-content: end;
 }
 
+
+
+
 .RowItemArt img {
     height: 100%;
     width: 100%;
 }
+
 
 .RowItemArt:hover .RowItemPlayBox1 {
     display: flex;
@@ -63,11 +144,7 @@
     justify-content: center;
     align-items: center;
     outline: yellow solid 1px;
-
-
     padding: 1vmin;
-    height: 50px;
-    width: 50px;
 }
 
 .RowItemPlayBox1 {
@@ -105,3 +182,4 @@
     display: flex;
     justify-content: left;
 }
+*/

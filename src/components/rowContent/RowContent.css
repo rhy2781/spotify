@@ -14,6 +14,10 @@
     overflow-x: hidden;
     outline: red solid 1px;
     overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
 }
 
 .RowItem:hover .PContainer {
@@ -44,12 +48,13 @@
 }
 
 .PContainer {
-    height: 100%;
+    height: 0%;
     opacity: 0;
     position: relative;
     bottom: 25%;
     left: 65%;
     color: black;
+    outline: aqua dotted 1px;
 }
 
 
@@ -68,17 +73,18 @@
 
 
 .RowItemMainText {
-    position: relative;
+    /* position: relative;
     bottom: 25%;
-    height: 10%;
+    height: 10%; */
     overflow-x: hidden;
     white-space: nowrap;
+    outline: aqua dotted 1px;
 }
 
 .RowItemSubText {
-    position: relative;
-    bottom: 20%;
-    height: 10%;
+    /* position: relative; */
+    /* bottom: 20%;
+    height: 10%; */
     outline: green solid 1px;
     overflow-x: hidden;
     white-space: nowrap;

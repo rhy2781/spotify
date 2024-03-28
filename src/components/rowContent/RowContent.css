@@ -1,0 +1,107 @@
+.Row {
+    display: flex;
+    flex-direction: row;
+    height: min-content;
+    outline: gold solid 1px;
+}
+
+.RowItem {
+    border-radius: 10px;
+    padding: 2vmin;
+    width: 100%;
+    height: 20vmin;
+    overflow-x: hidden;
+    outline: red solid 1px;
+
+
+
+}
+
+.RowItemEmpty {
+    border-radius: 10px;
+    padding: 2vmin;
+    width: 100%;
+    height: 20vmin;
+    overflow-x: hidden;
+}
+
+.RowItem:hover {
+    background-color: var(--gray);
+}
+
+.RowItemArt {
+    /* min-width: 20%; */
+    /* min-height: 20%; */
+    /* object-fit: cover; */
+    background-size: contain;
+
+    height: 80%;
+    width: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    outline: red solid 1px;
+
+
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.RowItemArt img {
+    height: 100%;
+    width: 100%;
+}
+
+.RowItemArt:hover .RowItemPlayBox1 {
+    display: flex;
+}
+
+
+
+.RowItemPlayBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: yellow solid 1px;
+
+
+    padding: 1vmin;
+    height: 50px;
+    width: 50px;
+}
+
+.RowItemPlayBox1 {
+    background-color: var(--green);
+    color: var(--black);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    display: none;
+}
+
+.RowItemPlay {
+    position: relative;
+    left: 5%;
+    top: 5%;
+}
+
+
+
+.RowItemMainText {
+    width: 100%;
+    height: 10%;
+    text-align: left;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.RowItemSubText {
+    height: 10%;
+    display: flex;
+    justify-content: left;
+}

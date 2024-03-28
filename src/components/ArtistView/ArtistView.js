@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import PageNavigation from '../pageNavigation/PageNavigation'
 import './ArtistView.css'
 import { IoPlaySharp } from "react-icons/io5";
+import RowContent from "../rowContent/RowContent";
 
 
 function ArtistView(props) {
@@ -109,22 +110,31 @@ function ArtistView(props) {
         // console.log(albumData)
         const visual = albumData.map((element) => {
             return (
-                <div className="ArtistAlbum">
+                <div className="Album" onClick={() => props.addPage(element.uri)}>
                     <div className="ArtistCoverArt">
-                        <img src={element.images[0].url}    />
+                        <img src={element.images[0].url} />
                     </div>
-                    <div>
+                    <div className="AlbumName">
                         {element.name}
                     </div>
-                    <div>
-                        {element.uri}
-                    </div>
-                    <div>
-                        {element.release_date}
+                    <div className="AlbumDetails">
+                        <div>
+                            {element.release_date.slice(0, 4)} •
+                        </div>
+                        <div className="AlbumType">
+                            {element.type.charAt(0).toUpperCase() + element.type.slice(1)}
+                        </div>
                     </div>
                 </div>
             )
         })
+        while (visual.length < 5) {
+            visual.push(
+                <div className="Album">
+
+                </div>
+            )
+        }
         setAlbum(visual)
 
     }, [albumData])
@@ -136,6 +146,22 @@ function ArtistView(props) {
         else { setShowAll(true) }
     }
 
+
+
+
+    const [temp, setTemp] = useState([])
+    useEffect(()=>{
+        const tri = albumData.map((element) => {
+            return{
+                "uri": element.uri,
+                "image" : element.images[0].url,
+                "mainText" : element.name,
+                "subText": `${element.release_date.slice(0, 4)} • ${element.type}` 
+            }
+        })
+        setTemp(tri)
+        console.log(tri)
+    },[albumData])
 
 
 
@@ -169,8 +195,12 @@ function ArtistView(props) {
                     <div className="ShowText" onClick={() => { handleShow() }}>
                         {showAll ? "Show Less" : " Show More"}
                     </div>
-                    <div className="AlbumTrack">
+                    {/* <div className="AlbumTrack">
                         {album}
+                    </div> */}
+
+                    <div className="AlbumList">
+                        <RowContent data={temp} addPage={props.addPage}/>
                     </div>
                 </div>
             }

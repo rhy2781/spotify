@@ -5,6 +5,7 @@ import PlaylistView from "../playlistView/playlistView"
 import './MainContent.css'
 import ArtistView from "../ArtistView/ArtistView"
 import PageNavigation from "../pageNavigation/PageNavigation"
+import AlbumView from "../AlbumView/AlbumView"
 
 function MainContent(props) {
 
@@ -28,6 +29,7 @@ function MainContent(props) {
             {page === "playlist" && <PlaylistView />}
             {page === "track" && <PlaylistView />}
             {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage} />}
+            {page === "album" && <AlbumView />}
         </div>
     )
 }

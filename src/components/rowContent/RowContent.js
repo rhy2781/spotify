@@ -14,19 +14,21 @@ function RowContent(props) {
                     <div className="Inner">
                         <div className="Image">
                             <img src={element.image} />
-                        </div>
-                        <div className="PContainer">
-                            <div className="PlayIcon">
-                                <IoPlaySharp />
+                            <div className="PContainer">
+                                <div className="PlayIcon">
+                                    <IoPlaySharp />
+                                </div>
                             </div>
                         </div>
+                        <div className="RowItemMainText">
+                            {element.mainText}
+                        </div>
+                        <div className="RowItemSubText">
+                            {element.subText}
+                        </div>
+
                     </div>
-                    <div className="RowItemMainText">
-                        {element.mainText}
-                    </div>
-                    <div className="RowItemSubText">
-                        {element.subText}
-                    </div>
+
                 </div>
             )
         })
@@ -37,8 +39,6 @@ function RowContent(props) {
         }
         setDisplay(visual.slice(0, 5))
     }, [props.data])
-
-
 
     return (
         <div>

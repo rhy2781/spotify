@@ -3,7 +3,7 @@
     flex-direction: row;
     height: min-content;
     outline: gold solid 1px;
-    height: 30vmin;
+    height: min-content;
     width: 100%;
 }
 
@@ -11,13 +11,12 @@
     border-radius: 10px;
     padding: 1vmin;
     width: 100%;
+    height: min-content;
     overflow-x: hidden;
-    outline: red solid 1px;
     overflow: hidden;
 
     display: flex;
     flex-direction: column;
-
 }
 
 .RowItem:hover .PContainer {
@@ -26,20 +25,21 @@
 }
 
 .Inner {
-    outline: yellow solid 1px;
-    height: 100%;
+    height: auto;
     width: 100%;
     overflow: hidden;
+    outline: aqua solid 1px;
 }
 
 
 .Image {
-    /* min-height: 100%; */
     height: auto;
     width: 100%;
     object-fit: cover;
     overflow: hidden;
-    outline: red solid 1px;
+
+    position: relative;
+    display: inline-block;
 }
 
 .Image img {
@@ -48,22 +48,19 @@
 }
 
 .PContainer {
-    height: 0%;
-    opacity: 0;
-    position: relative;
-    bottom: 25%;
-    left: 65%;
+    opacity: 1;
     color: black;
     outline: aqua dotted 1px;
-}
 
+    position: absolute;
+    top: 65%;
+    left: 65%;
+}
 
 .PlayIcon {
     background-color: var(--green);
     border-radius: 50%;
-    padding: 1vmin;
-    height: 3vmin;
-    width: 3vmin;
+    padding: 1.5vmin;
 
     display: flex;
     justify-content: center;
@@ -73,119 +70,22 @@
 
 
 .RowItemMainText {
-    /* position: relative;
-    bottom: 25%;
-    height: 10%; */
     overflow-x: hidden;
     white-space: nowrap;
     outline: aqua dotted 1px;
 }
 
 .RowItemSubText {
-    /* position: relative; */
-    /* bottom: 20%;
-    height: 10%; */
     outline: green solid 1px;
     overflow-x: hidden;
     white-space: nowrap;
 }
 
-
-
-
-
-
-
-
 .RowItemEmpty {
     border-radius: 10px;
-    padding: 2vmin;
-    width: 100%;
-    height: auto;
-    /* height: 20vmin; */
-    overflow-x: hidden;
-}
-
-/*
-
-.RowItem:hover {
-    background-color: var(--gray);
-}
-
-.RowItemArt {
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-
-    border-radius: 10px;
-    overflow: hidden;
-    outline: orange solid 1px;
-
-
-
-
-
-    display: flex;
-    align-items: end;
-    justify-content: end;
-}
-
-
-
-
-.RowItemArt img {
-    height: 100%;
-    width: 100%;
-}
-
-
-.RowItemArt:hover .RowItemPlayBox1 {
-    display: flex;
-}
-
-
-
-.RowItemPlayBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: yellow solid 1px;
     padding: 1vmin;
-}
-
-.RowItemPlayBox1 {
-    background-color: var(--green);
-    color: var(--black);
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large;
-    display: none;
-}
-
-.RowItemPlay {
-    position: relative;
-    left: 5%;
-    top: 5%;
-}
-
-
-
-.RowItemMainText {
-    width: 100%;
-    height: 10%;
-    text-align: left;
+    height: min-content;
     overflow-x: hidden;
-    white-space: nowrap;
+    overflow: hidden;
 }
-
-.RowItemSubText {
-    height: 10%;
-    display: flex;
-    justify-content: left;
-}
-*/

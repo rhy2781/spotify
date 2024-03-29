@@ -57,6 +57,7 @@ function ArtistView(props) {
 
     // visually update with cached data, and state update with hover variable
     useEffect(() => {
+        console.log(trackData)
         const visual = trackData.map((element, index) => {
             const min = Math.floor((element.duration_ms / 1000) / 60)
             const sec = Math.floor((element.duration_ms / 1000) % 60).toString().padStart(2, '0')
@@ -64,7 +65,7 @@ function ArtistView(props) {
             return (
                 <div className="TopTrack" key={index} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
                     <div className="Container">
-                        <div className="TopTrackNumber" onClick={() => { props.addPage(element.uri) }}>
+                        <div className="TopTrackNumber" onClick={() => { props.submitRequest(element.album.uri, element.track_number) }}>
                             {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                         </div>
                         <div className="TopTrackImage">
@@ -150,20 +151,18 @@ function ArtistView(props) {
 
 
     const [temp, setTemp] = useState([])
-    useEffect(()=>{
+    useEffect(() => {
         const tri = albumData.map((element) => {
-            return{
+            return {
                 "uri": element.uri,
-                "image" : element.images[0].url,
-                "mainText" : element.name,
-                "subText": `${element.release_date.slice(0, 4)} • ${element.type}` 
+                "image": element.images[0].url,
+                "mainText": element.name,
+                "subText": `${element.release_date.slice(0, 4)} • ${element.type}`
             }
         })
         setTemp(tri)
         console.log(tri)
-    },[albumData])
-
-
+    }, [albumData])
 
 
     return (
@@ -195,12 +194,9 @@ function ArtistView(props) {
                     <div className="ShowText" onClick={() => { handleShow() }}>
                         {showAll ? "Show Less" : " Show More"}
                     </div>
-                    {/* <div className="AlbumTrack">
-                        {album}
-                    </div> */}
 
                     <div className="AlbumList">
-                        <RowContent data={temp} addPage={props.addPage}/>
+                        <RowContent data={temp} addPage={props.addPage} submitRequest={props.submitRequest} />
                     </div>
                 </div>
             }

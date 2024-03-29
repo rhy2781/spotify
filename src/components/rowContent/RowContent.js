@@ -10,7 +10,8 @@ function RowContent(props) {
     useEffect(() => {
         const visual = props.data.map((element) => {
             return (
-                <div className="RowItem" onClick={() => props.addPage(element.uri)}>
+                <div className="RowItem" onClick={() => props.submitRequest(element.uri)}>
+                    {element.uri}
                     <div className="Inner">
                         <div className="Image">
                             <img src={element.image} />

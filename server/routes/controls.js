@@ -54,5 +54,39 @@ router.post('/repeat', (req, res) => {
     }
 })
 
+router.post('/request1', (req, res) => {
+    var uri = req.body.uri
+    var device = req.body.device
+    var offset = req.body.offset
+
+    if(offset == null){
+        offset = 0
+    }
+
+    fetch(`https://api.spotify.com/v1/me/player/play?${device}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "context_uri": uri,
+            "offset": {
+                "position": offset
+            }
+        })
+    })
+    .then((response) => {
+        console.log(response.ok)
+        console.log(response.statusText)
+        console.log(response.status)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+    res.end();
+})
+
 
 module.exports = router

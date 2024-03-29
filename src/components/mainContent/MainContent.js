@@ -28,7 +28,7 @@ function MainContent(props) {
             {page === "home" && <HomeView />}
             {page === "playlist" && <PlaylistView />}
             {page === "track" && <PlaylistView />}
-            {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage} />}
+            {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage} submitRequest={props.submitRequest}/>}
             {page === "album" && <AlbumView />}
         </div>
     )

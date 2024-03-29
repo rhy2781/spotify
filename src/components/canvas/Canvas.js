@@ -135,6 +135,23 @@ function Canvas(props) {
             })
     }
 
+    const submitRequest = (uri, offset) => {
+        fetch(`${process.env.REACT_APP_BACKEND}/controls/request1`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                uri: uri,
+                device: device,
+                offset: offset - 1
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     if (active) {
         return (
             <div className="Canvas">
@@ -152,6 +169,7 @@ function Canvas(props) {
                             pageIndex={pageIndex}
                             prevPage={prevPage}
                             nextPage={nextPage}
+                            submitRequest={submitRequest}
                         />
                     </div>
                 </div>

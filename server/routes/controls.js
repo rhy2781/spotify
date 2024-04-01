@@ -23,6 +23,7 @@ router.post('/shuffle', (req, res) => {
             }
         })
     }
+    res.end()
 })
 
 router.post('/repeat', (req, res) => {
@@ -52,9 +53,10 @@ router.post('/repeat', (req, res) => {
             }
         })
     }
+    res.end()
 })
 
-router.post('/request1', (req, res) => {
+router.post('/request', (req, res) => {
     var uri = req.body.uri
     var device = req.body.device
     var offset = req.body.offset

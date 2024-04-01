@@ -1,13 +1,13 @@
 import { React, useState, useEffect } from "react";
 
 import './Canvas.css'
-import ProgressBar from "../progressBar/ProgressBar";
-import Current from "../current/Current";
-import MainControl from "../mainControl/MainControl";
-import SideControl from "../sideControl/SideControl";
-import Playlists from "../playlists/Playlists";
-import MainContent from "../mainContent/MainContent";
-import PageNavigation from "../pageNavigation/PageNavigation";
+import ProgressBar from "./trackProgress/TrackProgress";
+import Current from "./player/CurrentTrack";
+import MainControl from "./mainControl/MainControl";
+import SideControl from "./sideControl/SideControl";
+import Playlists from "./playlists/Playlists";
+import MainContent from "./mainContent/MainContent";
+import PageNavigation from "../components/pageNavigation/PageNavigation";
 
 
 const track = {
@@ -136,7 +136,7 @@ function Canvas(props) {
     }
 
     const submitRequest = (uri, offset) => {
-        fetch(`${process.env.REACT_APP_BACKEND}/controls/request1`, {
+        fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -147,9 +147,9 @@ function Canvas(props) {
                 offset: offset - 1
             })
         })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     if (active) {

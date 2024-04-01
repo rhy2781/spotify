@@ -28,9 +28,12 @@
     height: auto;
     width: 100%;
     overflow: hidden;
-    outline: aqua solid 1px;
+    /* outline: aqua solid 1px; */
 }
 
+.Inner:hover .PContainer {
+    opacity: 1;
+}
 
 .Image {
     height: auto;
@@ -48,9 +51,9 @@
 }
 
 .PContainer {
-    opacity: 1;
+    opacity: 0;
     color: black;
-    outline: aqua dotted 1px;
+    /* outline: aqua dotted 1px; */
 
     position: absolute;
     top: 65%;
@@ -72,11 +75,11 @@
 .RowItemMainText {
     overflow-x: hidden;
     white-space: nowrap;
-    outline: aqua dotted 1px;
+    /* outline: aqua dotted 1px; */
 }
 
 .RowItemSubText {
-    outline: green solid 1px;
+    /* outline: green solid 1px; */
     overflow-x: hidden;
     white-space: nowrap;
 }

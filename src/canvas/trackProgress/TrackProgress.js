@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react"
-import './ProgressBar.css'
+import './TrackProgress.css'
 
 function ProgressBar(props) {
     const [progress, setProgress] = useState(props.ms)
@@ -29,7 +29,7 @@ function ProgressBar(props) {
         const slider = document.querySelector(".ProgressInputSlider")
         var temp = slider.valueAsNumber * 100
         slider.style.background = `linear-gradient(to right, #ffffff ${temp}%, #535353 ${temp}%)`
-    }, )
+    },)
 
     // updating component
     useEffect(() => {

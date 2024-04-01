@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Login from './components/login/Login';
+import Login from './canvas/Login';
 import './App.css';
-import Canvas from './components/canvas/Canvas';
+import Canvas from './canvas/Canvas';
 
 function App() {
 

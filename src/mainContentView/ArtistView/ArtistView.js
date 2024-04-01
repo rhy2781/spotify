@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import PageNavigation from '../pageNavigation/PageNavigation'
+import PageNavigation from '../../components/pageNavigation/PageNavigation'
 import './ArtistView.css'
 import { IoPlaySharp } from "react-icons/io5";
-import RowContent from "../rowContent/RowContent";
+import RowContent from "../../components/rowContent/RowContent";
 
 
 function ArtistView(props) {

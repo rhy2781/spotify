@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 
-import HomeView from "../homeView/HomeView"
-import PlaylistView from "../playlistView/playlistView"
 import './MainContent.css'
-import ArtistView from "../ArtistView/ArtistView"
-import PageNavigation from "../pageNavigation/PageNavigation"
-import AlbumView from "../AlbumView/AlbumView"
+
+import HomeView from "../../mainContentView/homeView/HomeView"
+import PlaylistView from "../../mainContentView/playlistView/playlistView"
+import ArtistView from "../../mainContentView/ArtistView/ArtistView"
+import PageNavigation from "../../components/pageNavigation/PageNavigation"
+import AlbumView from "../../mainContentView/AlbumView/AlbumView"
 
 function MainContent(props) {
 
@@ -28,7 +29,7 @@ function MainContent(props) {
             {page === "home" && <HomeView />}
             {page === "playlist" && <PlaylistView />}
             {page === "track" && <PlaylistView />}
-            {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage} submitRequest={props.submitRequest}/>}
+            {page === "artist" && <ArtistView spotifyId={spotifyId} addPage={props.addPage} submitRequest={props.submitRequest} />}
             {page === "album" && <AlbumView />}
         </div>
     )

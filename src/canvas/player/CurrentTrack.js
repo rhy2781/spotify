@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import './Current.css'
+import './CurrentTrack.css'
 
 function Current(props) {
 

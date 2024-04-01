@@ -42,7 +42,11 @@ function Canvas(props) {
     const [pages, setPages] = useState(["spotify:home:home"])
     const [pageIndex, setPageIndex] = useState(0)
 
-
+    /**
+     * @typedef {AddPageFunction} 
+     * @param {string} uri – the uri of the page the user wants to navigate to
+     * @return void
+     */
     const addPage = (uri) => {
         if (uri.localeCompare(pages[pageIndex]) == 0) return;
         setPages([...pages.slice(0, pageIndex + 1), uri])
@@ -135,6 +139,12 @@ function Canvas(props) {
             })
     }
 
+    /**
+     * @typedef {RequestFunction} 
+     * @param {string} uri - the string uri of the song to request to play
+     * @param {string} [offset] – optional, the number of to offset the play request
+     * @return void 
+     */
     const submitRequest = (uri, offset) => {
         fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
             method: 'POST',

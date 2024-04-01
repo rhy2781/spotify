@@ -19,6 +19,10 @@
     flex-direction: column;
 }
 
+.RowItem:hover {
+    background-color: var(--gray);
+}
+
 .RowItem:hover .PContainer {
     opacity: 1;
     z-index: 10;
@@ -34,6 +38,7 @@
 .Inner:hover .PContainer {
     opacity: 1;
 }
+
 
 .Image {
     height: auto;

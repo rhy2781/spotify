@@ -38,7 +38,7 @@
 
 .ArtistHeading {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     font-size: 30px;
     font-weight: bolder;
     padding: 1vmin;
@@ -103,7 +103,7 @@
 .TopTrackTimeBox {
     display: flex;
     width: 30%;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .TopTrackTime {
@@ -116,7 +116,7 @@
 
 .ShowText {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     padding: 1vmin;
     padding-bottom: 2vmin;
 }

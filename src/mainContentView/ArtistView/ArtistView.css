@@ -1,5 +1,5 @@
 .ArtistView {
-    outline: blue solid 1px;
+    /* outline: blue solid 1px; */
     height: calc(100% - 6vmin);
     overflow-y: scroll;
 }
@@ -52,12 +52,10 @@
 .RenderOptions {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
 }
 
 .RenderOption {
     padding: 10%;
-    /* background-color: gray; */
     border-radius: 10px;
     width: min-content;
 }

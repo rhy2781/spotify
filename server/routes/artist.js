@@ -141,5 +141,31 @@ router.get('/singles', async (req, res) => {
         })
 })
 
+router.get('/appear', async (req, res) => {
+    const artist_spotify_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=appears_on`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+        .then((response) => response.json())
+        .then((response) => {
+            const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
+            const temp1 = temp.map((element) => {
+                return {
+                    "uri": element.uri,
+                    "image": element.images[0].url,
+                    "mainText": element.name,
+                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+                }
+            })
+            res.json({"appear" : temp1 })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
 
 module.exports = router;

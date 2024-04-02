@@ -19,6 +19,7 @@ function ArtistView(props) {
 
     const [singleData, setSingleData] = useState([])
     const [popularData, setPopularData] = useState([])
+    const [appearData, setAppearData] = useState([])
 
     const [render, setRender] = useState(0)
     const handleRender = (index) => { setRender(index) }
@@ -107,6 +108,22 @@ function ArtistView(props) {
         getSingles()
     }, [props.spotifyId])
 
+    // get appears on data for artist
+    useEffect(() => {
+        const getAppear = async () => {
+            await fetch(`${process.env.REACT_APP_BACKEND}/artist/appear?id=${props.spotifyId}`, {
+                headers: {
+                    method: 'GET'
+                }
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    setAppearData(response.appear)
+                })
+                .catch(err => console.log(err))
+        }
+        getAppear()
+    }, [props.spotifyId])
 
     const containerRef = useRef(null);
 
@@ -165,8 +182,11 @@ function ArtistView(props) {
                         {render == 1 && albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                         {render == 2 && singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                     </div>
+                    <div className="ArtistHeading">
+                        Appears On
+                    </div>
                     <div>
-                        end
+                        {appearData && <RowContent data={appearData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                     </div>
                 </div>
             }

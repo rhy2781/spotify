@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
         })
 })
 
-
+// TODO
 router.get('/tracks', async (req, res) => {
     const artist_spotify_id = req.query.id
 
@@ -51,7 +51,7 @@ router.get('/tracks', async (req, res) => {
                     "uri": element.uri,
                     "album_uri": element.album_uri,
                     "track_number":element.track_number,
-                    "image": element.album.images[0].url,
+                    "image": element.album.images[0].url, // image 
                     "name": element.name,
                     "time": `${min}:${sec}`
                 }                

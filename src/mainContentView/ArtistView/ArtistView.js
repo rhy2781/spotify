@@ -38,6 +38,7 @@ function ArtistView(props) {
         getData()
     }, [props.spotifyId])
 
+    //TODO 
     // get new data for artist top tracks
     useEffect(() => {
         const getTopTracks = async () => {
@@ -54,7 +55,7 @@ function ArtistView(props) {
 
     }, [props.spotifyId])
 
-
+    // TODO
     // visually update with cached data, and state update with hover variable
     // useEffect(() => {
     //     console.log(trackData)

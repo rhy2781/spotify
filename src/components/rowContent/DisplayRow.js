@@ -5,14 +5,14 @@ import './DisplayRow.css'
 
 /**
  * @param {Object} props 
- * @param {Array.<RowItem>} props.data - An array of objects representing items to display.
+ * @param {RowItem[]} props.data - An array of objects representing items to display.
  * @param {RequestFunction} props.submitRequest
  * @param {AddPageFunction} props.addPage
  */
 
 /**
  * @typedef {RowItem} 
- * @property {string} uri
+ * @property {string} uri – the spotify uri of the item
  * @property {string} image – the url source of the image to display
  * @property {string} mainText – the main text to display
  * @property {string} subText – additional information 

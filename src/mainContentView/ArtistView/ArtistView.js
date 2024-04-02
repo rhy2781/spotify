@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import PageNavigation from '../../components/pageNavigation/PageNavigation'
 import './ArtistView.css'
@@ -108,6 +108,15 @@ function ArtistView(props) {
     }, [props.spotifyId])
 
 
+    const containerRef = useRef(null);
+
+    // Scroll to top whenever render changes
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTo(0, 0);
+        }
+    }, [render]);
+
     return (
         <div className="ArtistView">
             {(Object.keys(artistData).length > 0) &&
@@ -131,19 +140,24 @@ function ArtistView(props) {
                     <div>
                         <TrackList data={trackData} submitRequest={props.submitRequest} split={true} currentTrack={props.currentTrack} />
                     </div>
-                    <div>
-                        <div className="ArtistHeader">
+                    <div className="RenderOptions">
+                        <div onClick={() => handleRender(0)}>
                             Popular
                         </div>
-                        {popularData && <RowContent data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
-                        <div className="ArtistHeader">
-                            Albums
+                        <div onClick={() => handleRender(1)}>
+                            Album
                         </div>
-                        {albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
-                        <div className="ArtistHeader">
-                            Singles
+                        <div onClick={() => handleRender(2)}>
+                            Single
                         </div>
-                        {singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                    </div>
+                    <div className="test" ref={containerRef}>
+                        {render == 0 && popularData && <RowContent data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                        {render == 1 && albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                        {render == 2 && singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                    </div>
+                    <div>
+                        end
                     </div>
                 </div>
             }

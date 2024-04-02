@@ -1,9 +1,9 @@
 .Row {
     display: flex;
     flex-direction: row;
-    height: min-content;
+    height: 30vmin;
     outline: gold solid 1px;
-    height: min-content;
+    /* height: min-content; */
     width: 100%;
 }
 
@@ -97,3 +97,4 @@
     overflow-x: hidden;
     overflow: hidden;
 }
+

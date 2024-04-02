@@ -48,3 +48,16 @@
     padding: 1vmin;
 }
 
+
+.RenderOptions {
+    display: flex;
+    flex-direction: row;
+}
+
+.test {
+    /* height: max-content; */
+    /* height: 20vmin; */
+    height: 30vmin;
+    width: 100%;
+    outline: green solid 3px;
+}

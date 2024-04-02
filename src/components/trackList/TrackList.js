@@ -23,18 +23,16 @@ function TrackList(props) {
             if (element.uri.localeCompare(props.currentTrack.uri) == 0) {
                 return (
                     <div className="TopTrack" key={element.uri} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-                        <div className="Container">
-                            <div className="TopTrackNumber" style={{ "color": "#44c767" }} onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}>
-                                {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
+                        <div className="TopTrackNumber" style={{ "color": "#44c767" }} onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}>
+                            {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
+                        </div>
+                        <div className="TopTrackImage">
+                            <div className="TopTrackImageContainer">
+                                <img src={element.image} alt={element.uri} />
                             </div>
-                            <div className="TopTrackImage">
-                                <div className="TopTrackImageContainer">
-                                    <img src={element.image} alt={element.uri} />
-                                </div>
-                            </div>
-                            <div className="TopTrackName" style={{ "color": "#44c767"}}>
-                                {element.name}
-                            </div>
+                        </div>
+                        <div className="TopTrackName" style={{ "color": "#44c767" }}>
+                            {element.name}
                         </div>
                         <div className="TopTrackTimeBox">
                             <div className="TopTrackTime">
@@ -47,18 +45,16 @@ function TrackList(props) {
             else {
                 return (
                     <div className="TopTrack" key={element.uri} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-                        <div className="Container">
-                            <div className="TopTrackNumber" onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}>
-                                {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
+                        <div className="TopTrackNumber" onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}>
+                            {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
+                        </div>
+                        <div className="TopTrackImage">
+                            <div className="TopTrackImageContainer">
+                                <img src={element.image} alt={element.uri} />
                             </div>
-                            <div className="TopTrackImage">
-                                <div className="TopTrackImageContainer">
-                                    <img src={element.image} alt={element.uri} />
-                                </div>
-                            </div>
-                            <div className="TopTrackName">
-                                {element.name}
-                            </div>
+                        </div>
+                        <div className="TopTrackName">
+                            {element.name}
                         </div>
                         <div className="TopTrackTimeBox">
                             <div className="TopTrackTime">
@@ -75,7 +71,7 @@ function TrackList(props) {
 
 
     return (
-        <div className="debug">
+        <div>
             {!props.split && visual}
             {props.split && visual.slice(0, visual.length / 2)}
             {props.split && showAll && visual.slice(visual.length / 2, visual.length)}

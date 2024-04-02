@@ -17,12 +17,33 @@
 .ArtistImage {
     height: 150px;
     width: 150px;
-    border-radius: 50%;
     overflow: hidden;
+
+    position: relative;
+    z-index: 1;
 }
 
 .ArtistImage img {
     height: 100%;
+}
+
+.ArtistPlayContainer {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    z-index: 5;
+}
+
+.ArtistPlay {
+    background-color: var(--green);
+    padding: 1%;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .ArtistDetails {

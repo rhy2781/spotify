@@ -141,7 +141,13 @@ function ArtistView(props) {
                     <div className="ArtistHeader">
                         <div className="ArtistImage">
                             <img src={artistData.images[0].url} />
+                            <div className="ArtistPlayContainer">
+                                <div className="ArtistPlay">
+                                    <IoPlaySharp />
+                                </div>
+                            </div>
                         </div>
+
                         <div className="ArtistDetails">
                             <div className="ArtistName">
                                 {artistData.name}

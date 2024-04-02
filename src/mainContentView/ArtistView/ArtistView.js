@@ -13,12 +13,12 @@ function ArtistView(props) {
 
     // state variables for track display
     const [trackData, setTrackData] = useState([])
-    // const [tracks, setTracks] = useState([])
-    const [showAll, setShowAll] = useState(false)
-    const [hoverTrack, setHoverTrack] = useState(11)
 
     // state variable for album display
     const [albumData, setAlbumData] = useState([])
+
+    const [singleData, setSingleData] = useState([])
+    const [popularData, setPopularData] = useState([])
 
 
     const handleMouseEnter = (index) => { setHoverTrack(index) }
@@ -73,6 +73,39 @@ function ArtistView(props) {
 
     }, [props.spotifyId])
 
+    // get album data for artist
+    useEffect(() => {
+        const getSingles = async () => {
+            await fetch(`${process.env.REACT_APP_BACKEND}/artist/singles?id=${props.spotifyId}`, {
+                headers: {
+                    method: 'GET'
+                }
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    setSingleData(response.singles)
+                })
+                .catch(err => console.log(err))
+        }
+        getSingles()
+    }, [props.spotifyId])
+
+    useEffect(() => {
+        const getSingles = async () => {
+            await fetch(`${process.env.REACT_APP_BACKEND}/artist/popular?id=${props.spotifyId}`, {
+                headers: {
+                    method: 'GET'
+                }
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    setPopularData(response.popular)
+                })
+                .catch(err => console.log(err))
+        }
+        getSingles()
+    }, [props.spotifyId])
+
     return (
         <div className="ArtistView">
             {(Object.keys(artistData).length > 0) &&
@@ -96,8 +129,14 @@ function ArtistView(props) {
                     <div>
                         <TrackList data={trackData} submitRequest={props.submitRequest} split={true} currentTrack={props.currentTrack} />
                     </div>
+                    <div>
+                        {popularData && <RowContent data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                    </div>
                     <div className="AlbumList">
-                        <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />
+                        {albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                    </div>
+                    <div>
+                        {singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                     </div>
                 </div>
             }

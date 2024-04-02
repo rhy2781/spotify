@@ -62,6 +62,33 @@ router.get('/tracks', async (req, res) => {
         })
 })
 
+
+router.get('/popular', async (req, res) => {
+    const artist_spotify_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+        .then((response) => response.json())
+        .then((response) => {
+            const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
+            const temp1 = temp.map((element) => {
+                return {
+                    "uri": element.uri,
+                    "image": element.images[0].url,
+                    "mainText": element.name,
+                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+                }
+            })
+            res.json({ "popular": temp1 })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
 router.get('/albums', async (req, res) => {
     const artist_spotify_id = req.query.id
     await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=album`, {
@@ -72,7 +99,8 @@ router.get('/albums', async (req, res) => {
     })
         .then((response) => response.json())
         .then((response) => {
-            const temp = response.items.map((element) => {
+            const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
+            const temp1 = temp.map((element) => {
                 return {
                     "uri": element.uri,
                     "image": element.images[0].url,
@@ -80,7 +108,33 @@ router.get('/albums', async (req, res) => {
                     "subText": `${element.release_date.slice(0, 4)} • ${element.type}`
                 }
             })
-            res.json({ "album": temp })
+            res.json({ "album": temp1 })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
+router.get('/singles', async (req, res) => {
+    const artist_spotify_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=single`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+        .then((response) => response.json())
+        .then((response) => {
+            const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
+            const temp1 = temp.map((element) => {
+                return {
+                    "uri": element.uri,
+                    "image": element.images[0].url,
+                    "mainText": element.name,
+                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+                }
+            })
+            res.json({ "singles": temp1 })
         })
         .catch(err => {
             console.log(err)

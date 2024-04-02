@@ -1,81 +1,19 @@
-
-> spotify@0.1.0 server
-> node server
-
-Application listening on port 5001
-6mEQK9m2krja6X1cfsAjfl
-6mEQK9m2krja6X1cfsAjfl
 {
-  href: 'https://api.spotify.com/v1/artists/6mEQK9m2krja6X1cfsAjfl/albums?include_groups=album&offset=0&limit=20&locale=*',
+  href: 'https://api.spotify.com/v1/artists/6mEQK9m2krja6X1cfsAjfl/albums?include_groups=single&offset=0&limit=20&locale=*',
   items: [
     {
-      album_group: 'album',
-      album_type: 'album',
+      album_group: 'single',
+      album_type: 'single',
       artists: [Array],
       available_markets: [Array],
       external_urls: [Object],
-      href: 'https://api.spotify.com/v1/albums/31LvSRXGPVhYs2EZFK0BEU',
-      id: '31LvSRXGPVhYs2EZFK0BEU',
+      href: 'https://api.spotify.com/v1/albums/63xNXfql8mdsOd1fZjodbf',
+      id: '63xNXfql8mdsOd1fZjodbf',
       images: [Array],
-      name: 'Ado "Ready For My Show Playlist"',
-      release_date: '2024-02-06',
+      name: 'Value',
+      release_date: '2024-02-23',
       release_date_precision: 'day',
-      total_tracks: 25,
+      total_tracks: 1,
       type: 'album',
-      uri: 'spotify:album:31LvSRXGPVhYs2EZFK0BEU'
+      uri: 'spotify:album:63xNXfql8mdsOd1fZjodbf'
     },
-    {
-      album_group: 'album',
-      album_type: 'album',
-      artists: [Array],
-      available_markets: [Array],
-      external_urls: [Object],
-      href: 'https://api.spotify.com/v1/albums/2tGokYNjX87AAodtbLBYuf',
-      id: '2tGokYNjX87AAodtbLBYuf',
-      images: [Array],
-      name: "Ado's Utattemita Album",
-      release_date: '2023-12-13',
-      release_date_precision: 'day',
-      total_tracks: 10,
-      type: 'album',
-      uri: 'spotify:album:2tGokYNjX87AAodtbLBYuf'
-    },
-    {
-      album_group: 'album',
-      album_type: 'album',
-      artists: [Array],
-      available_markets: [Array],
-      external_urls: [Object],
-      href: 'https://api.spotify.com/v1/albums/7Ixqxq13tWhrbnIabk3172',
-      id: '7Ixqxq13tWhrbnIabk3172',
-      images: [Array],
-      name: "UTA'S SONGS ONE PIECE FILM RED",
-      release_date: '2022-08-10',
-      release_date_precision: 'day',
-      total_tracks: 8,
-      type: 'album',
-      uri: 'spotify:album:7Ixqxq13tWhrbnIabk3172'
-    },
-    {
-      album_group: 'album',
-      album_type: 'album',
-      artists: [Array],
-      available_markets: [Array],
-      external_urls: [Object],
-      href: 'https://api.spotify.com/v1/albums/4muEF5biWb506ZojGMfHb7',
-      id: '4muEF5biWb506ZojGMfHb7',
-      images: [Array],
-      name: 'Kyougen',
-      release_date: '2022-01-26',
-      release_date_precision: 'day',
-      total_tracks: 14,
-      type: 'album',
-      uri: 'spotify:album:4muEF5biWb506ZojGMfHb7'
-    }
-  ],
-  limit: 20,
-  next: null,
-  offset: 0,
-  previous: null,
-  total: 4
-}

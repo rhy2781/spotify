@@ -94,7 +94,7 @@ function ArtistView(props) {
                         Popular
                     </div>
                     <div>
-                        <TrackList data={trackData} submitRequest={props.submitRequest} split={true} />
+                        <TrackList data={trackData} submitRequest={props.submitRequest} split={true} currentTrack={props.currentTrack} />
                     </div>
                     <div className="AlbumList">
                         <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />

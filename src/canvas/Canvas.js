@@ -1,14 +1,13 @@
 import { React, useState, useEffect } from "react";
 
 import './Canvas.css'
+
 import ProgressBar from "./trackProgress/TrackProgress";
-import Current from "./player/CurrentTrack";
+import Current from "./currentTrack/CurrentTrack";
 import MainControl from "./mainControl/MainControl";
 import SideControl from "./sideControl/SideControl";
 import Playlists from "./playlists/Playlists";
 import MainContent from "./mainContent/MainContent";
-import PageNavigation from "../components/pageNavigation/PageNavigation";
-
 
 const track = {
     name: "",
@@ -94,8 +93,9 @@ function Canvas(props) {
             // Player State Change Listener
             player.addListener('player_state_changed', (state => {
                 if (!state) {
-                    return;
+                    return
                 }
+
                 setCurrentTrack(state.track_window.current_track);
                 setPause(state.paused);
                 setShuffle(state.shuffle);
@@ -107,6 +107,7 @@ function Canvas(props) {
                 player.getCurrentState().then((state) => {
                     (!state) ? setActive(false) : setActive(true)
                 });
+
             }));
             player.connect();
         };
@@ -180,6 +181,7 @@ function Canvas(props) {
                             prevPage={prevPage}
                             nextPage={nextPage}
                             submitRequest={submitRequest}
+                            currentTrack={currentTrack}
                         />
                     </div>
                 </div>

@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react"
 
+import './TrackList.css'
+
+import { IoPlaySharp } from "react-icons/io5"
+
 function TrackList(props) {
-    // TODO
 
     const [visual, setVisual] = useState([])
     const [hoverTrack, setHoverTrack] = useState(-1)
+    const [showAll, setShowAll] = useState(true)
+
+    const handleMouseEnter = (index) => { setHoverTrack(index) }
+    const handleMouseLeave = () => { setHoverTrack(null) }
+    const handleShow = () => {
+        if (showAll) { setShowAll(false) }
+        else { setShowAll(true) }
+    }
 
     useEffect(() => {
         const temp = props.data.map((element, index) => {
@@ -16,7 +27,7 @@ function TrackList(props) {
                         </div>
                         <div className="TopTrackImage">
                             <div className="TopTrackImageContainer">
-                                <img src={element.album.image} alt={element.uri} />
+                                <img src={element.image} alt={element.uri} />
                             </div>
                         </div>
                         <div className="TopTrackName">
@@ -25,20 +36,24 @@ function TrackList(props) {
                     </div>
                     <div className="TopTrackTimeBox">
                         <div className="TopTrackTime">
-                            {min}:{sec}
+                            {element.time}
                         </div>
                     </div>
                 </div>
             )
         })
+        setVisual(temp)
 
-    }, [props.data])
+    }, [props.data, hoverTrack])
 
 
     return (
-        <div>
-
-
+        <div className="debug">
+            {visual.slice(0, 5)}
+            {showAll && visual.slice(5, 10)}
+            <div onClick={() => handleShow()}>
+                {showAll ? "Show Less" : " Show More"}
+            </div>
         </div>
     )
 }

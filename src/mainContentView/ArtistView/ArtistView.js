@@ -4,6 +4,7 @@ import PageNavigation from '../../components/pageNavigation/PageNavigation'
 import './ArtistView.css'
 import { IoPlaySharp } from "react-icons/io5";
 import RowContent from "../../components/rowContent/DisplayRow";
+import TrackList from "../../components/trackList/TrackList";
 
 
 function ArtistView(props) {
@@ -12,7 +13,7 @@ function ArtistView(props) {
 
     // state variables for track display
     const [trackData, setTrackData] = useState([])
-    const [tracks, setTracks] = useState([])
+    // const [tracks, setTracks] = useState([])
     const [showAll, setShowAll] = useState(false)
     const [hoverTrack, setHoverTrack] = useState(11)
 
@@ -134,6 +135,8 @@ function ArtistView(props) {
                     <div className="ArtistHeading">
                         Popular
                     </div>
+                    <TrackList data={trackData}/>
+
                     {/* <div className="ArtistTracks">
                         <div className="TopTracks">
                             {tracks.slice(0, 5)}

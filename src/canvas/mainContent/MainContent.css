@@ -1,0 +1,5 @@
+.MainContent {
+    background-color: var(--dark-gray);
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,19 @@
+{
+  href: 'https://api.spotify.com/v1/artists/6mEQK9m2krja6X1cfsAjfl/albums?include_groups=single&offset=0&limit=20&locale=*',
+  items: [
+    {
+      album_group: 'single',
+      album_type: 'single',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/63xNXfql8mdsOd1fZjodbf',
+      id: '63xNXfql8mdsOd1fZjodbf',
+      images: [Array],
+      name: 'Value',
+      release_date: '2024-02-23',
+      release_date_precision: 'day',
+      total_tracks: 1,
+      type: 'album',
+      uri: 'spotify:album:63xNXfql8mdsOd1fZjodbf'
+    },

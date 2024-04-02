@@ -1,0 +1,70 @@
+.ArtistView {
+    /* outline: blue solid 1px; */
+    height: calc(100% - 6vmin);
+    overflow-y: scroll;
+}
+
+.ArtistContent {
+    height: max-content;
+}
+
+.ArtistHeader {
+    display: flex;
+    flex-direction: row;
+    padding: 1vmin;
+}
+
+.ArtistImage {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.ArtistImage img {
+    height: 100%;
+}
+
+.ArtistDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    padding: 1vmin;
+}
+
+.ArtistName {
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+
+
+.ArtistHeading {
+    display: flex;
+    align-items: flex-start;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 1vmin;
+}
+
+
+.RenderOptions {
+    display: flex;
+    flex-direction: row;
+}
+
+.RenderOption {
+    padding: 10%;
+    border-radius: 10px;
+    width: min-content;
+}
+
+.RenderContainer {
+    padding-right: 1.5%;
+}
+
+.ContentDisplay {
+    height: 30vmin;
+    width: 100%;
+}

@@ -1,0 +1,41 @@
+.SideControl {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.VolumeInputContainer {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.VolumeInputContainer:hover input[type="range"]::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.VolumeInputSlider {
+    width: 100%;
+    height: 5px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 15px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+
+    height: 20px;
+    width: 20px;
+    background-color: var(--green);
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+    opacity: 0;
+}

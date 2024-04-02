@@ -19,7 +19,7 @@ var generateRandomString = function (length) {
 // request code through the spotify accounts service
 var stateCheck = ''
 router.get('/login', (req, res) => {
-    var scope = "streaming \ user-read-email \ user-read-private"
+    const scope = 'user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state playlist-read-private'
     var state = generateRandomString(16);
     var auth_query_parameters = new URLSearchParams({
         response_type: "code",
@@ -59,15 +59,44 @@ router.get('/callback', function (req, res) {
         };
         request.post(authOptions, function (error, response, body) {
             if (!error && response.statusCode === 200) {
-                console.log(body)
                 credentials.setSpotifyToken(body.access_token)
                 credentials.setRefreshToken(body.refresh_token)
-                credentials.setExpiresIn(body.expires_in)
                 res.redirect('http://localhost:3000/');
             }
         });
     }
 })
+
+
+router.get('/refresh', function (req, res) {
+    var refreshToken = credentials.getRefreshToken()
+    var clientId = credentials.getSpotifyClientId()
+    var clientSecret = credentials.getSpotifyClientSecret()
+
+    var authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret).toString('base64'))
+        },
+        form: {
+            grant_type: 'refresh_token',
+            refresh_token: refreshToken
+        },
+        json: true
+    }
+    request.post(authOptions, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            credentials.setSpotifyToken(body.access_token)
+            res.json({
+                access_token: body.access_token,
+                expiresIn: body.expires_in
+            })
+        }
+    })
+})
+
+
 
 router.get('/token', (req, res) => {
     res.json({

@@ -8,6 +8,12 @@ var options = {
     origin: 'http://localhost:3000'
 }
 app.use(cors(options))
+app.use(express.json())
+
+const qs = require('qs')
+app.set('query parser',
+  (str) => qs.parse(str)
+)
 
 /**
  * Authentication routes
@@ -25,6 +31,20 @@ app.get('/test', (req, res) => {
     })
 })
 
+
+const transfer = require('./routes/transfer')
+app.use('/transfer', transfer)
+
+
+const controls = require('./routes/controls')
+app.use('/controls', controls)
+
+
+const playlists = require('./routes/playlists')
+app.use('/playlists', playlists)
+
+const artist = require('./routes/artist')
+app.use('/artist', artist)
 
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)

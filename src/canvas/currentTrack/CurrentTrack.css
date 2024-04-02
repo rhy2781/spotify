@@ -1,0 +1,46 @@
+.CurrentContainer{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+/* Current Track Image */
+.CurrentImageContainer {
+    overflow: hidden;
+    height: 100%;
+    width: min-content;
+}
+
+.CurrentImageContainer img {
+    height: 100%;
+}
+
+/* Details about Current Track*/
+.CurrentDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 1%;
+    width: 100%;
+}
+
+.CurrentTrack{
+    width: 100%;
+}
+
+.CurrentTrack:hover{
+    text-decoration: underline;
+}
+
+.CurrentArtists {
+    display: flex;
+    flex-direction: row;
+}
+
+.Artist {
+    padding-right: 1%;
+}
+.Artist:hover{
+    text-decoration: underline;
+}

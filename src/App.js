@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import WebPlayback from './components/WebPlayback';
-import Login from './components/Login';
+import Login from './canvas/Login';
 import './App.css';
-import Canvas from './components/Canvas';
+import Canvas from './canvas/Canvas';
 
 function App() {
 
   const [token, setToken] = useState(' ');
+  const [expiresIn, setExpiresIn] = useState(0)
 
   // request token initially
   useEffect(() => {
@@ -18,15 +18,39 @@ function App() {
             setToken(response.token)
           }
         })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
     getAuthenticated()
   }, []);
 
+  // get refresh token for SDK callback function
+  // useEffect(() => {
+  //   const interval = setInterval(async () => {
+  //     console.log('attempted')
+  //     await fetch(`${process.env.REACT_APP_BACKEND}/auth/refresh`, {
+  //       method: 'GET'
+  //     })
+  //       .then((response) => response.json())
+  //       .then((response) => {
+  //         setToken(response.access_token)
+  //         setExpiresIn(response.expiresIn)
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //   }, (expiresIn - 60) * 1000)
+
+  //   return () => clearInterval(interval)
+  // }, [token])
+
+
   return (
-    <>
-      {(token === ' ') ? <Login /> : <Canvas />}
-    </>
+    <div className='App'>
+      {(token === ' ') ? <Login /> : <Canvas token={token} />}
+    </div>
   );
 }
 

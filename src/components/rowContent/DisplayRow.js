@@ -30,7 +30,7 @@ function RowContent(props) {
                         <div className="Image">
                             <img src={element.image} />
                             <div className="PContainer">
-                                <div className="PlayIcon">
+                                <div className="PlayIcon" onClick={(e) => e.stopPropagation()}>
                                     <IoPlaySharp onClick={() => props.submitRequest(element.uri)} />
                                 </div>
                             </div>
@@ -43,7 +43,6 @@ function RowContent(props) {
                         </div>
 
                     </div>
-
                 </div>
             )
         })

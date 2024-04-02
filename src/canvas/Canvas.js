@@ -6,7 +6,7 @@ import ProgressBar from "./trackProgress/TrackProgress";
 import Current from "./currentTrack/CurrentTrack";
 import MainControl from "./mainControl/MainControl";
 import SideControl from "./sideControl/SideControl";
-import Playlists from "./playlists/Playlists";
+import Playlists from "./playlistPanel/PlaylistPanel";
 import MainContent from "./mainContent/MainContent";
 
 const track = {
@@ -170,6 +170,7 @@ function Canvas(props) {
                     <div className="Playlists">
                         <Playlists
                             addPage={addPage}
+                            pages={pages}
                             pageIndex={pageIndex}
                         />
                     </div>

@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
         })
 })
 
-// TODO
 router.get('/tracks', async (req, res) => {
     const artist_spotify_id = req.query.id
 

@@ -4,6 +4,10 @@
     overflow-y: scroll;
 }
 
+.ArtistContent {
+    height: max-content;
+}
+
 .ArtistHeader {
     display: flex;
     flex-direction: row;

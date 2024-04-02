@@ -140,18 +140,27 @@ function ArtistView(props) {
                     <div>
                         <TrackList data={trackData} submitRequest={props.submitRequest} split={true} currentTrack={props.currentTrack} />
                     </div>
+                    <div className="ArtistHeading">
+                        Discography
+                    </div>
                     <div className="RenderOptions">
-                        <div onClick={() => handleRender(0)}>
-                            Popular
+                        <div className="RenderContainer" >
+                            <div className="RenderOption" onClick={() => handleRender(0)} style={{ "backgroundColor": (render == 0) ? 'gray' : '' }}>
+                                Popular
+                            </div>
                         </div>
-                        <div onClick={() => handleRender(1)}>
-                            Album
+                        <div className="RenderContainer">
+                            <div className="RenderOption" onClick={() => handleRender(1)} style={{ "backgroundColor": (render == 1) ? 'gray' : '' }}>
+                                Album
+                            </div>
                         </div>
-                        <div onClick={() => handleRender(2)}>
-                            Single
+                        <div className="RenderContainer">
+                            <div className="RenderOption" onClick={() => handleRender(2)} style={{ "backgroundColor": (render == 2) ? 'gray' : '' }}>
+                                Single
+                            </div>
                         </div>
                     </div>
-                    <div className="test" ref={containerRef}>
+                    <div className="ContentDisplay" ref={containerRef}>
                         {render == 0 && popularData && <RowContent data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                         {render == 1 && albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                         {render == 2 && singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}

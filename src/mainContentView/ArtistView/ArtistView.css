@@ -52,12 +52,21 @@
 .RenderOptions {
     display: flex;
     flex-direction: row;
+    /* justify-content: space-evenly; */
 }
 
-.test {
-    /* height: max-content; */
-    /* height: 20vmin; */
+.RenderOption {
+    padding: 10%;
+    /* background-color: gray; */
+    border-radius: 10px;
+    width: min-content;
+}
+
+.RenderContainer {
+    padding-right: 1.5%;
+}
+
+.ContentDisplay {
     height: 30vmin;
     width: 100%;
-    outline: green solid 3px;
 }

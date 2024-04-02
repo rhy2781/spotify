@@ -142,7 +142,11 @@ function ArtistView(props) {
                         <div className="ArtistImage">
                             <img src={artistData.images[0].url} />
                             <div className="ArtistPlayContainer">
-                                <div className="ArtistPlay">
+                                <div className="ArtistPlay" onClick={() => {
+                                    props.submitRequest(props.uri)
+                                    console.log(props.uri)
+                                }
+                                }>
                                     <IoPlaySharp />
                                 </div>
                             </div>

@@ -67,6 +67,13 @@ router.post('/request', (req, res) => {
         offset = 0
     }
 
+    console.log(JSON.stringify({
+        "context_uri": uri,
+        "offset": {
+            "position": offset
+        }
+    }))
+
     fetch(`https://api.spotify.com/v1/me/player/play?${device}`, {
         method: 'PUT',
         headers: {
@@ -78,6 +85,39 @@ router.post('/request', (req, res) => {
             "offset": {
                 "position": offset
             }
+        })
+    })
+        .then((response) => {
+            console.log(response.ok)
+            console.log(response.statusText)
+            console.log(response.status)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    res.end();
+})
+
+router.post('/requestArtist', (req, res) => {
+    var uri = req.body.uri
+    var device = req.body.device
+    var offset = req.body.offset
+    console.log(uri)
+    console.log(offset)
+
+    if (offset == null) {
+        offset = 0
+    }
+
+    fetch(`https://api.spotify.com/v1/me/player/play?${device}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "context_uri": uri,
         })
     })
         .then((response) => {

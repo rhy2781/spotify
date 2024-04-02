@@ -146,21 +146,39 @@ function Canvas(props) {
      * @param {string} [offset] – optional, the number of to offset the play request
      * @return void 
      */
-    const submitRequest = (uri, offset) => {
-        fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                uri: uri,
-                device: device,
-                offset: offset - 1
+    const submitRequest = (uri, offset) => {    
+        if(uri.split(':')[1].localeCompare("artist") == 0){
+            fetch(`${process.env.REACT_APP_BACKEND}/controls/requestArtist`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uri: uri,
+                    device: device
+                })
             })
-        })
             .catch(err => {
                 console.log(err)
             })
+        }
+        else{
+
+            fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uri: uri,
+                    device: device,
+                    offset: offset - 1
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
     }
 
     if (active) {

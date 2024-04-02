@@ -60,8 +60,10 @@ router.post('/request', (req, res) => {
     var uri = req.body.uri
     var device = req.body.device
     var offset = req.body.offset
+    console.log(uri)
+    console.log(offset)
 
-    if(offset == null){
+    if (offset == null) {
         offset = 0
     }
 
@@ -78,14 +80,14 @@ router.post('/request', (req, res) => {
             }
         })
     })
-    .then((response) => {
-        console.log(response.ok)
-        console.log(response.statusText)
-        console.log(response.status)
-    })
-    .catch(err => {
-        console.log(err)
-    })
+        .then((response) => {
+            console.log(response.ok)
+            console.log(response.statusText)
+            console.log(response.status)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 
     res.end();
 })

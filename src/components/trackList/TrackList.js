@@ -8,10 +8,11 @@ function TrackList(props) {
 
     const [visual, setVisual] = useState([])
     const [hoverTrack, setHoverTrack] = useState(-1)
-    const [showAll, setShowAll] = useState(true)
+    const [showAll, setShowAll] = useState(false)
 
     const handleMouseEnter = (index) => { setHoverTrack(index) }
     const handleMouseLeave = () => { setHoverTrack(null) }
+
     const handleShow = () => {
         if (showAll) { setShowAll(false) }
         else { setShowAll(true) }
@@ -49,11 +50,16 @@ function TrackList(props) {
 
     return (
         <div className="debug">
-            {visual.slice(0, 5)}
-            {showAll && visual.slice(5, 10)}
-            <div onClick={() => handleShow()}>
-                {showAll ? "Show Less" : " Show More"}
-            </div>
+            {!props.split && visual}
+            {props.split && visual.slice(0, visual.length / 2)}
+            {props.split && showAll && visual.slice(visual.length / 2, visual.length)}
+            {props.split &&
+                <div className="ShowText" >
+                    <div onClick={() => handleShow()}>
+                        {showAll ? "Show Less" : " Show More"}
+                    </div>
+                </div>
+            }
         </div>
     )
 }

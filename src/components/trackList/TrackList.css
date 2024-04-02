@@ -68,3 +68,10 @@
 .debug {
     outline: red dotted 1px;
 }
+
+.ShowText {
+    display: flex;
+    align-items: flex-start;
+    padding: 1vmin;
+    padding-bottom: 2vmin;
+}

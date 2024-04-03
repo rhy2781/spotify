@@ -8,7 +8,7 @@
     height: max-content;
 }
 
-.ArtistHeader {
+/* .ArtistHeader {
     display: flex;
     flex-direction: row;
     padding: 1vmin;
@@ -58,9 +58,22 @@
 .ArtistName {
     font-size: 60px;
     font-weight: bolder;
+} */
+
+
+.ArtistDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* justify-content: flex-end; */
+    text-align: left;
+    /* padding: 1vmin; */
 }
 
-
+.ArtistName {
+    font-size: 60px;
+    font-weight: bolder;
+}
 
 .ArtistHeading {
     display: flex;

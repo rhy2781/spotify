@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
             res.json({
                 followers: response.followers.total,
                 genre: response.genres,
-                images: response.images,
+                image: response.images[0].url,
                 name: response.name,
                 type: response.type
             })

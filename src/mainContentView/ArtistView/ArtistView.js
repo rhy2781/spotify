@@ -5,11 +5,13 @@ import './ArtistView.css'
 import { IoPlaySharp } from "react-icons/io5";
 import RowContent from "../../components/rowContent/DisplayRow";
 import TrackList from "../../components/trackList/TrackList";
+import Header from "../../components/header/Header";
 
 
 function ArtistView(props) {
 
     const [artistData, setArtistData] = useState({})
+    const [artistDetails, setArtistDetails] = useState(null)
 
     // state variables for track display
     const [trackData, setTrackData] = useState([])
@@ -35,6 +37,16 @@ function ArtistView(props) {
                 .then((response) => response.json())
                 .then((response) => {
                     setArtistData(response)
+                    const temp =
+                        (<div className="ArtistDetails">
+                            <div className="ArtistName">
+                                {response.name}
+                            </div>
+                            <div>
+                                {response.followers.toLocaleString()} Followers
+                            </div>
+                        </div>)
+                    setArtistDetails(temp)
                 })
         }
         getData()
@@ -138,13 +150,14 @@ function ArtistView(props) {
         <div className="ArtistView">
             {(Object.keys(artistData).length > 0) &&
                 <div className="ArtistContent">
-                    <div className="ArtistHeader">
+
+
+                    {/* <div className="ArtistHeader">
                         <div className="ArtistImage">
                             <img src={artistData.images[0].url} />
                             <div className="ArtistPlayContainer">
                                 <div className="ArtistPlay" onClick={() => {
                                     props.submitRequest(props.uri)
-                                    console.log(props.uri)
                                 }
                                 }>
                                     <IoPlaySharp />
@@ -160,7 +173,16 @@ function ArtistView(props) {
                                 {artistData.followers.toLocaleString()} Followers
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+
+                    <Header
+                        image={artistData.image}
+                        uri={props.uri}
+                        details={artistDetails}
+                    />
+
+
+
                     <div className="ArtistHeading">
                         Top Tracks
                     </div>

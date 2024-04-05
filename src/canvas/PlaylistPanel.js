@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import './PlaylistPanel.css'
 
-import blank from '../../images/blank.png'
+import blank from '../images/blank.png'
 
 function Playlists(props) {
     const [playlistData, setPlaylistData] = useState([])

@@ -2,13 +2,14 @@ import { React, useState, useEffect } from "react";
 
 import './Canvas.css'
 
-import ProgressBar from "./trackProgress/TrackProgress";
-import Current from "./currentTrack/CurrentTrack";
-import MainControl from "./mainControl/MainControl";
-import SideControl from "./sideControl/SideControl";
-import Playlists from "./playlistPanel/PlaylistPanel";
-import MainContent from "./mainContent/MainContent";
+import ProgressBar from "./TrackProgress";
+import Current from "./CurrentTrack";
+import MainControl from "./MainControl";
+import SideControl from "./SideControl";
+import Playlists from "./PlaylistPanel";
+import MainContent from "./MainContent";
 
+// default track
 const track = {
     name: "",
     album: {
@@ -21,7 +22,13 @@ const track = {
     ]
 }
 
-
+/**
+ * @component
+ * @param {object} props 
+ * @param {string} props.token The OAuthToken used to interact with the Spotify Web Playback SDK
+ * @description The Canvas component is the main component that is used for format of the web clone
+ * @returns {JSX.Element}
+ */
 function Canvas(props) {
     // web playback
     const [player, setPlayer] = useState(undefined)
@@ -42,9 +49,10 @@ function Canvas(props) {
     const [pageIndex, setPageIndex] = useState(0)
 
     /**
-     * @typedef {AddPageFunction} 
-     * @param {string} uri – the uri of the page the user wants to navigate to
-     * @return void
+     * @function
+     * @param {String} uri The string of the spotify uri
+     * @description Adds a page to the pages history state variable.
+     * @returns {void}
      */
     const addPage = (uri) => {
         if (uri.localeCompare(pages[pageIndex]) == 0) return;
@@ -52,10 +60,21 @@ function Canvas(props) {
         setPageIndex(pageIndex + 1)
     }
 
+    /**
+     * @function
+     * @description Decrements the current pointer in the page history by 1
+     * @returns {void}
+     */
     const prevPage = () => {
         if (pageIndex == 0) return
         setPageIndex(pageIndex - 1)
     }
+
+    /**
+     * @function
+     * @description Increments the current pointer in the page history by 1
+     * @returns 
+     */
     const nextPage = () => {
         if (pageIndex == pages.length - 1) return
         setPageIndex(pageIndex + 1)
@@ -127,6 +146,11 @@ function Canvas(props) {
         // eslint-disable-next-line
     }, []);
 
+    /**
+     * @async
+     * @function
+     * @description Request to transfer the playback of the Spotify Player to the current web app
+     */
     const handleTransfer = async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/transfer`, {
             method: "POST",
@@ -141,13 +165,14 @@ function Canvas(props) {
     }
 
     /**
-     * @typedef {RequestFunction} 
-     * @param {string} uri - the string uri of the song to request to play
-     * @param {string} [offset] – optional, the number of to offset the play request
-     * @return void 
+     * @typedef {submitRequest} 
+     * @param {string} uri The string uri of a spotify object to play
+     * @param {string} [offset] The number of tracks to offset the playing of an album or a playlist. 1-indexed
+     * @return {void}
      */
-    const submitRequest = (uri, offset) => {    
-        if(uri.split(':')[1].localeCompare("artist") == 0){
+    const submitRequest = (uri, offset) => {
+        // if the uri is an artist then submit our request to /requestArtist without a offset value
+        if (uri.split(':')[1].localeCompare("artist") == 0) {
             fetch(`${process.env.REACT_APP_BACKEND}/controls/requestArtist`, {
                 method: 'POST',
                 headers: {
@@ -158,12 +183,13 @@ function Canvas(props) {
                     device: device
                 })
             })
-            .catch(err => {
-                console.log(err)
-            })
+                .catch(err => {
+                    console.log(err)
+                })
         }
-        else{
-
+        // otherwise submit a request to /request with the offset value
+        // offset should be passed in as a 1-based indexed number
+        else {
             fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
                 method: 'POST',
                 headers: {
@@ -175,12 +201,13 @@ function Canvas(props) {
                     offset: offset - 1
                 })
             })
-            .catch(err => {
-                console.log(err)
-            })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
 
+    // if the component is active, render the format of Canvas
     if (active) {
         return (
             <div className="Canvas">
@@ -239,6 +266,8 @@ function Canvas(props) {
             </div>
         )
     }
+    // otherwise render a component to inform the user to transfer and provide the capability to transfer
+    // the playback to the browser
     else {
         return (
             <div className="NoPlayback">

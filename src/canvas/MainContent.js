@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react"
 
 import './MainContent.css'
 
-import HomeView from "../../mainContentView/homeView/HomeView"
-import PlaylistView from "../../mainContentView/playlistView/playlistView"
-import ArtistView from "../../mainContentView/ArtistView/ArtistView"
-import PageNavigation from "../../components/pageNavigation/PageNavigation"
-import AlbumView from "../../mainContentView/AlbumView/AlbumView"
+import HomeView from "../mainContentView/homeView/HomeView"
+import PlaylistView from "../mainContentView/playlistView/playlistView"
+import ArtistView from "../mainContentView/ArtistView/ArtistView"
+import PageNavigation from "../components/pageNavigation/PageNavigation"
+import AlbumView from "../mainContentView/AlbumView/AlbumView"
 
 function MainContent(props) {
 

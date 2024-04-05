@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import PageNavigation from '../../components/pageNavigation/PageNavigation'
 import './ArtistView.css'
@@ -150,7 +150,7 @@ function ArtistView(props) {
 
                     {/* <div className="ArtistHeader">
                         <div className="ArtistImage">
-                            <img src={artistData.images[0].url} />
+                            <img src={artistData.images[0].url} />f
                             <div className="ArtistPlayContainer">
                                 <div className="ArtistPlay" onClick={() => {
                                     props.submitRequest(props.uri)
@@ -173,7 +173,8 @@ function ArtistView(props) {
 
                     <Header
                         image={artistData.image}
-                        uri={props.uri}
+                        uri={props.currentPageUri}
+                        submitRequest={props.submitRequest}
                         details={artistDetails}
                     />
 
@@ -205,7 +206,7 @@ function ArtistView(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="ContentDisplay" ref={containerRef}>
+                    <div className="ContentDisplay">
                         {render == 0 && popularData && <RowContent data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                         {render == 1 && albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                         {render == 2 && singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}

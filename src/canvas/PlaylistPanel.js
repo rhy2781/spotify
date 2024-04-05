@@ -4,10 +4,19 @@ import './PlaylistPanel.css'
 
 import blank from '../images/blank.png'
 
-function Playlists(props) {
+/** 
+ * Returns a list of the current user's playlists to display on the side panel
+ * @param {Object} props 
+ * @param {Function} props.addPage Add a page to history
+ * @param {String} props.currentPageUri The current uri of the page history
+ * @return {JSX.Element}  
+ */
+function PlaylistPanel(props) {
+
     const [playlistData, setPlaylistData] = useState([])
     const [display, setDisplay] = useState([])
 
+    // get playlist data
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND}/playlists`)
             .then((response) => response.json())
@@ -17,47 +26,32 @@ function Playlists(props) {
             });
     }, [])
 
+    // update the contents to display to the user
     useEffect(() => {
         var temp = playlistData.map((element) => {
+            // if this is the current page, style it differently 
+            const isSelected = element.uri === props.currentPageUri
 
-            if (element.uri.localeCompare(props.pages[props.pageIndex]) == 0) {
-                return (
-                    <div className="Playlist" style={{ "backgroundColor": "gray" }} key={element.uri} onClick={() => props.addPage(element.uri)}>
-                        <div className="temp">
-                            {element.image === "none" ? <img src={blank} className="PlaylistCover" /> : <img src={element.image} className="PlaylistCover" />}
-                        </div>
-                        <div className="PlaylistDetails">
-                            <div>
-                                {element.name}
-                            </div>
-                            <div>
-                                selected
-                            </div>
+            return (
+                <div className="Playlist"
+                    key={element.uri}
+                    style={{ "backgroundColor": isSelected ? "gray" : "" }}
+                    onClick={() => props.addPage(element.uri)}
+                >
+                    <div className="temp">
+                        {element.image === "none" ? <img src={blank} className="PlaylistCover" /> : <img src={element.image} className="PlaylistCover" />}
+                    </div>
+                    <div className="PlaylistDetails">
+                        <div>
+                            {element.name}
                         </div>
                     </div>
-                )
-            }
-            else {
-                return (
-                    <div className="Playlist" key={element.uri} onClick={() => props.addPage(element.uri)}>
-                        <div className="temp">
-                            {element.image === "none" ? <img src={blank} className="PlaylistCover" /> : <img src={element.image} className="PlaylistCover" />}
-                        </div>
-                        <div className="PlaylistDetails">
-                            <div>
-                                {element.name}
-                            </div>
-                        </div>
-                    </div>
-                )
-            }
+                </div>
+            )
         })
         setDisplay(temp)
 
-    }, [props.pageIndex, playlistData])
-
-
-
+    }, [props.currentPageUri, playlistData])
 
     return (
         <div className="PlaylistContainer">
@@ -66,5 +60,4 @@ function Playlists(props) {
     )
 }
 
-export default Playlists
-
+export default PlaylistPanel

@@ -2,12 +2,12 @@ import { React, useState, useEffect } from "react";
 
 import './Canvas.css'
 
-import ProgressBar from "./TrackProgress";
-import Current from "./CurrentTrack";
+import TrackProgress from "./TrackProgress";
+import CurrentTrack from "./CurrentTrack";
 import MainControl from "./MainControl";
 import SideControl from "./SideControl";
-import Playlists from "./PlaylistPanel";
 import MainContent from "./MainContent";
+import PlaylistPanel from "./PlaylistPanel";
 
 // default track
 const track = {
@@ -23,10 +23,9 @@ const track = {
 }
 
 /**
- * @component
- * @param {object} props 
- * @param {string} props.token The OAuthToken used to interact with the Spotify Web Playback SDK
- * @description The Canvas component is the main component that is used for format of the web clone
+ * The Canvas component is the main component that is used for format of the web clone
+ * @param {Object} props 
+ * @param {String} props.token The OAuthToken used to interact with the Spotify Web Playback SDK
  * @returns {JSX.Element}
  */
 function Canvas(props) {
@@ -73,7 +72,7 @@ function Canvas(props) {
     /**
      * @function
      * @description Increments the current pointer in the page history by 1
-     * @returns 
+     * @returns {void}
      */
     const nextPage = () => {
         if (pageIndex == pages.length - 1) return
@@ -89,6 +88,7 @@ function Canvas(props) {
         document.body.appendChild(script);
 
         window.onSpotifyWebPlaybackSDKReady = () => {
+
             const player = new window.Spotify.Player({
                 name: 'Web Playback Player -' + new Date().getTime(),
                 getOAuthToken: cb => cb(props.token),
@@ -150,6 +150,7 @@ function Canvas(props) {
      * @async
      * @function
      * @description Request to transfer the playback of the Spotify Player to the current web app
+     * @returns {Promise<void>}
      */
     const handleTransfer = async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/transfer`, {
@@ -165,9 +166,9 @@ function Canvas(props) {
     }
 
     /**
-     * @typedef {submitRequest} 
-     * @param {string} uri The string uri of a spotify object to play
-     * @param {string} [offset] The number of tracks to offset the playing of an album or a playlist. 1-indexed
+     * @function
+     * @param {String} uri The string uri of a spotify object to play
+     * @param {Number} [offset] The number of tracks to offset the playing of an album or a playlist. 1-indexed
      * @return {void}
      */
     const submitRequest = (uri, offset) => {
@@ -213,20 +214,18 @@ function Canvas(props) {
             <div className="Canvas">
                 <div className="Top">
                     <div className="Playlists">
-                        <Playlists
+                        <PlaylistPanel
                             addPage={addPage}
-                            pages={pages}
-                            pageIndex={pageIndex}
+                            currentPageUri={pages[pageIndex]}
                         />
                     </div>
                     <div className="Content">
                         <MainContent
                             addPage={addPage}
-                            pages={pages}
-                            pageIndex={pageIndex}
                             prevPage={prevPage}
                             nextPage={nextPage}
                             submitRequest={submitRequest}
+                            currentPageUri={pages[pageIndex]}
                             currentTrack={currentTrack}
                         />
                     </div>
@@ -234,9 +233,9 @@ function Canvas(props) {
 
                 <div className="Bottom">
                     <div className="Current">
-                        <Current
-                            track={currentTrack}
+                        <CurrentTrack
                             addPage={addPage}
+                            track={currentTrack}
                         />
                     </div>
                     <div className="Controls">
@@ -245,21 +244,19 @@ function Canvas(props) {
                             pause={pause}
                             shuffle={shuffle}
                             repeat={repeat}
-                            durationMS={durationMS}
-                            ms={progressMS}
                         />
-                        < ProgressBar
+                        < TrackProgress
                             player={player}
                             pause={pause}
                             durationMS={durationMS}
-                            ms={progressMS}
+                            progressMS={progressMS}
                         />
                     </div>
                     <div className="SideControls">
                         <SideControl
+                            setVolume={setVolume}
                             player={player}
                             volume={volume}
-                            setVolume={setVolume}
                         />
                     </div>
                 </div>

@@ -2,10 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import './CurrentTrack.css'
 
-function Current(props) {
+/**
+ * Renders the currently playing track
+ * @param {Object} props 
+ * @param {Function} props.addPage Add a page to the page history
+ * @param {Object} props.currentTrack The current Track that the playback is playing
+ * @returns 
+ */
+function CurrentTrack(props) {
 
     const [artists, setArtists] = useState([])
 
+    // render visual data
     useEffect(() => {
         const temp = props.track.artists.map((artist, index, arr) => (
             < div key={index} className="Artist" onClick={() => { props.addPage(artist.uri) }}>
@@ -35,4 +43,4 @@ function Current(props) {
         </div>
     )
 }
-export default Current
+export default CurrentTrack

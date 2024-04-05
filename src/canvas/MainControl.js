@@ -4,7 +4,9 @@ import { LuRepeat, LuRepeat1 } from "react-icons/lu"
 
 import './MainControl.css'
 
-import SpotifyPlayer from "../types";
+/**
+ * @typedef {import('../types').SpotifyPlayer} SpotifyPlayer
+ */
 
 /**
  * Renders the main controls of the application
@@ -13,7 +15,7 @@ import SpotifyPlayer from "../types";
  * @param {boolean} pause
  * @param {boolean} shuffle
  * @param {number} repeat
- * @returns 
+ * @returns {JSX.Element}
  */
 function MainControl(props) {
 
@@ -29,7 +31,7 @@ function MainControl(props) {
             .catch(err => {
                 console.log(err)
             })
-    } 
+    }
 
     // submit request to toggle repeat through api
     async function toggleRepeat() {

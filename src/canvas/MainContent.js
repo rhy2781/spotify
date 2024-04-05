@@ -4,10 +4,10 @@ import './MainContent.css'
 
 import PageNavigation from "../components/pageNavigation/PageNavigation"
 
-import HomeView from "../mainContentView/homeView/HomeView"
-import PlaylistView from "../mainContentView/playlistView/playlistView"
-import ArtistView from "../mainContentView/ArtistView/ArtistView"
-import AlbumView from "../mainContentView/AlbumView/AlbumView"
+import HomeView from "../mainContentView/HomeView"
+import PlaylistView from "../mainContentView/playlistView"
+import ArtistView from "../mainContentView/ArtistView"
+import AlbumView from "../mainContentView/AlbumView"
 
 /**
  * Renders the main content of the page based on the uri of the current page
@@ -23,7 +23,7 @@ import AlbumView from "../mainContentView/AlbumView/AlbumView"
 function MainContent(props) {
 
     const [page, setPage] = useState("")
-    const [spotifyId , setSpotifyId] = useState("")
+    const [spotifyId, setSpotifyId] = useState("")
 
     // parse uri to facilitate rendering
     useEffect(() => {
@@ -42,12 +42,12 @@ function MainContent(props) {
             {page === "home" && <HomeView />}
             {page === "playlist" && <PlaylistView />}
             {page === "track" && <PlaylistView />}
-            {page === "artist" && <ArtistView 
+            {page === "artist" && <ArtistView
                 currentPageUri={props.currentPageUri}
-                spotifyId={spotifyId} 
-                addPage={props.addPage} 
-                submitRequest={props.submitRequest} 
-                currentTrack={props.currentTrack}/>}
+                spotifyId={spotifyId}
+                addPage={props.addPage}
+                submitRequest={props.submitRequest}
+                currentTrack={props.currentTrack} />}
             {page === "album" && <AlbumView />}
         </div>
     )

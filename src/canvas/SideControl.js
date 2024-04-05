@@ -3,7 +3,9 @@ import { IoVolumeMuteSharp, IoVolumeOffSharp, IoVolumeLowSharp, IoVolumeMediumSh
 
 import './SideControl.css'
 
-import SpotifyPlayer from "../types";
+/**
+ * @typedef {import('../types').SpotifyPlayer} SpotifyPlayer
+ */
 
 /**
  * Renders the side controls for the web clone

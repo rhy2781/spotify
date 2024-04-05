@@ -2,7 +2,9 @@ import { React, useEffect, useState } from "react"
 
 import './TrackProgress.css'
 
-import SpotifyPlayer from "../types"
+/**
+ * @typedef {import('../types').SpotifyPlayer} SpotifyPlayer
+ */
 
 /**
  * Renders the bottom part of the controls, with strings to represent the current time of the track and 

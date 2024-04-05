@@ -2,63 +2,14 @@
     /* outline: blue solid 1px; */
     height: calc(100% - 6vmin);
     overflow-y: scroll;
+    background-image: linear-gradient(rgb(152, 35, 32), #000000);
+
 }
 
 .ArtistContent {
     height: max-content;
 }
 
-/* .ArtistHeader {
-    display: flex;
-    flex-direction: row;
-    padding: 1vmin;
-}
-
-.ArtistImage {
-    height: 150px;
-    width: 150px;
-    flex-shrink: 0;
-    overflow: hidden;
-
-    position: relative;
-    z-index: 1;
-}
-
-.ArtistImage img {
-    height: 100%;
-}
-
-.ArtistPlayContainer {
-    position: absolute;
-    right: 5%;
-    bottom: 5%;
-    z-index: 5;
-}
-
-.ArtistPlay {
-    background-color: var(--green);
-    padding: 1%;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ArtistDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: left;
-    padding: 1vmin;
-}
-
-.ArtistName {
-    font-size: 60px;
-    font-weight: bolder;
-} */
 
 
 .ArtistDetails {

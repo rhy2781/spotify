@@ -86,7 +86,7 @@ function ArtistView(props) {
 
     }, [props.spotifyId])
 
-    // get album data for artist
+    // get single data for artist
     useEffect(() => {
         const getSingles = async () => {
             await fetch(`${process.env.REACT_APP_BACKEND}/artist/singles?id=${props.spotifyId}`, {
@@ -103,7 +103,7 @@ function ArtistView(props) {
         getSingles()
     }, [props.spotifyId])
 
-    // get single data for artist
+    // get popular data for artist
     useEffect(() => {
         const getSingles = async () => {
             await fetch(`${process.env.REACT_APP_BACKEND}/artist/popular?id=${props.spotifyId}`, {
@@ -137,14 +137,10 @@ function ArtistView(props) {
         getAppear()
     }, [props.spotifyId])
 
-    const containerRef = useRef(null);
+
+
 
     // Scroll to top whenever render changes
-    useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTo(0, 0);
-        }
-    }, [render]);
 
     return (
         <div className="ArtistView">

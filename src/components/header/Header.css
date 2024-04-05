@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: row;
     padding: 1vmin;
+    background-color: rgb(152, 35, 32);
+    /* background-image: linear-gradient(rgb(152, 35, 32), #000000); */
+
 }
 
 .HeaderImage {

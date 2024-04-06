@@ -6,7 +6,6 @@ const credentials = require('../credentials')
 
 router.get('/', async (req, res) => {
     const artist_spotify_id = req.query.id
-    console.log(artist_spotify_id)
 
     await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}`,
         {
@@ -29,6 +28,7 @@ router.get('/', async (req, res) => {
             console.log(err)
         })
 })
+
 
 router.get('/tracks', async (req, res) => {
     const artist_spotify_id = req.query.id
@@ -55,7 +55,7 @@ router.get('/tracks', async (req, res) => {
                     "time": `${min}:${sec}`
                 }
             })
-            res.json({ "tracks": temp })
+            res.json({ "items": temp })
         })
         .catch(err => {
             console.log(err)
@@ -73,20 +73,53 @@ router.get('/popular', async (req, res) => {
     })
         .then((response) => response.json())
         .then((response) => {
-            const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
-            const temp1 = temp.map((element) => {
-                return {
-                    "uri": element.uri,
-                    "image": element.images[0].url,
-                    "mainText": element.name,
-                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+            var ids = 'ids='
+            response.items.forEach((element, index) => {
+                if (index == 3) {
+                    console.log(ids)
+                    return ids;
+                }
+                ids = ids + element.uri.split(":")[2]
+                ids = ids + ','
+            });
+            return ids
+        })
+        .then(async (ids) => {
+            await fetch(`https://api.spotify.com/v1/albums?${ids}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${credentials.getSpotifyToken()}`
                 }
             })
-            res.json({ "popular": temp1 })
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response)
+                    console.log(response.albums) 
+                    // TODO: Complete the Request to sort items based on popularity
+                    // Integrate this with component
+                    
+                    // const temp = response.items.map()
+                })
         })
-        .catch(err => {
-            console.log(err)
-        })
+
+
+
+    // const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
+    // TODO
+
+    // const temp = response.items.map((element) => {
+    //     return {
+    //         "uri": element.uri,
+    //         "image": element.images[0].url,
+    //         "mainText": element.name,
+    //         "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+    //     }
+    // })
+    //     res.json({})
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    // })
 })
 
 router.get('/albums', async (req, res) => {
@@ -108,7 +141,7 @@ router.get('/albums', async (req, res) => {
                     "subText": `${element.release_date.slice(0, 4)} • ${element.type}`
                 }
             })
-            res.json({ "album": temp1 })
+            res.json({ "items": temp1 })
         })
         .catch(err => {
             console.log(err)
@@ -134,7 +167,7 @@ router.get('/singles', async (req, res) => {
                     "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
                 }
             })
-            res.json({ "singles": temp1 })
+            res.json({ "items": temp1 })
         })
         .catch(err => {
             console.log(err)
@@ -160,7 +193,7 @@ router.get('/appear', async (req, res) => {
                     "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
                 }
             })
-            res.json({"appear" : temp1 })
+            res.json({ "items": temp1 })
         })
         .catch(err => {
             console.log(err)

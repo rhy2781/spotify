@@ -242,7 +242,7 @@ function Canvas(props) {
 
                 <div className="Bottom">
                     <div className="Current">
-                        <CurrentTrack     // TODO
+                        <CurrentTrack
                             addPage={addPage}
                             currentTrack={currentTrack}
                             pages={pages}

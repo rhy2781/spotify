@@ -27,8 +27,26 @@ function ArtistView(props) {
     const handleRender = (index) => { setRender(index) }
 
 
+    const fetchData = async (url, setter) => {
+        await fetch(url)
+            .then((response) => response.json())
+            .then((response) => setter(response.items))
+            .catch(err => console.log(err))
+    }
 
-    // get base data for artist
+    // base data for artist
+    useEffect(() => {
+        // fetchData(`${process.env.REACT_APP_BACKEND}/artist?id=${props.spotifyId}`, setArtistData)
+        fetchData(`${process.env.REACT_APP_BACKEND}/artist/tracks?id=${props.spotifyId}`, setTrackData)
+        fetchData(`${process.env.REACT_APP_BACKEND}/artist/albums?id=${props.spotifyId}`, setAlbumData)
+        fetchData(`${process.env.REACT_APP_BACKEND}/artist/singles?id=${props.spotifyId}`, setSingleData)
+        fetchData(`${process.env.REACT_APP_BACKEND}/artist/popular?id=${props.spotifyId}`, setPopularData)
+        fetchData(`${process.env.REACT_APP_BACKEND}/artist/appear?id=${props.spotifyId}`, setAppearData)
+    }, [props.spotifyId])
+
+
+
+    //base data
     useEffect(() => {
         const getData = async () => {
             await fetch(`${process.env.REACT_APP_BACKEND}/artist?id=${props.spotifyId}`, {
@@ -37,108 +55,10 @@ function ArtistView(props) {
                 .then((response) => response.json())
                 .then((response) => {
                     setArtistData(response)
-                    const temp =
-                        (<div className="ArtistDetails">
-                            <div className="ArtistName">
-                                {response.name}
-                            </div>
-                            <div>
-                                {response.followers.toLocaleString()} Followers
-                            </div>
-                        </div>)
-                    setArtistDetails(temp)
                 })
         }
         getData()
     }, [props.spotifyId])
-
-    // get data for artist top tracks
-    useEffect(() => {
-        const getTopTracks = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND}/artist/tracks?id=${props.spotifyId}`, {
-                method: 'GET',
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    setTrackData(response.tracks)
-                })
-                .catch(err => console.log(err))
-        }
-        getTopTracks()
-
-    }, [props.spotifyId])
-
-    // get album data for artist
-    useEffect(() => {
-        const getAlbums = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND}/artist/albums?id=${props.spotifyId}`, {
-                headers: {
-                    method: 'GET'
-                }
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    setAlbumData(response.album)
-                })
-                .catch(err => console.log(err))
-        }
-        getAlbums();
-
-    }, [props.spotifyId])
-
-    // get single data for artist
-    useEffect(() => {
-        const getSingles = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND}/artist/singles?id=${props.spotifyId}`, {
-                headers: {
-                    method: 'GET'
-                }
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    setSingleData(response.singles)
-                })
-                .catch(err => console.log(err))
-        }
-        getSingles()
-    }, [props.spotifyId])
-
-    // get popular data for artist
-    useEffect(() => {
-        const getSingles = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND}/artist/popular?id=${props.spotifyId}`, {
-                headers: {
-                    method: 'GET'
-                }
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    setPopularData(response.popular)
-                })
-                .catch(err => console.log(err))
-        }
-        getSingles()
-    }, [props.spotifyId])
-
-    // get appears on data for artist
-    useEffect(() => {
-        const getAppear = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND}/artist/appear?id=${props.spotifyId}`, {
-                headers: {
-                    method: 'GET'
-                }
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    setAppearData(response.appear)
-                })
-                .catch(err => console.log(err))
-        }
-        getAppear()
-    }, [props.spotifyId])
-
-
-
 
     // Scroll to top whenever render changes
 
@@ -175,7 +95,7 @@ function ArtistView(props) {
                         image={artistData.image}
                         uri={props.currentPageUri}
                         submitRequest={props.submitRequest}
-                        details={artistDetails}
+                    // details={artistDetails}
                     />
 
 
@@ -186,6 +106,7 @@ function ArtistView(props) {
                     <div>
                         <TrackList data={trackData} submitRequest={props.submitRequest} split={true} currentTrack={props.currentTrack} />
                     </div>
+
                     <div className="ArtistHeading">
                         Discography
                     </div>

@@ -5,9 +5,9 @@ import './DisplayRow.css'
 
 /**
  * @param {Object} props 
- * @param {RowItem[]} props.data - An array of objects representing items to display.
- * @param {RequestFunction} props.submitRequest
- * @param {AddPageFunction} props.addPage
+ * @param {RowItem[]} props.data An array of objects representing items to display.
+ * @param {Function} props.submitRequest Submits a request to play a desired spotify uri
+ * @param {Function} props.addPage Adds a spotify uri string page history
  */
 
 /**
@@ -22,6 +22,7 @@ function RowContent(props) {
 
     const [display, setDisplay] = useState([])
 
+    // visually map the data array
     useEffect(() => {
         const temp = props.data.map((element, index) => {
             return (
@@ -48,6 +49,8 @@ function RowContent(props) {
                 </div>
             )
         })
+        
+        // pad the row with empty items
         while (temp.length < 5) {
             temp.push(
                 <div className="RowItemEmpty" key={temp.length} />

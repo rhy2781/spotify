@@ -15,26 +15,26 @@ function CurrentTrack(props) {
 
     // render visual data
     useEffect(() => {
-        const temp = props.track.artists.map((artist, index, arr) => (
-            < div key={index} className="Artist" onClick={() => { props.addPage(artist.uri) }}>
+        const temp = props.currentTrack.artists.map((artist, index, arr) => (
+            < div key={index} className="Artist" onClick={() => props.addPage(artist.uri)}>
                 {(index === arr.length - 1) ? ` ${artist.name}` : `${artist.name}, `}
             </div >
         ));
         setArtists(temp);
 
-    }, [props.track])
+    }, [props.currentTrack, props.pages])
 
     return (
         <div className="CurrentContainer">
             <div className="CurrentImageContainer">
                 <img
-                    src={props.track.album.images[0].url}
-                    alt={props.track.uri}
+                    src={props.currentTrack.album.images[0].url}
+                    alt={props.currentTrack.uri}
                 />
             </div>
             <div className="CurrentDetails">
-                <div className="CurrentTrack" onClick={() => props.addPage(props.track.uri)}>
-                    {props.track.name}
+                <div className="CurrentTrack" onClick={() => props.addPage(props.currentTrack.uri)}>
+                    {props.currentTrack.name}
                 </div>
                 <div className="CurrentArtists">
                     {artists}

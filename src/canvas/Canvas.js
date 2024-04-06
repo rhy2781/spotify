@@ -58,9 +58,13 @@ function Canvas(props) {
      * @returns {void}
      */
     const addPage = (uri) => {
-        if (uri.localeCompare(pages[pageIndex]) == 0) return;
+        console.log(uri)
+        if (pages[pageIndex] === uri) return;
+        console.log(pages)
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
+
+
     }
 
     /**
@@ -150,6 +154,7 @@ function Canvas(props) {
         // eslint-disable-next-line
     }, []);
 
+
     /**
      * @async
      * @function
@@ -237,9 +242,10 @@ function Canvas(props) {
 
                 <div className="Bottom">
                     <div className="Current">
-                        <CurrentTrack
+                        <CurrentTrack     // TODO
                             addPage={addPage}
-                            track={currentTrack}
+                            currentTrack={currentTrack}
+                            pages={pages}
                         />
                     </div>
                     <div className="Controls">

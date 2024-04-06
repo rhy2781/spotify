@@ -97,13 +97,8 @@ function TrackProgress(props) {
     // handle seeking the playtime of the track
     function handleSeek(i) {
         const seek_to = Math.floor(props.durationMS * i);
-        if (props.player.pause) {
-            props.player.togglePlay();
-        } props.player.seek(seek_to);
+        props.player.seek(seek_to);
         setProgressPercentage(seek_to / props.durationMS);
-        // if (!props.player.pause) {
-        //     props.player.togglePlay();
-        // }
     }
 
     return (

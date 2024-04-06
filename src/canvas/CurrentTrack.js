@@ -5,8 +5,8 @@ import './CurrentTrack.css'
 /**
  * Renders the currently playing track
  * @param {Object} props 
- * @param {Function} props.addPage Add a page to the page history
- * @param {Object} props.currentTrack The current Track that the playback is playing
+ * @param {Function} props.addPage Adds a spotify uri to the page history
+ * @param {Object} props.currentTrack The current track that the playback is playing
  * @returns 
  */
 function CurrentTrack(props) {

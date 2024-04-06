@@ -32,10 +32,14 @@ function Canvas(props) {
     // web playback
     const [player, setPlayer] = useState(undefined)
     const [active, setActive] = useState(false)
+
+
     const [device, setDevice] = useState(null)
 
     // state variables to manage controls
     const [pause, setPause] = useState(false)
+
+
     const [currentTrack, setCurrentTrack] = useState(track)
     const [shuffle, setShuffle] = useState(false)
     const [repeat, setRepeat] = useState(0)
@@ -240,12 +244,14 @@ function Canvas(props) {
                     </div>
                     <div className="Controls">
                         <MainControl
+                            setPause={setPause}
                             player={player}
                             pause={pause}
                             shuffle={shuffle}
                             repeat={repeat}
                         />
                         < TrackProgress
+                            setPause={setPause}
                             player={player}
                             pause={pause}
                             durationMS={durationMS}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import PageNavigation from '../components/pageNavigation/PageNavigation'
+import PageNavigation from '../components/PageNavigation'
 import './ArtistView.css'
 import { IoPlaySharp } from "react-icons/io5";
-import RowContent from "../components/rowContent/DisplayRow";
-import TrackList from "../components/trackList/TrackList";
-import Header from "../components/header/Header";
+import RowContent from "../components/DisplayRow";
+import TrackList from "../components/TrackList";
+import Header from "../components/Header";
 
 
 function ArtistView(props) {

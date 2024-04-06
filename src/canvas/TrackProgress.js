@@ -11,7 +11,8 @@ import './TrackProgress.css'
  * total time of the track along with a interactive progress bar
  * @param {Object} props 
  * @param {SpotifyPlayer} props.player The Spotify Web Playback player
- * @param {boolean} props.pause Relays whether or not the player is paused
+ * @param {boolean} props.pause The state variable mirroring the pause state of the web player
+ * @param {Function} props.setPause Updates the pause state variable
  * @param {number} props.durationMS The duration of the current playing track
  * @param {number} props.progressMS The current duration of the current track
  * @returns {JSX.Element}
@@ -43,7 +44,7 @@ function TrackProgress(props) {
         const slider = document.querySelector(".ProgressInputSlider")
         var temp = slider.valueAsNumber * 100
         slider.style.background = `linear-gradient(to right, #ffffff ${temp}%, #535353 ${temp}%)`
-    }, [])
+    })
 
     // updating component
     useEffect(() => {
@@ -96,10 +97,13 @@ function TrackProgress(props) {
     // handle seeking the playtime of the track
     function handleSeek(i) {
         const seek_to = Math.floor(props.durationMS * i);
-        props.player.togglePlay();
-        props.player.seek(seek_to);
+        if (props.player.pause) {
+            props.player.togglePlay();
+        } props.player.seek(seek_to);
         setProgressPercentage(seek_to / props.durationMS);
-        props.player.togglePlay();
+        // if (!props.player.pause) {
+        //     props.player.togglePlay();
+        // }
     }
 
     return (

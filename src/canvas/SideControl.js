@@ -10,7 +10,8 @@ import './SideControl.css'
 /**
  * Renders the side controls for the web clone
  * @param {Object} props 
- * @param {Function} props.setVolume Updates the state value for volume
+ * @param {number} props.volume The state variable mirroring the player's volume 
+ * @param {Function} props.setVolume Updates the state variable for volume
  * @param {SpotifyPlayer} props.player The Playback object of the Spotify Web SDK
  * @returns {JSX.Element}
  */

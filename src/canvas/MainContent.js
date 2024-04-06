@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import './MainContent.css'
 
-import PageNavigation from "../components/pageNavigation/PageNavigation"
+import PageNavigation from "../components/PageNavigation"
 
 import HomeView from "../mainContentView/HomeView"
 import PlaylistView from "../mainContentView/playlistView"

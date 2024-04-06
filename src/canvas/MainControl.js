@@ -8,14 +8,20 @@ import './MainControl.css'
  * @typedef {import('../types').SpotifyPlayer} SpotifyPlayer
  */
 
+
 /**
  * Renders the main controls of the application
  * @param {Object} props 
- * @param {SpotifyPlayer} props.player
- * @param {boolean} pause
- * @param {boolean} shuffle
- * @param {number} repeat
- * @returns {JSX.Element}
+ * @param {Function} props.setPause Updates the pause state variable
+ * @param {SpotifyPlayer} props.player The player for the web playback sdk
+ * @param {boolean} props.pause The state variable mirroring the pause state of the player
+ * @param {boolean} props.shuffle The state variable mirroring the shuffle state of the player
+ * @param {number} props.repeat The state variable mirroring the repeat state of the player
+ * @returns {JSX.Element}   
+ */
+
+/**
+ * @param {ParentComponentProps} props
  */
 function MainControl(props) {
 
@@ -55,7 +61,10 @@ function MainControl(props) {
             <div className="SkipBackward" onClick={() => { props.player.previousTrack() }}>
                 <IoPlaySkipBackSharp />
             </div>
-            <div className="Play" onClick={() => { props.player.togglePlay() }}>
+            <div className="Play" onClick={() => {
+                props.player.togglePlay()
+                props.setPause(!props.pause)
+            }}>
                 <div className="PlayButton">
                     {(props.pause) ? <IoPlaySharp /> : <IoPauseSharp />}
                 </div>

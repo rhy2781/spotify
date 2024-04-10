@@ -26,30 +26,31 @@ function RowContent(props) {
     useEffect(() => {
         const temp = props.data.map((element, index) => {
             return (
-                <div className="RowItem" key={index} onClick={() => props.addPage(element.uri)}>
+                <div className={`RowItem${index + 1}`} key={index} onClick={() => props.addPage(element.uri)}>
                     <div className="Inner">
                         <div className="Image">
                             <img src={element.image} />
-                            <div className="PContainer">
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
+        {/* <div className="PContainer">
                                 <div className="PlayIcon" onClick={(e) => e.stopPropagation()}>
                                     <IoPlaySharp onClick={() => props.submitRequest(element.uri)} />
                                 </div>
-                            </div>
-                        </div>
-                        <div className="RowItemText">
+                            </div> */}
+
+        {/* <div className="RowItemText">
                             <div className="RowItemMainText">
                                 {element.mainText}
                             </div>
                             <div className="RowItemSubText">
                                 {element.subText}
                             </div>
-                        </div>
+                        </div> */}
 
-                    </div>
-                </div>
-            )
-        })
-        
         // pad the row with empty items
         while (temp.length < 5) {
             temp.push(
@@ -60,10 +61,8 @@ function RowContent(props) {
     }, [props.data])
 
     return (
-        <div>
-            <div className="Row">
-                {display}
-            </div>
+        <div className="Row">
+            {display}
         </div>
     )
 }

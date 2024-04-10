@@ -2,7 +2,8 @@
     display: flex;
     /* flex-direction: row; */
     /* height: 30vmin; */
-    /* height: max-content; */
+    height: min-content;
+    outline: blue dotted 1px;
     /* width: 100%; */
 }
 
@@ -28,9 +29,25 @@
 
 
 
-.RowItem {
+.RowItem1,
+.RowItem2,
+.RowItem3,
+.RowItem4,
+.RowItem5 {
+    height: min-content;
+    outline: red dotted 1px;
     padding: 1vmin;
 }
+
+.RowItem1:hover,
+.RowItem2:hover,
+.RowItem3:hover,
+.RowItem4:hover,
+.RowItem4:hover {
+    background-color: var(--gray);
+}
+
+
 
 /* 
 .RowItem {

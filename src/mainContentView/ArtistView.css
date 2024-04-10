@@ -51,6 +51,6 @@
 }
 
 .ContentDisplay {
-    height: 30vmin;
+    height: max-content;
     width: 100%;
 }

@@ -30,7 +30,19 @@ function RowContent(props) {
                     <div className="Inner">
                         <div className="Image">
                             <img src={element.image} />
+                            <div className={`PContainer${index + 1}`}>
+                                <div className="PlayIcon" onClick={(e) => e.stopPropagation()}>
+                                    <IoPlaySharp onClick={() => props.submitRequest(element.uri)} />
+                                </div>
+                            </div>
                         </div>
+                        <div className="RowItemMainText">
+                            {element.mainText}
+                        </div>
+                        <div className="RowItemSubText">
+                                {element.subText}
+                            </div>
+
                     </div>
                 </div>
             )
@@ -52,12 +64,12 @@ function RowContent(props) {
                         </div> */}
 
         // pad the row with empty items
-        while (temp.length < 5) {
+        while (temp.length < 11) {
             temp.push(
                 <div className="RowItemEmpty" key={temp.length} />
             )
         }
-        setDisplay(temp.slice(0, 5))
+        setDisplay(temp.slice(0, 10))
     }, [props.data])
 
     return (

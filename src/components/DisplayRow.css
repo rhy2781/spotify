@@ -1,11 +1,16 @@
 .Row {
     display: flex;
     height: min-content;
+    width: 100%;
     /* outline: blue dotted 1px; */
 }
 
 @media (max-width: 2000px) {
     .RowItem10 {
+        display: none;
+    }
+
+    .RowItemEmpty10 {
         display: none;
     }
 }
@@ -14,10 +19,18 @@
     .RowItem9 {
         display: none;
     }
+
+    .RowItemEmpty9 {
+        display: none;
+    }
 }
 
 @media (max-width: 1600px) {
     .RowItem8 {
+        display: none;
+    }
+
+    .RowItemEmpty8 {
         display: none;
     }
 }
@@ -26,10 +39,18 @@
     .RowItem7 {
         display: none;
     }
+
+    .RowItemEmpty7 {
+        display: none;
+    }
 }
 
 @media (max-width: 1200px) {
     .RowItem6 {
+        display: none;
+    }
+
+    .RowItemEmpty6 {
         display: none;
     }
 }
@@ -38,16 +59,28 @@
     .RowItem5 {
         display: none;
     }
+
+    .RowItemEmpty5 {
+        display: none;
+    }
 }
 
 @media (max-width: 800px) {
     .RowItem4 {
         display: none;
     }
+
+    .RowItemEmpty4 {
+        display: none;
+    }
 }
 
 @media (max-width: 600px) {
     .RowItem3 {
+        display: none;
+    }
+
+    .RowItemEmpty3 {
         display: none;
     }
 }
@@ -64,6 +97,8 @@
 .RowItem10 {
     height: min-content;
     width: 100%;
+    max-width: 200px;
+    ;
     padding: 1vmin;
 
     text-overflow: ellipsis;
@@ -84,8 +119,18 @@
     background-color: var(--gray);
 }
 
-.RowItemEmpty {
+.RowItemEmpty1,
+.RowItemEmpty2,
+.RowItemEmpty3,
+.RowItemEmpty4,
+.RowItemEmpty5,
+.RowItemEmpty6,
+.RowItemEmpty7,
+.RowItemEmpty8,
+.RowItemEmpty9,
+.RowItemEmpty10 {
     width: 100%;
+    max-width: 200px;
 }
 
 
@@ -106,30 +151,39 @@
 .RowItem1:hover .PContainer1 {
     opacity: 1;
 }
+
 .RowItem2:hover .PContainer2 {
     opacity: 1;
 }
+
 .RowItem3:hover .PContainer3 {
     opacity: 1;
 }
+
 .RowItem4:hover .PContainer4 {
     opacity: 1;
 }
+
 .RowItem5:hover .PContainer5 {
     opacity: 1;
 }
+
 .RowItem6:hover .PContainer6 {
     opacity: 1;
 }
+
 .RowItem7:hover .PContainer7 {
     opacity: 1;
 }
+
 .RowItem8:hover .PContainer8 {
     opacity: 1;
 }
+
 .RowItem9:hover .PContainer9 {
     opacity: 1;
 }
+
 .RowItem10:hover .PContainer10 {
     opacity: 1;
 }

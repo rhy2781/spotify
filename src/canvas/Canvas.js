@@ -58,9 +58,7 @@ function Canvas(props) {
      * @returns {void}
      */
     const addPage = (uri) => {
-        console.log(uri)
         if (pages[pageIndex] === uri) return;
-        console.log(pages)
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
 

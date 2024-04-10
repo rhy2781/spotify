@@ -98,7 +98,6 @@
     height: min-content;
     width: 100%;
     max-width: 200px;
-    ;
     padding: 1vmin;
 
     text-overflow: ellipsis;
@@ -129,8 +128,10 @@
 .RowItemEmpty8,
 .RowItemEmpty9,
 .RowItemEmpty10 {
+    height: min-content;
     width: 100%;
     max-width: 200px;
+    padding: 1vmin;
 }
 
 

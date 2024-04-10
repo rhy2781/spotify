@@ -71,41 +71,41 @@ router.get('/popular', async (req, res) => {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
         }
     })
-    .then((response) => response.json())
-    .then((response) => {
-        var ids = 'ids='
-        response.items.forEach((element, index) => {
-            if (index == 3) {
-                return ids;
-            }
-            ids = ids + element.uri.split(":")[2]
-            ids = ids + ','
-        });
-        return ids
-    })
-    .then(async (ids) => {
-        await fetch(`https://api.spotify.com/v1/albums?${ids}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
-            }
+        .then((response) => response.json())
+        .then((response) => {
+            var ids = 'ids='
+            response.items.forEach((element, index) => {
+                if (index == 3) {
+                    return ids;
+                }
+                ids = ids + element.uri.split(":")[2]
+                ids = ids + ','
+            });
+            return ids
         })
-            .then((response) => response.json())
-            .then((response) => {
-                const temp = response.albums.filter(element => element)
-                const temp1 = temp.sort((a, b) => b.popularity - a.popularity)
-                const temp2 = temp1.map((element) => {
-                    return {
-                        "uri": element.uri,
-                        "image": element.images[0].url,
-                        "mainText": element.name,
-                        "subText": `${element.release_date.slice(0, 4)} • ${element.album_type.charAt(0).toUpperCase() + element.album_type.slice(1)}`
-                    }
-                })
-                res.json({ "items": temp2 })
+        .then(async (ids) => {
+            await fetch(`https://api.spotify.com/v1/albums?${ids}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                }
             })
-    })
-    .catch(eer => console.log(err))
+                .then((response) => response.json())
+                .then((response) => {
+                    const temp = response.albums.filter(element => element)
+                    const temp1 = temp.sort((a, b) => b.popularity - a.popularity)
+                    const temp2 = temp1.map((element) => {
+                        return {
+                            "uri": element.uri,
+                            "image": element.images[0].url,
+                            "mainText": element.name,
+                            "subText": `${element.release_date.slice(0, 4)} • ${element.album_type.charAt(0).toUpperCase() + element.album_type.slice(1)}`
+                        }
+                    })
+                    res.json({ "items": temp2 })
+                })
+        })
+        .catch(err => console.log(err))
 })
 
 router.get('/albums', async (req, res) => {

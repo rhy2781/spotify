@@ -2,7 +2,7 @@
     /* outline: blue solid 1px; */
     height: calc(100% - 6vmin);
     overflow-y: scroll;
-    background-image: linear-gradient(rgb(152, 35, 32), #000000);
+    /* background-image: linear-gradient(rgb(152, 35, 32), #000000); */
 
 }
 

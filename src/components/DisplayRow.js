@@ -42,7 +42,6 @@ function RowContent(props) {
                         <div className="RowItemSubText">
                             {element.subText}
                         </div>
-
                     </div>
                 </div>
             )
@@ -52,9 +51,7 @@ function RowContent(props) {
         var index = temp.length
         while (temp.length < 11) {
             temp.push(
-                <div className={`RowItemEmpty${index + 1}`} key={temp.length}>
-                    {temp.length}
-                </div>
+                <div className={`RowItemEmpty${index + 1}`} key={temp.length} />
             )
             index += 1
         }

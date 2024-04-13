@@ -114,9 +114,6 @@ function ArtistView(props) {
                         name={artistData.name}
                         followers={artistData.followers}
                     />
-
-
-
                     <div className="ArtistHeading">
                         Top Tracks
                     </div>

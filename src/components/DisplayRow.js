@@ -4,20 +4,20 @@ import { IoPlaySharp } from "react-icons/io5";
 import './DisplayRow.css'
 
 /**
- * @param {Object} props 
- * @param {RowItem[]} props.data An array of objects representing items to display.
- * @param {Function} props.submitRequest Submits a request to play a desired spotify uri
- * @param {Function} props.addPage Adds a spotify uri string page history
- */
-
-/**
- * @typedef {RowItem} 
+ * @typedef {Object} RowItem
  * @property {string} uri – the spotify uri of the item
  * @property {string} image – the url source of the image to display
  * @property {string} mainText – the main text to display
  * @property {string} subText – additional information 
  */
-
+/**
+ * A JSX Element displaying a row of content allowing the user to view images and pick and choose what to play 
+ * @param {Object} props 
+ * @param {RowItem[]} props.data An array of objects representing items to display.
+ * @param {Function} props.submitRequest Submits a request to play a desired spotify uri
+ * @param {Function} props.addPage Adds a spotify uri string page history
+ * @return {JSX.Element}
+ */
 function RowContent(props) {
 
     const [display, setDisplay] = useState([])

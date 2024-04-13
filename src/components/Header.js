@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoPlaySharp } from "react-icons/io5";
 
 import './Header.css'
-/*
-data ={
-    image: "" url string,
-    uri:"" uri string,
-    details: jsx element // this way we can configure how everything looks
 
-}
-*/
-
-
+/**
+ * The formatted header for an Artist
+ * 
+ * @param {Object} props 
+ * @param {string} props.image The source for the artist's image 
+ * @param {string} props.uri The spotify uri for the artist 
+ * @param {string} props.name The name of the artist
+ * @param {string} props.followers The number of followers of the artist 
+ * @return {JSX.Element}
+ */
 function Header(props) {
     return (
         <div className="Header">

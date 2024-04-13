@@ -40,7 +40,13 @@ function MainContent(props) {
                 nextPage={props.nextPage}
             />
             {page === "home" && <HomeView />}
-            {page === "playlist" && <PlaylistView />}
+            {page === "playlist" && <PlaylistView 
+                currentPageUri={props.currentPageUri}
+                spotifyId={spotifyId}
+                addPage={props.addPage}
+                submitRequest={props.submitRequest}
+                currentTrack={props.currentTrack}
+            />}
             {page === "track" && <PlaylistView />}
             {page === "artist" && <ArtistView
                 currentPageUri={props.currentPageUri}

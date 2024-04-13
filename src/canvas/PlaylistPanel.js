@@ -18,7 +18,7 @@ function PlaylistPanel(props) {
 
     // get playlist data
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BACKEND}/playlists`)
+        fetch(`${process.env.REACT_APP_BACKEND}/user-playlists`)
             .then((response) => response.json())
             .then((response) => setPlaylistData(response))
             .catch((error) => {

@@ -3,6 +3,11 @@
     flex-direction: row;
     padding: 1vmin;
     align-items: flex-end;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    outline: blue dotted 1px;
 
 }
 

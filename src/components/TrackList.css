@@ -1,11 +1,14 @@
 .TopTracks {
     padding: 1vmin;
+
+
 }
 
 .TopTrack {
-    /* height: min-content; */
-    height: 70px;
+    height: 50px;
+    /* necessary*/
 
+    outline: purple dotted 1px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,24 +18,21 @@
 
 
 .TopTrackNumber {
-    /* height: 70px; */
-    width: 70px;
+    width: 50px;
+    /* necessary*/
     flex-grow: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.TopTrackImage {
-    flex-grow: 0;
-    /* height: 70px; */
-    /* width: 70px; */
-}
 
 .TopTrackImageContainer {
-    height: 70px;
-    width: 70px;
-
+    flex-grow: 0;
+    height: 50px;
+    /* necessary*/
+    width: 50px;
+    /* necessary*/
     border-radius: 10px;
     overflow: hidden;
 }
@@ -42,23 +42,28 @@
 }
 
 .TopTrackName {
-    height: 70px;
-    max-width: calc(100% - 210px);
+    max-width: calc(100% - 150px - 1vmin);
     padding-left: 1%;
     flex-grow: 1;
 
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center; */
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    outline: red dotted 1px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 
 .TopTrackTimeBox {
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
     flex-grow: 0;
 
     display: flex;
@@ -78,4 +83,9 @@
     align-items: flex-start;
     padding: 1vmin;
     padding-bottom: 2vmin;
+}
+
+.temp {
+    text-align: left;
+    font-size: 20px;
 }

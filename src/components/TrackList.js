@@ -23,19 +23,24 @@ function TrackList(props) {
         const temp = props.data.map((element, index) => {
             return (
                 <div className="TopTrack" key={element.uri} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-                    <div className="TopTrackNumber" 
-                        style={{ "color": element.uri.localeCompare(props.currentTrack.uri) == 0 ? "#44c767" : "white" }} 
+                    <div className="TopTrackNumber"
+                        style={{ "color": element.uri.localeCompare(props.currentTrack.uri) == 0 ? "#44c767" : "white" }}
                         onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}
                     >
                         {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                     </div>
-                    {props.renderImage && <div className="TopTrackImage">
+                    {props.renderImage &&
                         <div className="TopTrackImageContainer">
                             <img src={element.image} alt={element.uri} />
                         </div>
-                    </div>}
+                    }
                     <div className="TopTrackName" style={{ "color": element.uri.localeCompare(props.currentTrack.uri) == 0 ? "#44c767" : "white" }}>
-                        {element.name}
+                        <div className="temp">
+                            {element.name}
+                        </div>
+                        <div className="temp">
+                            {element.artists.map((e) => e.name)}
+                        </div>
                     </div>
                     <div className="TopTrackTimeBox">
                         <div className="TopTrackTime">

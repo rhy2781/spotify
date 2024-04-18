@@ -13,7 +13,7 @@
 
 .Playlists {
     height: 100%;
-    width: 300px;
+    width: 250px;
     /* width: 20%; */
     overflow-y: scroll;
     /* padding-left: 1vmin; */
@@ -23,7 +23,7 @@
 .Content {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 300px);
+    width: calc(100% - 250px);
     height: 100%;
     padding-left: 1vmin;
     /* outline: yellow solid 1px; */

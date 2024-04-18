@@ -1,5 +1,6 @@
 import {React, useEffect, useState} from "react";
 
+// TODO: Document
 function Artists(props){
 
     const[display, setDisplay] = useState([])

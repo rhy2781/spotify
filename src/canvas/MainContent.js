@@ -5,7 +5,7 @@ import './MainContent.css'
 import PageNavigation from "../components/PageNavigation"
 
 import HomeView from "../mainContentView/HomeView"
-import PlaylistView from "../mainContentView/playlistView"
+import PlaylistView from "../mainContentView/PlaylistView"
 import ArtistView from "../mainContentView/ArtistView"
 import AlbumView from "../mainContentView/AlbumView"
 
@@ -40,7 +40,7 @@ function MainContent(props) {
                 nextPage={props.nextPage}
             />
             {page === "home" && <HomeView />}
-            {page === "playlist" && <PlaylistView 
+            {page === "playlist" && <PlaylistView
                 currentPageUri={props.currentPageUri}
                 spotifyId={spotifyId}
                 addPage={props.addPage}
@@ -54,7 +54,13 @@ function MainContent(props) {
                 addPage={props.addPage}
                 submitRequest={props.submitRequest}
                 currentTrack={props.currentTrack} />}
-            {page === "album" && <AlbumView />}
+            {page === "album" && <AlbumView
+                spotifyId={spotifyId}
+                currentPageUri={props.currentPageUri}
+                addPage={props.addPage}
+                submitRequest={props.submitRequest}
+                currentTrack={props.currentTrack}
+            />}
         </div>
     )
 }

@@ -1,10 +1,11 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 
-function AlbumView(){
+function AlbumView(props) {
 
-    return(
+    return (
         <div>
             This is the album view
+            {albumData.name}
         </div>
     )
 }

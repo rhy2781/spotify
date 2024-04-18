@@ -20,7 +20,7 @@ function CurrentTrack(props) {
                 />
             </div>
             <div className="CurrentDetails">
-                <div className="CurrentTrack" onClick={() => props.addPage(props.currentTrack.uri)}>
+                <div className="CurrentTrack" onClick={() => props.addPage(props.currentTrack.album.uri)}>
                     {props.currentTrack.name}
                 </div>
                 <div className="CurrentArtists">

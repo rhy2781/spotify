@@ -40,7 +40,7 @@ const controls = require('./routes/controls')
 app.use('/controls', controls)
 
 
-const user_playlists = require('./routes/user')
+const user_playlists = require('./routes/user_playlists')
 app.use('/user-playlists', user_playlists)
 
 const artist = require('./routes/artist')

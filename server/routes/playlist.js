@@ -13,10 +13,13 @@ const getMore = async (more) => {
     });
     const data = await response.json();
     const res = data.items.map((element) => {
+        const min = Math.floor((element.track.duration_ms / 1000) / 60)
+        const sec = Math.floor((element.track.duration_ms / 1000) % 60).toString().padStart(2, '0')
         return {
             "added_at": element.added_at,
             "album_name": element.track.album.name,
             "album_uri": element.track.album.uri,
+            "image": element.track.album.images[0].url,
             "artists": element.track.artists.map((artist) => {
                 return {
                     "name": artist.name,
@@ -26,7 +29,9 @@ const getMore = async (more) => {
             "uri": element.track.uri,
             "explicit": element.track.explicit,
             "duration": element.track.duration,
-            "name": element.track.name
+            "name": element.track.name,
+            "time": `${min}:${sec}`
+
         }
     })
     return [res, data.next];
@@ -47,10 +52,15 @@ router.use('/', async (req, res) => {
 
     const tracks = playlist.tracks;
     var formatted = tracks.items.map((element) => {
+        // console.log(element.duration_ms)
+        const min = Math.floor((element.track.duration_ms / 1000) / 60)
+        const sec = Math.floor((element.track.duration_ms / 1000) % 60).toString().padStart(2, '0')
+
         return {
             "added_at": element.added_at,
             "album_name": element.track.album.name,
             "album_uri": element.track.album.uri,
+            "image": element.track.album.images[0].url,
             "artists": element.track.artists.map((artist) => {
                 return {
                     "name": artist.name,
@@ -60,7 +70,8 @@ router.use('/', async (req, res) => {
             "uri": element.track.uri,
             "explicit": element.track.explicit,
             "duration": element.track.duration,
-            "name": element.track.name
+            "name": element.track.name,
+            "time": `${min}:${sec}`
         }
     })
     // console.log(JSON.stringify(formatted, null, 2))

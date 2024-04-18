@@ -86,7 +86,13 @@ function ArtistView(props) {
                         Top Tracks
                     </div>
                     <div>
-                        <TrackList data={trackData} submitRequest={props.submitRequest} split={true} currentTrack={props.currentTrack} />
+                        <TrackList
+                            data={trackData}
+                            submitRequest={props.submitRequest}
+                            split={true}
+                            currentTrack={props.currentTrack}
+                            renderImage={true}
+                        />
                     </div>
 
                     <div className="ArtistHeading">

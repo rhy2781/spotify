@@ -4,6 +4,7 @@ import './TrackList.css'
 
 import { IoPlaySharp } from "react-icons/io5"
 
+// TODO: Document
 function TrackList(props) {
 
     const [visual, setVisual] = useState([])
@@ -26,11 +27,11 @@ function TrackList(props) {
                         <div className="TopTrackNumber" style={{ "color": "#44c767" }} onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}>
                             {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                         </div>
-                        <div className="TopTrackImage">
+                        {props.renderImage  && <div className="TopTrackImage">
                             <div className="TopTrackImageContainer">
                                 <img src={element.image} alt={element.uri} />
                             </div>
-                        </div>
+                        </div>}
                         <div className="TopTrackName" style={{ "color": "#44c767" }}>
                             {element.name}
                         </div>
@@ -48,11 +49,11 @@ function TrackList(props) {
                         <div className="TopTrackNumber" onClick={() => { props.submitRequest(element.album_uri, element.track_number) }}>
                             {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                         </div>
-                        <div className="TopTrackImage">
+                        {props.renderImage  && <div className="TopTrackImage">
                             <div className="TopTrackImageContainer">
                                 <img src={element.image} alt={element.uri} />
                             </div>
-                        </div>
+                        </div>}
                         <div className="TopTrackName">
                             {element.name}
                         </div>

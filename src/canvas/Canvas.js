@@ -61,8 +61,6 @@ function Canvas(props) {
         if (pages[pageIndex] === uri) return;
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
-
-
     }
 
     /**

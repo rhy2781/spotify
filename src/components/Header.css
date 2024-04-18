@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: row;
     padding: 1vmin;
-    /* background-color: rgb(152, 35, 32); */
-    /* background-image: linear-gradient(rgb(152, 35, 32), #000000); */
+    align-items: flex-end;
 
 }
 
@@ -21,7 +20,7 @@
     height: 100%;
 }
 
-.PlayContainer {
+.HeaderPlayContainer {
     position: absolute;
     right: 5%;
     bottom: 5%;
@@ -29,7 +28,7 @@
 }
 
 
-.Play2 {
+.HeaderPlay {
     background-color: var(--green);
     border-radius: 50%;
     width: max-content;
@@ -41,7 +40,7 @@
     align-items: center;
 }
 
-.ArtistDetails {
+.HeaderDetails {
     display: flex;
     flex-direction: column;
     padding-left: 2vmin;
@@ -49,7 +48,7 @@
     justify-content: flex-end;
 }
 
-.ArtistName {
+.HeaderMain {
     font-size: 60px;
     font-weight: bolder
 }

@@ -79,8 +79,8 @@ function ArtistView(props) {
                         image={artistData.image}
                         uri={props.currentPageUri}
                         submitRequest={props.submitRequest}
-                        name={artistData.name}
-                        followers={artistData.followers}
+                        main={artistData.name}
+                        description={artistData.followers.toLocaleString() + " Followers"}
                     />
                     <div className="ArtistHeading">
                         Top Tracks

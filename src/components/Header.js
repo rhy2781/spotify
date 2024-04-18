@@ -1,35 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoPlaySharp } from "react-icons/io5";
 
 import './Header.css'
 
 /**
- * The formatted header for an Artist
+ * The formatted header
  * 
  * @param {Object} props 
- * @param {string} props.image The source for the artist's image 
- * @param {string} props.uri The spotify uri for the artist 
- * @param {string} props.name The name of the artist
- * @param {string} props.followers The number of followers of the artist 
+ * @param {string} props.image The source for the image that is to be displayed
+ * @param {string} props.uri The uri for the play button in the header 
+ * @param {string} props.main The main content
+ * @param {string} props.description The description of the content
  * @return {JSX.Element}
  */
 function Header(props) {
+
+    useEffect(() => {
+        console.log(props.uri)
+    }, [props.uri])
+
     return (
         <div className="Header">
             <div className="HeaderImage">
                 <img src={props.image} />
-                <div className="PlayContainer">
-                    <div className="Play2" onClick={() => { props.submitRequest(props.uri) }}>
+                <div className="HeaderPlayContainer">
+                    <div className="HeaderPlay" onClick={() => { props.submitRequest(props.uri) }}>
                         <IoPlaySharp />
                     </div>
                 </div>
             </div>
-            <div className="ArtistDetails">
-                <div className="ArtistName">
-                    {props.name}
+            <div className="HeaderDetails">
+                <div className="HeaderMain">
+                    {props.main}
                 </div>
                 <div>
-                    {props.followers.toLocaleString()} Followers
+                    {props.description}
                 </div>
             </div>
         </div>

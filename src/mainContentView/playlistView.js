@@ -1,6 +1,6 @@
 import { ReactDOM, useEffect, useState } from "react";
 
-
+import Header from '../components/Header'
 import fetchAndEncodeImage from './Color'
 function PlaylistView(props) {
 
@@ -11,9 +11,12 @@ function PlaylistView(props) {
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND}/playlists?id=${props.spotifyId}`)
             .then((response) => response.json())
-            .then((response) => setPlaylistData(response))
+            .then((response) => {
+                setPlaylistData(response)
+                console.log(response)
+            })
             .catch(err => console.log(err))
-        }, [props.spotifyId]
+    }, [props.spotifyId]
     )
 
     useEffect(() => {
@@ -27,7 +30,13 @@ function PlaylistView(props) {
 
             {(Object.keys(playlistData).length > 0) &&
                 <div>
-                    hello there
+                    <Header
+                        image={playlistData.image}
+                        uri={props.currentPageUri}
+                        main={playlistData.name}
+                        description={""}
+                        submitRequest={props.submitRequest}
+                    />
                 </div>
             }
         </div>

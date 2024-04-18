@@ -78,6 +78,7 @@ router.use('/', async (req, res) => {
         "name": playlist.name,
         "description": playlist.description,
         "image": playlist.images[0].url,
+        "uri": playlist.uri,
         "tracks": formatted
 
     });

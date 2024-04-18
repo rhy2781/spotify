@@ -26,7 +26,27 @@ router.use('/', async (req, res) => {
         }
     });
     const playlist = await response.json();
+
+
     const tracks = playlist.tracks;
+    const formatted = tracks.items.map((element) => {
+        return {
+            "added_at": element.added_at,
+            "album_name": element.track.album.name,
+            "album_uri": element.track.album.uri,
+            "artists": element.track.artists.map((artist) => {
+                return {
+                    "name": artist.name,
+                    "uri": artist.uri
+                }
+            }),
+            "uri": element.track.uri,
+            "explicit": element.track.explicit,
+            "duration": element.track.duration,
+            "name": element.track.name
+        }
+    })
+    console.log(JSON.stringify(formatted, null, 2))
 
     var more = tracks.next;
     var test = 1;
@@ -34,7 +54,7 @@ router.use('/', async (req, res) => {
         console.log(test);
         test += 1;
         const temp = await getMore(more); // Wait for getMore function to execute
-        console.log(temp[0]);
+        // console.log(temp[0]);
         more = temp[1];
     }
 

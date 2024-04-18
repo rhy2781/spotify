@@ -243,7 +243,6 @@ function Canvas(props) {
                         <CurrentTrack
                             addPage={addPage}
                             currentTrack={currentTrack}
-                            pages={pages}
                         />
                     </div>
                     <div className="Controls">

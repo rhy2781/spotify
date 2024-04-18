@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import './CurrentTrack.css'
+import Artists from "../components/Artists";
 
 /**
  * Renders the currently playing track
@@ -10,20 +11,6 @@ import './CurrentTrack.css'
  * @returns 
  */
 function CurrentTrack(props) {
-
-    const [artists, setArtists] = useState([])
-
-    // render visual data
-    useEffect(() => {
-        const temp = props.currentTrack.artists.map((artist, index, arr) => (
-            < div key={index} className="Artist" onClick={() => props.addPage(artist.uri)}>
-                {(index === arr.length - 1) ? ` ${artist.name}` : `${artist.name}, `}
-            </div >
-        ));
-        setArtists(temp);
-
-    }, [props.currentTrack, props.pages])
-
     return (
         <div className="CurrentContainer">
             <div className="CurrentImageContainer">
@@ -37,7 +24,10 @@ function CurrentTrack(props) {
                     {props.currentTrack.name}
                 </div>
                 <div className="CurrentArtists">
-                    {artists}
+                    <Artists 
+                        artists={props.currentTrack.artists} 
+                        addPage={props.addPage} 
+                    />
                 </div>
             </div>
         </div>

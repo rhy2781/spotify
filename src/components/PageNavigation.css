@@ -4,14 +4,14 @@
     align-items: center;
 
     font-size: large;
-    height: 4vmin;
+    height: 40px;
     padding: 1vmin;
     /* outline: red solid 1px; */
 }
 
 .NavigationBox {
-    width: 4vmin;
-    height: 4vmin;
+    width: 40px;
+    height: 40px;
     /* outline: orange solid 1px; */
 }
 

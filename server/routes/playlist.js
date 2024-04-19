@@ -38,6 +38,7 @@ const getMore = async (more) => {
 }
 
 
+
 router.use('/', async (req, res) => {
     const playlist_id = req.query.id;
     console.log(`request received ${playlist_id}`);
@@ -52,10 +53,9 @@ router.use('/', async (req, res) => {
 
     const tracks = playlist.tracks;
     var formatted = tracks.items.map((element) => {
-        // console.log(element.duration_ms)
         const min = Math.floor((element.track.duration_ms / 1000) / 60)
         const sec = Math.floor((element.track.duration_ms / 1000) % 60).toString().padStart(2, '0')
-
+        
         return {
             "added_at": element.added_at,
             "album_name": element.track.album.name,
@@ -78,13 +78,12 @@ router.use('/', async (req, res) => {
     // console.log(JSON.stringify(formatted, null, 2))
 
 
-    // Pause for now
-    var more = tracks.next;
-    while (more != null) {
-        const temp = await getMore(more);
-        formatted = formatted.concat(temp[0])
-        more = temp[1];
-    }
+    // var more = tracks.next;
+    // while (more != null) {
+    //     const temp = await getMore(more);
+    //     formatted = formatted.concat(temp[0])
+    //     more = temp[1];
+    // }
 
     res.json({
         "name": playlist.name,

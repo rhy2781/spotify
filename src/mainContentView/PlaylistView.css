@@ -1,14 +1,8 @@
 .PlaylistView {
-    height: calc(100% - 6vmin);
-    /* height: max-content; */
+    height: calc(100% - 40px - 2vmin);
     overflow-y: scroll;
-
-    outline: red dotted 1px;
 }
 
 .PlaylistContent {
     height: max-content;
-
 }
-
-/* spotify:track:5mEqD00bdFcsiVd0MfvEeF */

@@ -10,7 +10,7 @@ import Header from "../components/Header";
 // import ColorThief from 'colorthief'
 import fetchAndEncodeImage from "./Color";
 
-
+// TODO: Document
 function ArtistView(props) {
 
     const [artistData, setArtistData] = useState({})
@@ -92,6 +92,7 @@ function ArtistView(props) {
                             split={true}
                             currentTrack={props.currentTrack}
                             renderImage={true}
+                            padding={1}
                         />
                     </div>
 

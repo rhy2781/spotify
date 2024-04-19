@@ -6,6 +6,11 @@ import TrackList from "../components/TrackList";
 
 import './PlaylistView.css'
 
+// TODO: document
+/**
+ * @param {} props 
+ * @returns 
+ */
 function PlaylistView(props) {
 
     const [color, setColor] = useState([0, 0, 0])
@@ -47,6 +52,8 @@ function PlaylistView(props) {
                         split={false}
                         submitRequest={props.submitRequest}
                         renderImage={true}
+                        padding={0.5}
+                        size={50}
                     />
                 </div>
             }

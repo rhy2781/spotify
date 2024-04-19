@@ -2,7 +2,6 @@
     display: flex;
     height: min-content;
     width: 100%;
-    /* outline: blue dotted 1px; */
 }
 
 @media (max-width: 2000px) {

@@ -45,7 +45,6 @@ function TrackList(props) {
 
     useEffect(() => {
         const temp = props.data.map((element, index) => {
-
             const date = new Date(element.added_at).toDateString();
             const formatted_date = date.substring(0, 7) + ", " + date.substring(8, date.length).replace(/^0+/, '')
 
@@ -54,7 +53,7 @@ function TrackList(props) {
 
 
             return (
-                <div className="TopTrack"
+                <div className="Track"
                     key={element.uri}
                     style={{
                         "padding": props.padding + "vmin",
@@ -63,7 +62,7 @@ function TrackList(props) {
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
                 >
-                    <div className="TopTrackNumber"
+                    <div className="TrackNumber"
                         style={{
                             "color": element.uri.localeCompare(props.currentTrack.uri) == 0 ? "#44c767" : "white",
                             "width": `${props.size}px`,
@@ -73,8 +72,8 @@ function TrackList(props) {
                     >
                         {(hoverTrack !== index) ? index + 1 : <IoPlaySharp />}
                     </div>
-                    {props.renderImage &&
-                        <div className="TopTrackImageContainer"
+                    {element.image &&
+                        <div className="TrackImageContainer"
                             style={{
                                 "width": `${props.size}px`,
                                 "height": `${props.size}px`
@@ -83,26 +82,45 @@ function TrackList(props) {
                             <img src={element.image} alt={element.uri} />
                         </div>
                     }
-                    <div className="TopTrackName"
+                    <div className="TrackMainDescription"
                         style={{
                             "color": element.uri.localeCompare(props.currentTrack.uri) == 0 ? "#44c767" : "white",
-                            "max-width": "calc(100% - 150px - 1vmin)" // TODO: How to scale this based on what values we display
+                            "height": `${props.size}px`,
+                            "width": `calc(((100% - ${3 * props.size}px - 2vmin) / 3)`
                         }}
                     >
-                        <div className="temp">
+                        <div className="TrackName">
                             {element.name}
                         </div>
-                        <div className="temp">
-                            {element.artists.map((e) => e.name)}
+                        {element.artists &&
+                            <div className="TrackArtists">
+                                {element.artists.map((e) => e.name)}
+                            </div>
+                        }
+                    </div>
+                    {element.album_name &&
+                        <div
+                            className="TrackAlbum"
+                            style={{
+                                "height": props.size,
+                                "width": `calc(((100% - ${3 * props.size}px - 2vmin) / 3)`
+                            }}
+                            onClick={() => props.submitRequest(element.album_uri)}
+                        >
+                            {element.album_name}
                         </div>
-                    </div>
-                    <div onClick={() => props.submitRequest(element.album_uri)}>
-                        {element.album_name}
-                    </div>
-                    <div>
-                        {formatted_date}
-                    </div>
-                    <div className="TopTrackTimeBox"
+                    }
+                    {element.added_at &&
+                        <div className="TrackDate"
+                            style={{
+                                "height": props.size,
+                                "width": `calc(((100% - ${3 * props.size}px - 2vmin) / 3)`
+                            }}
+                        >
+                            {formatted_date.substring(4, formatted_date.length)}
+                        </div>
+                    }
+                    < div className="TopTrackTimeBox"
                         style={{
                             "width": `${props.size}px`,
                             "height": `${props.size}px`
@@ -111,8 +129,8 @@ function TrackList(props) {
                         <div className="TopTrackTime">
                             {element.time}
                         </div>
-                    </div>
-                </div>
+                    </div >
+                </div >
             )
         })
         setVisual(temp)

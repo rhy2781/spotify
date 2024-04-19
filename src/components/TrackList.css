@@ -4,14 +4,14 @@
 
 } */
 
-.TopTrack {
+.Track {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 
-.TopTrackNumber {
+.TrackNumber {
     flex-grow: 0;
     display: flex;
     align-items: center;
@@ -19,28 +19,91 @@
 }
 
 
-.TopTrackImageContainer {
+.TrackImageContainer {
     flex-grow: 0;
     border-radius: 10px;
     overflow: hidden;
+    /* outline: red dotted 1px; */
+    padding-right: 1vmin;
+
+
 }
 
-.TopTrackImageContainer img {
+.TrackImageContainer img {
     height: 100%;
 }
 
-.TopTrackName {
-    padding-left: 1%;
+.TrackMainDescription {
+    /* padding-left: 1%; */
     flex-grow: 1;
+    /* width: calc(((100% - 150px - 1vmin) / 6) * 3); */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* outline: yellow dotted 1px; */
+}
 
+.TrackName {
+    text-align: left;
+    /* outline: red dotted 1px; */
+
+    /* width: 100%; */
+
+
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.TrackArtists {
+    /* width: 100%; */
+    text-align: left;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    align-items: center;
+}
+
+
+.TrackAlbum {
+    /* width: calc(((100% - 150px - 1vmin) / 6) * 2); */
+    /* outline: red dotted 1px; */
+    text-align: left;
 
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+
+    /* max-width: 300px; */
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.TrackDate {
+    padding-left: 1%;
+    /* width: calc(((100% - 150px - 1vmin) / 6) * 1); */
+    flex-grow: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* outline: red dotted 1px; */
+}
+
+@media (max-width: 1500px) {
+    .TrackDate {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .TrackAlbum {
+        display: none;
+    }
 }
 
 
@@ -68,5 +131,10 @@
 .temp {
     text-align: left;
     font-size: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+
     /*necessary*/
 }

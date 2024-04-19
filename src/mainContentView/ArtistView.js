@@ -93,6 +93,7 @@ function ArtistView(props) {
                             currentTrack={props.currentTrack}
                             renderImage={true}
                             padding={1}
+                            size={70}
                         />
                     </div>
 

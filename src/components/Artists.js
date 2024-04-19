@@ -1,11 +1,13 @@
-import {React, useEffect, useState} from "react";
+import { React, useEffect, useState } from "react";
+
+import './Artist.css'
 
 // TODO: Document
-function Artists(props){
+function Artists(props) {
 
-    const[display, setDisplay] = useState([])
+    const [display, setDisplay] = useState([])
 
-    useEffect(() =>{
+    useEffect(() => {
         const temp = props.artists.map((artist, index, arr) => (
             < div key={index} className="Artist" onClick={() => props.addPage(artist.uri)}>
                 {(index === arr.length - 1) ? ` ${artist.name}` : `${artist.name}, `}
@@ -15,8 +17,8 @@ function Artists(props){
 
     }, [props.artists])
 
-    return(
-        <div>   
+    return (
+        <div className="ArtistList">
             {display}
         </div>
     )

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import './TrackList.css'
 
 import { IoPlaySharp } from "react-icons/io5"
+import Artists from './Artists'
 
 /**
  * @typedef {Object} TrackItem
@@ -48,10 +49,6 @@ function TrackList(props) {
             const date = new Date(element.added_at).toDateString();
             const formatted_date = date.substring(0, 7) + ", " + date.substring(8, date.length).replace(/^0+/, '')
 
-
-
-
-
             return (
                 <div className="Track"
                     key={element.uri}
@@ -94,7 +91,10 @@ function TrackList(props) {
                         </div>
                         {element.artists &&
                             <div className="TrackArtists">
-                                {element.artists.map((e) => e.name)}
+                                <Artists
+                                    artists={element.artists}
+                                    addPage={props.addPage}
+                                />
                             </div>
                         }
                     </div>

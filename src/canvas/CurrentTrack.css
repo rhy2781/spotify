@@ -46,11 +46,3 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
-.Artist {
-    padding-right: 1%;
-}
-
-.Artist:hover {
-    text-decoration: underline;
-}

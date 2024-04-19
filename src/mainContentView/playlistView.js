@@ -22,14 +22,12 @@ function PlaylistView(props) {
             .then((response) => response.json())
             .then((response) => {
                 setPlaylistData(response)
-                console.log(response)
             })
             .catch(err => console.log(err))
     }, [props.spotifyId]
     )
 
     useEffect(() => {
-        console.log(playlistData.image)
         fetchAndEncodeImage(playlistData.image, setColor)
     }, [playlistData])
 
@@ -53,6 +51,7 @@ function PlaylistView(props) {
                         submitRequest={props.submitRequest}
                         renderImage={true}
                         padding={0.5}
+                        addPage={props.addPage}
                         size={50}
                     />
                 </div>

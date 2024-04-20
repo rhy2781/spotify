@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: inherit;
 }
 
 
@@ -17,7 +18,7 @@
     flex-grow: 0;
     border-radius: 10px;
     overflow: hidden;
-    padding-right: 1vmin;
+    height: inherit;
 }
 
 .TrackImageContainer img {
@@ -25,10 +26,13 @@
 }
 
 .TrackMainDescription {
+    padding-left: 1vmin;
+
     flex-grow: 1;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height: inherit;
 }
 
 .TrackName {
@@ -49,46 +53,57 @@
     align-items: center;
 }
 
+.TrackAlbumContainer {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    height: inherit;
+}
 
 .TrackAlbum {
     text-align: left;
+    font-size: 20px;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    align-items: center;
+}
+
+.TrackAlbum:hover {
+    text-decoration: underline;
 }
 
 .TrackDate {
+    height: inherit;
+    display: flex;
     flex-grow: 1;
     text-align: left;
-    display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1300px) {
     .TrackDate {
         display: none;
     }
 }
 
 @media (max-width: 800px) {
-    .TrackAlbum {
+    .TrackAlbumContainer {
         display: none;
     }
 }
 
 
-.TopTrackTimeBox {
-    flex-grow: 0;
-
+.TrackTimeContainer {
     display: flex;
+    flex-grow: 0;
+    height: inherit;
+
     align-items: center;
     justify-content: center;
 }
 
-.TopTrackTime {
+.TrackTime {
     display: flex;
     align-items: center;
     justify-content: center;

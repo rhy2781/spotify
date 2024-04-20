@@ -52,7 +52,7 @@ function PlaylistView(props) {
                         renderImage={true}
                         padding={0.5}
                         addPage={props.addPage}
-                        size={50}
+                        height={50}
                     />
                 </div>
             }

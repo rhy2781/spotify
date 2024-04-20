@@ -5,9 +5,9 @@ const router = express.Router()
 const credentials = require('../credentials')
 
 router.get('/', async (req, res) => {
-    const artist_spotify_id = req.query.id
+    const artist_id = req.query.id
 
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}`,
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}`,
         {
             method: 'GET',
             headers: {
@@ -31,9 +31,9 @@ router.get('/', async (req, res) => {
 
 
 router.get('/tracks', async (req, res) => {
-    const artist_spotify_id = req.query.id
+    const artist_id = req.query.id
 
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/top-tracks`,
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/top-tracks`,
         {
             method: 'GET',
             headers: {
@@ -64,8 +64,8 @@ router.get('/tracks', async (req, res) => {
 
 
 router.get('/popular', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -109,8 +109,8 @@ router.get('/popular', async (req, res) => {
 })
 
 router.get('/albums', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=album`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=album`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -135,8 +135,8 @@ router.get('/albums', async (req, res) => {
 })
 
 router.get('/singles', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=single`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=single`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -161,8 +161,8 @@ router.get('/singles', async (req, res) => {
 })
 
 router.get('/appear', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=appears_on`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=appears_on`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`

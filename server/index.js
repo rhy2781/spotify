@@ -50,6 +50,9 @@ const playlists = require('./routes/playlist')
 app.use('/playlists', playlists)
 
 
+const album = require('./routes/album')
+app.use('/album', album)
+
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)
 })

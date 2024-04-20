@@ -106,7 +106,7 @@ function TrackList(props) {
                                 "width": `calc(((100% - ${3 * props.height}px - 2vmin) / 5) * 2`
                             }}
                         >
-                            <div className="TrackAlbum" onClick={() => props.submitRequest(element.album_uri)}>
+                            <div className="TrackAlbum" onClick={() => props.addPage(element.album_uri)}>
                                 {element.album_name}
                             </div>
                         </div>

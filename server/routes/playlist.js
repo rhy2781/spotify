@@ -28,7 +28,6 @@ const getMore = async (more) => {
             }),
             "uri": element.track.uri,
             "explicit": element.track.explicit,
-            "duration": element.track.duration,
             "name": element.track.name,
             "time": `${min}:${sec}`,
             "track_number": element.track.track_number
@@ -69,7 +68,6 @@ router.use('/', async (req, res) => {
             }),
             "uri": element.track.uri,
             "explicit": element.track.explicit,
-            "duration": element.track.duration,
             "name": element.track.name,
             "time": `${min}:${sec}`,
             "track_number": element.track.track_number

@@ -2,9 +2,17 @@
     /* outline: blue solid 1px; */
     height: calc(100% - 6vmin);
     overflow-y: scroll;
-    /* background-image: linear-gradient(rgb(152, 35, 32), #000000); */
-
 }
+.ArtistView::-webkit-scrollbar {
+    background-color: var(--dark-gray);
+    width: 1vmin;
+}
+
+.ArtistView::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 10px;
+}
+
 
 .ArtistContent {
     height: max-content;

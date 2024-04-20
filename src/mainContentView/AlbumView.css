@@ -1,0 +1,12 @@
+.AlbumView{
+    height: calc(100% - 6vmin);
+    overflow-y: scroll;
+}
+
+.Copyrights {
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+    padding: 1vmin;
+}

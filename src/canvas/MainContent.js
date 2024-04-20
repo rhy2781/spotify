@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react"
 import './MainContent.css'
 
 import PageNavigation from "../components/PageNavigation"
-
-import HomeView from "../mainContentView/HomeView"
 import PlaylistView from "../mainContentView/PlaylistView"
+import HomeView from "../mainContentView/HomeView"
 import ArtistView from "../mainContentView/ArtistView"
 import AlbumView from "../mainContentView/AlbumView"
 

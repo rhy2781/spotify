@@ -91,7 +91,6 @@ function ArtistView(props) {
                             submitRequest={props.submitRequest}
                             split={true}
                             currentTrack={props.currentTrack}
-                            renderImage={true}
                             padding={1}
                             height={70}
                         />

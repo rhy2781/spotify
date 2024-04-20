@@ -6,7 +6,9 @@ import TrackList from "../components/TrackList";
 
 import './PlaylistView.css'
 
-// TODO: document
+// 
+
+//TODO: Document
 /**
  * @param {} props 
  * @returns 
@@ -20,11 +22,9 @@ function PlaylistView(props) {
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND}/playlists?id=${props.spotifyId}`)
             .then((response) => response.json())
-            .then((response) => {
-                setPlaylistData(response)
-            })
+            .then((response) => setPlaylistData(response))
             .catch(err => console.log(err))
-    }, [props.spotifyId]
+        }, [props.spotifyId]
     )
 
     useEffect(() => {
@@ -49,7 +49,6 @@ function PlaylistView(props) {
                         currentTrack={props.currentTrack}
                         split={false}
                         submitRequest={props.submitRequest}
-                        renderImage={true}
                         padding={0.5}
                         addPage={props.addPage}
                         height={50}

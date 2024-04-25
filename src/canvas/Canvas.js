@@ -8,6 +8,7 @@ import MainControl from "./MainControl";
 import SideControl from "./SideControl";
 import MainContent from "./MainContent";
 import PlaylistPanel from "./PlaylistPanel";
+import NavigationPanel from "./NavgiationPanel";
 
 // default track
 const track = {
@@ -218,7 +219,8 @@ function Canvas(props) {
         return (
             <div className="Canvas">
                 <div className="Top">
-                    <div className="Playlists">
+                    <div className="Panel">
+                        <NavigationPanel />
                         <PlaylistPanel
                             addPage={addPage}
                             currentPageUri={pages[pageIndex]}

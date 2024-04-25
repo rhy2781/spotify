@@ -1,21 +1,51 @@
-.PlaylistContainer {
+.PlaylistPanel {
+    width: calc(100% - 10px);
+    height: 100%;
+    overflow-y: scroll;
+
     background-color: var(--dark-gray);
+    padding: 5px;
+    border-radius: 10px;
+
+    /* outline: gold dotted 1px; */
+}
+
+.PlaylistPanel::-webkit-scrollbar {
+    background-color: var(--dark-gray);
+    width: 6px;
+}
+
+.PlaylistPanel::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 10px;
 }
 
 .Playlist {
-    overflow-x: hidden;
-    height: min-content;
     display: flex;
     flex-direction: row;
+    height: 80px;
+    width: calc(100% - 5px);
+    /* width is less since we want playlist box to be closer to scroll bar*/
+    padding: 5px;
+    border-radius: 10px;
+
+    /* outline: red dotted 1px; */
 }
 
-.PlaylistCover {
-    height: 70px;
-    width: 70px;
-}
 
 .PlaylistDetails {
-    display: flex;
-    flex-direction: column;
     text-align: left;
+
+    /* outline: orange dotted 1px; */
+}
+
+.PlaylistImage {
+    height: 80px;
+
+    /* outline: orange dotted 1px; */
+}
+
+.PlaylistImage img {
+    height: 100%;
+    border-radius: 10px;
 }

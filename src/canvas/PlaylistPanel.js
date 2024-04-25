@@ -29,17 +29,16 @@ function PlaylistPanel(props) {
     // update the contents to display to the user
     useEffect(() => {
         var temp = playlistData.map((element) => {
-            // if this is the current page, style it differently 
-            const isSelected = element.uri === props.currentPageUri
-
+            console.log(element.image)
             return (
                 <div className="Playlist"
                     key={element.uri}
-                    style={{ "backgroundColor": isSelected ? "gray" : "" }}
+                    style={{ "backgroundColor": element.uri === props.currentPageUri ? "gray" : "" }}
                     onClick={() => props.addPage(element.uri)}
                 >
-                    <div className="temp">
-                        {element.image === "none" ? <img src={blank} className="PlaylistCover" /> : <img src={element.image} className="PlaylistCover" />}
+
+                    <div className="PlaylistImage">
+                        {element.image === "none" ? <img src={blank} alt={element.uri} /> : <img src={element.image} alt={element.uri}/>}
                     </div>
                     <div className="PlaylistDetails">
                         <div>
@@ -54,7 +53,7 @@ function PlaylistPanel(props) {
     }, [props.currentPageUri, playlistData])
 
     return (
-        <div className="PlaylistContainer">
+        <div className="PlaylistPanel">
             {display}
         </div>
     )

@@ -7,6 +7,7 @@ import PlaylistView from "../mainContentView/PlaylistView"
 import HomeView from "../mainContentView/HomeView"
 import ArtistView from "../mainContentView/ArtistView"
 import AlbumView from "../mainContentView/AlbumView"
+import SearchView from "../mainContentView/SearchView"
 
 /**
  * Renders the main content of the page based on the uri of the current page
@@ -39,6 +40,7 @@ function MainContent(props) {
                 nextPage={props.nextPage}
             />
             {page === "home" && <HomeView />}
+            {page === "search" && <SearchView />}
             {page === "playlist" && <PlaylistView
                 currentPageUri={props.currentPageUri}
                 spotifyId={spotifyId}

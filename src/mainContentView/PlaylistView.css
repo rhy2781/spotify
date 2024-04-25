@@ -1,17 +1,7 @@
 .PlaylistView {
-    height: calc(100% - 40px - 2vmin);
-    overflow-y: scroll;
+
 }
 
-.PlaylistView::-webkit-scrollbar {
-    background-color: var(--dark-gray);
-    width: 1vmin;
-}
-
-.PlaylistView::-webkit-scrollbar-thumb {
-    background-color: var(--gray);
-    border-radius: 10px;
-}
 
 .PlaylistContent {
     height: max-content;

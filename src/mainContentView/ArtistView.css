@@ -1,16 +1,6 @@
 .ArtistView {
     /* outline: blue solid 1px; */
     height: calc(100% - 6vmin);
-    overflow-y: scroll;
-}
-.ArtistView::-webkit-scrollbar {
-    background-color: var(--dark-gray);
-    width: 1vmin;
-}
-
-.ArtistView::-webkit-scrollbar-thumb {
-    background-color: var(--gray);
-    border-radius: 10px;
 }
 
 

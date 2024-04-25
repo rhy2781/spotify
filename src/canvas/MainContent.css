@@ -1,5 +1,27 @@
-.MainContent {
-    background-color: var(--dark-gray);
+.MainContentContainer {
     height: 100%;
     width: 100%;
+}
+
+.MainContent {
+    border-radius: 10px;
+    background-color: var(--dark-gray);
+    height: 100%;
+}
+
+.Scrollable {
+    overflow-y: scroll;
+    /* overflow: hidden; */
+    height: calc(100% - 40px - var(--spacer));
+    outline: red dotted 1px;
+}
+
+.Scrollable::-webkit-scrollbar {
+    background-color: var(--dark-gray);
+    width: 6px;
+}
+
+.Scrollable::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 10px;
 }

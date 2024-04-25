@@ -220,12 +220,16 @@ function Canvas(props) {
             <div className="Canvas">
                 <div className="Top">
                     <div className="Panel">
-                        <NavigationPanel />
+                        <NavigationPanel
+                            addPage={addPage}
+                            currentPageUri={pages[pageIndex]}
+                        />
                         <PlaylistPanel
                             addPage={addPage}
                             currentPageUri={pages[pageIndex]}
                         />
                     </div>
+
                     <div className="Content">
                         <MainContent
                             addPage={addPage}

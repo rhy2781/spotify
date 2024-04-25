@@ -29,7 +29,6 @@ function PlaylistPanel(props) {
     // update the contents to display to the user
     useEffect(() => {
         var temp = playlistData.map((element) => {
-            console.log(element.image)
             return (
                 <div className="Playlist"
                     key={element.uri}

@@ -5,7 +5,7 @@
 
     font-size: large;
     height: 40px;
-    padding: 1vmin;
+    padding: var(--spacer)
     /* outline: red solid 1px; */
 }
 

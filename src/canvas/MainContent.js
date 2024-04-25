@@ -34,34 +34,38 @@ function MainContent(props) {
 
     // load different content based off of currentPageUri
     return (
-        <div className="MainContent">
-            <PageNavigation
-                prevPage={props.prevPage}
-                nextPage={props.nextPage}
-            />
-            {page === "home" && <HomeView />}
-            {page === "search" && <SearchView />}
-            {page === "playlist" && <PlaylistView
-                currentPageUri={props.currentPageUri}
-                spotifyId={spotifyId}
-                addPage={props.addPage}
-                submitRequest={props.submitRequest}
-                currentTrack={props.currentTrack}
-            />}
-            {page === "track" && <PlaylistView />}
-            {page === "artist" && <ArtistView
-                currentPageUri={props.currentPageUri}
-                spotifyId={spotifyId}
-                addPage={props.addPage}
-                submitRequest={props.submitRequest}
-                currentTrack={props.currentTrack} />}
-            {page === "album" && <AlbumView
-                spotifyId={spotifyId}
-                currentPageUri={props.currentPageUri}
-                addPage={props.addPage}
-                submitRequest={props.submitRequest}
-                currentTrack={props.currentTrack}
-            />}
+        <div className="MainContentContainer">
+            <div className="MainContent">
+                <PageNavigation
+                    prevPage={props.prevPage}
+                    nextPage={props.nextPage}
+                />
+                <div className="Scrollable">
+                    {page === "home" && <HomeView />}
+                    {page === "search" && <SearchView />}
+                    {page === "playlist" && <PlaylistView
+                        currentPageUri={props.currentPageUri}
+                        spotifyId={spotifyId}
+                        addPage={props.addPage}
+                        submitRequest={props.submitRequest}
+                        currentTrack={props.currentTrack}
+                    />}
+                    {page === "track" && <PlaylistView />}
+                    {page === "artist" && <ArtistView
+                        currentPageUri={props.currentPageUri}
+                        spotifyId={spotifyId}
+                        addPage={props.addPage}
+                        submitRequest={props.submitRequest}
+                        currentTrack={props.currentTrack} />}
+                    {page === "album" && <AlbumView
+                        spotifyId={spotifyId}
+                        currentPageUri={props.currentPageUri}
+                        addPage={props.addPage}
+                        submitRequest={props.submitRequest}
+                        currentTrack={props.currentTrack}
+                    />}
+                </div>
+            </div>
         </div>
     )
 }

@@ -22,8 +22,10 @@ import SearchView from "../mainContentView/SearchView"
  */
 function MainContent(props) {
 
+    const [color, setColor] = useState([0, 0, 0])
     const [page, setPage] = useState("")
     const [spotifyId, setSpotifyId] = useState("")
+
 
     // parse uri to facilitate rendering
     useEffect(() => {
@@ -32,18 +34,31 @@ function MainContent(props) {
         setSpotifyId(temp[2])
     }, [props.currentPageUri])
 
+    const handleColorChange = (c) => {
+        setColor(c)
+    }
+
     // load different content based off of currentPageUri
     return (
-        <div className="MainContentContainer">
+        <div
+            className="MainContentContainer"
+            style={{ backgroundImage: `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` }}
+        >
             <div className="MainContent">
-                <PageNavigation
-                    prevPage={props.prevPage}
-                    nextPage={props.nextPage}
-                />
                 <div className="Scrollable">
-                    {page === "home" && <HomeView />}
-                    {page === "search" && <SearchView />}
+                    {page === "home" && <HomeView
+                        prevPage={props.prevPage}
+                        nextPage={props.nextPage}
+                    />}
+                    {page === "search" && <SearchView
+                        prevPage={props.prevPage}
+                        nextPage={props.nextPage}
+                    />}
                     {page === "playlist" && <PlaylistView
+                        onColorChange={handleColorChange}
+
+                        prevPage={props.prevPage}
+                        nextPage={props.nextPage}
                         currentPageUri={props.currentPageUri}
                         spotifyId={spotifyId}
                         addPage={props.addPage}

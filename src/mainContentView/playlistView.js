@@ -1,5 +1,7 @@
 import { ReactDOM, useEffect, useState } from "react";
 
+
+import PageNavigation from "../components/PageNavigation";
 import Header from '../components/Header'
 import fetchAndEncodeImage from './Color'
 import TrackList from "../components/TrackList";
@@ -24,19 +26,27 @@ function PlaylistView(props) {
             .then((response) => response.json())
             .then((response) => setPlaylistData(response))
             .catch(err => console.log(err))
-        }, [props.spotifyId]
+    }, [props.spotifyId]
     )
 
     useEffect(() => {
         fetchAndEncodeImage(playlistData.image, setColor)
     }, [playlistData])
 
+    useEffect(() => {
+        props.onColorChange(color)
+    }, [color])
+
 
     return (
-        <div className="PlaylistView" style={{ backgroundImage: `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` }}>
+        <div className="PlaylistView">
 
             {(Object.keys(playlistData).length > 0) &&
                 <div className="PlayListContent">
+                    <PageNavigation
+                        prevPage={props.prevPage}
+                        nextPage={props.nextPage}
+                    />
                     <Header
                         image={playlistData.image}
                         uri={props.currentPageUri}

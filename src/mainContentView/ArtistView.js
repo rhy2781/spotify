@@ -69,10 +69,15 @@ function ArtistView(props) {
         fetchAndEncodeImage(artistData.image, setColor)
     }, [artistData])
 
+    useEffect(() => {
+        props.onColorChange(color)
+    }, [color])
+
+
 
 
     return (
-        <div className="ArtistView" style={{ backgroundImage: `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` }}>
+        <div className="ArtistView">
             {(Object.keys(artistData).length > 0) &&
                 <div className="ArtistContent">
                     <Header

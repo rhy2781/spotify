@@ -34,8 +34,13 @@ function AlbumView(props) {
     }, [albumData])
 
 
+    useEffect(() => {
+        props.onColorChange(color)
+    }, [color])
+
+
     return (
-        <div className="AlbumView" style={{ backgroundImage: `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` }}>
+        <div className="AlbumView">
             {(Object.keys(albumData).length > 0 &&
                 <div>
                     <Header

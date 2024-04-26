@@ -3,7 +3,7 @@ import { React, useState, useEffect } from "react";
 import './Canvas.css'
 
 import TrackProgress from "./TrackProgress";
-import CurrentTrack from "./CurrentTrack";
+import PlayerTrack from "./PlayerTrack";
 import MainControl from "./MainControl";
 import SideControl from "./SideControl";
 import MainContent from "./MainContent";
@@ -24,7 +24,7 @@ const track = {
 }
 
 /**
- * The Canvas component is the main component that is used for format of the web clone
+ * The Canvas component is the main component that is used for formatting the major components of the web clone
  * @param {Object} props 
  * @param {String} props.token The OAuthToken used to interact with the Spotify Web Playback SDK
  * @returns {JSX.Element}
@@ -33,14 +33,10 @@ function Canvas(props) {
     // web playback
     const [player, setPlayer] = useState(undefined)
     const [active, setActive] = useState(false)
-
-
     const [device, setDevice] = useState(null)
 
     // state variables to manage controls
     const [pause, setPause] = useState(false)
-
-
     const [currentTrack, setCurrentTrack] = useState(track)
     const [shuffle, setShuffle] = useState(false)
     const [repeat, setRepeat] = useState(0)
@@ -48,7 +44,7 @@ function Canvas(props) {
     const [durationMS, setDurationMS] = useState(0)
     const [volume, setVolume] = useState(0)
 
-    // state variable to manage page
+    // state variables to manage page
     const [pages, setPages] = useState(["spotify:home:home"])
     const [pageIndex, setPageIndex] = useState(0)
 
@@ -100,7 +96,7 @@ function Canvas(props) {
                 volume: 0.5
             });
 
-            setVolume(0.5);
+            setVolume(0.3);
             setPlayer(player);
 
             // Ready
@@ -119,13 +115,12 @@ function Canvas(props) {
                 if (!state) {
                     return
                 }
-
+                // if we have new state update state variables
                 setCurrentTrack(state.track_window.current_track);
                 setPause(state.paused);
                 setShuffle(state.shuffle);
                 setRepeat(state.repeat_mode);
                 player.getVolume().then((v) => setVolume(v))
-
                 setProgressMS(state.position)
                 setDurationMS(state.track_window.current_track.duration_ms)
                 player.getCurrentState().then((state) => {
@@ -136,7 +131,7 @@ function Canvas(props) {
             player.connect();
         };
 
-        window.addEventListener('beforeunload', () => player.disconnect()); // disconnect player on reload
+        window.addEventListener('beforeunload', () => player.disconnect()); // disconnect player on component reload
         window.addEventListener('close', () => player.disconnect()); // disconnect player when window closes
 
         return () => {
@@ -244,7 +239,7 @@ function Canvas(props) {
 
                 <div className="Bottom">
                     <div className="Current">
-                        <CurrentTrack
+                        <PlayerTrack
                             addPage={addPage}
                             currentTrack={currentTrack}
                         />

@@ -40,13 +40,8 @@ function PlaylistView(props) {
 
     return (
         <div className="PlaylistView">
-
             {(Object.keys(playlistData).length > 0) &&
                 <div className="PlayListContent">
-                    <PageNavigation
-                        prevPage={props.prevPage}
-                        nextPage={props.nextPage}
-                    />
                     <Header
                         image={playlistData.image}
                         uri={props.currentPageUri}

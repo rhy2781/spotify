@@ -1,46 +1,48 @@
-.CurrentContainer {
+.PlayerTrack {
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
 }
 
-/* Current Track Image */
-.CurrentImageContainer {
+.PlayerTrackImage {
     overflow: hidden;
     min-width: 80px;
     height: 80px;
 }
 
-.CurrentImageContainer img {
+.PlayerTrackImage img {
     height: 100%;
 }
 
 /* Details about Current Track*/
-.CurrentDetails {
+.PlayerTrackDetails {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: calc(100% - 90px);
+
     text-align: left;
     padding-left: var(--spacer);
-    width: calc(100% - 80px);
+    overflow-x: hidden;
 }
 
-.CurrentTrack {
-    width: 100%;
+.PlayerTrackName {
+    width: max-content;
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.CurrentTrack:hover {
+.PlayerTrackName:hover {
     text-decoration: underline;
 }
 
-.CurrentArtists {
-    width: 100%;
-
+.PlayerTrackArtists {
     display: flex;
     flex-direction: row;
+    width: max-content;
 
     overflow: hidden;
     text-overflow: ellipsis;

@@ -22,18 +22,23 @@ import SearchView from "../mainContentView/SearchView"
  */
 function MainContent(props) {
 
-    const [color, setColor] = useState([0, 0, 0])
+    const [color, setColor] = useState([53, 53, 53])
     const [page, setPage] = useState("")
     const [spotifyId, setSpotifyId] = useState("")
 
 
-    // parse uri to facilitate rendering
+    // parse uri to facilitate rendering and data loading
     useEffect(() => {
         const temp = props.currentPageUri.split(":")
         setPage(temp[1])
         setSpotifyId(temp[2])
     }, [props.currentPageUri])
 
+    /**
+     * Callback function to change color of main content component based on ColorThief
+     * @function 
+     * @param {Number[]} c The RGB Color array gained from the child components
+     */
     const handleColorChange = (c) => {
         setColor(c)
     }
@@ -41,45 +46,43 @@ function MainContent(props) {
     // load different content based off of currentPageUri
     return (
         <div
-            className="MainContentContainer"
+            className="MainContent"
             style={{ backgroundImage: `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` }}
         >
-            <div className="MainContent">
-                <div className="Scrollable">
-                    {page === "home" && <HomeView
-                        prevPage={props.prevPage}
-                        nextPage={props.nextPage}
-                    />}
-                    {page === "search" && <SearchView
-                        prevPage={props.prevPage}
-                        nextPage={props.nextPage}
-                    />}
-                    {page === "playlist" && <PlaylistView
-                        onColorChange={handleColorChange}
+            <PageNavigation
+                prevPage={props.prevPage}
+                nextPage={props.nextPage}
+            />
+            <div className="MainContentView">
+                {page === "home" && <HomeView />}
+                {page === "search" && <SearchView />}
+                {page === "playlist" && <PlaylistView
+                    onColorChange={handleColorChange}
 
-                        prevPage={props.prevPage}
-                        nextPage={props.nextPage}
-                        currentPageUri={props.currentPageUri}
-                        spotifyId={spotifyId}
-                        addPage={props.addPage}
-                        submitRequest={props.submitRequest}
-                        currentTrack={props.currentTrack}
-                    />}
-                    {page === "track" && <PlaylistView />}
-                    {page === "artist" && <ArtistView
-                        currentPageUri={props.currentPageUri}
-                        spotifyId={spotifyId}
-                        addPage={props.addPage}
-                        submitRequest={props.submitRequest}
-                        currentTrack={props.currentTrack} />}
-                    {page === "album" && <AlbumView
-                        spotifyId={spotifyId}
-                        currentPageUri={props.currentPageUri}
-                        addPage={props.addPage}
-                        submitRequest={props.submitRequest}
-                        currentTrack={props.currentTrack}
-                    />}
-                </div>
+                    currentPageUri={props.currentPageUri}
+                    spotifyId={spotifyId}
+                    addPage={props.addPage}
+                    submitRequest={props.submitRequest}
+                    currentTrack={props.currentTrack}
+                />}
+                {page === "track" && <PlaylistView />}
+                {page === "artist" && <ArtistView
+                    onColorChange={handleColorChange}
+
+                    currentPageUri={props.currentPageUri}
+                    spotifyId={spotifyId}
+                    addPage={props.addPage}
+                    submitRequest={props.submitRequest}
+                    currentTrack={props.currentTrack} />}
+                {page === "album" && <AlbumView
+                    onColorChange={handleColorChange}
+
+                    spotifyId={spotifyId}
+                    currentPageUri={props.currentPageUri}
+                    addPage={props.addPage}
+                    submitRequest={props.submitRequest}
+                    currentTrack={props.currentTrack}
+                />}
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import './CurrentTrack.css'
+import './PlayerTrack.css'
 import Artists from "../components/Artists";
 
 /**
@@ -10,27 +10,27 @@ import Artists from "../components/Artists";
  * @param {Object} props.currentTrack The current track that the playback is playing
  * @returns 
  */
-function CurrentTrack(props) {
+function PlayerTrack(props) {
     return (
-        <div className="CurrentContainer">
-            <div className="CurrentImageContainer">
+        <div className="PlayerTrack">
+            <div className="PlayerTrackImage">
                 <img
                     src={props.currentTrack.album.images[0].url}
                     alt={props.currentTrack.uri}
                 />
             </div>
-            <div className="CurrentDetails">
-                <div className="CurrentTrack" onClick={() => props.addPage(props.currentTrack.album.uri)}>
+            <div className="PlayerTrackDetails">
+                <div className="PlayerTrackName" onClick={() => props.addPage(props.currentTrack.album.uri)}>
                     {props.currentTrack.name}
                 </div>
-                <div className="CurrentArtists">
-                    <Artists 
-                        artists={props.currentTrack.artists} 
-                        addPage={props.addPage} 
+                <div className="PlayerTrackArtists">
+                    <Artists
+                        artists={props.currentTrack.artists}
+                        addPage={props.addPage}
                     />
                 </div>
             </div>
         </div>
     )
 }
-export default CurrentTrack
+export default PlayerTrack

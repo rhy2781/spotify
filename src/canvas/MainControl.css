@@ -1,9 +1,10 @@
 .MainControl {
     display: flex;
     flex-direction: row;
+    
     align-items: baseline;
     justify-content: center;
-    padding: 1%;
+    padding: var(--spacer);
 }
 
 
@@ -12,7 +13,7 @@
 .SkipForward,
 .Shuffle,
 .Repeat {
-    padding-inline: 2%;
+    padding-inline: calc(2 * var(--spacer));
     font-size: 25px;
 }
 

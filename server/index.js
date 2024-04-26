@@ -12,7 +12,7 @@ app.use(express.json())
 
 const qs = require('qs')
 app.set('query parser',
-  (str) => qs.parse(str)
+    (str) => qs.parse(str)
 )
 
 /**
@@ -40,11 +40,18 @@ const controls = require('./routes/controls')
 app.use('/controls', controls)
 
 
-const playlists = require('./routes/playlists')
-app.use('/playlists', playlists)
+const user_playlists = require('./routes/user_playlists')
+app.use('/user-playlists', user_playlists)
 
 const artist = require('./routes/artist')
 app.use('/artist', artist)
+
+const playlists = require('./routes/playlist')
+app.use('/playlists', playlists)
+
+
+const album = require('./routes/album')
+app.use('/album', album)
 
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)

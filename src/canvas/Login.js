@@ -1,6 +1,10 @@
 import React from "react"
 import './Login.css'
 
+/**
+ * Renders a page with a log in button
+ * @returns {JSX.Element}
+ */
 function Login() {
     return (
         <div className="Login">

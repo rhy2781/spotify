@@ -1,0 +1,48 @@
+.CurrentContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+/* Current Track Image */
+.CurrentImageContainer {
+    overflow: hidden;
+    min-width: 80px;
+    height: 80px;
+}
+
+.CurrentImageContainer img {
+    height: 100%;
+}
+
+/* Details about Current Track*/
+.CurrentDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: var(--spacer);
+    width: calc(100% - 80px);
+}
+
+.CurrentTrack {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.CurrentTrack:hover {
+    text-decoration: underline;
+}
+
+.CurrentArtists {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,233 @@
+.Row {
+    display: flex;
+    height: min-content;
+    width: 100%;
+}
+
+@media (max-width: 2000px) {
+    .RowItem10 {
+        display: none;
+    }
+
+    .RowItemEmpty10 {
+        display: none;
+    }
+}
+
+@media (max-width: 1800px) {
+    .RowItem9 {
+        display: none;
+    }
+
+    .RowItemEmpty9 {
+        display: none;
+    }
+}
+
+@media (max-width: 1600px) {
+    .RowItem8 {
+        display: none;
+    }
+
+    .RowItemEmpty8 {
+        display: none;
+    }
+}
+
+@media (max-width: 1400px) {
+    .RowItem7 {
+        display: none;
+    }
+
+    .RowItemEmpty7 {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .RowItem6 {
+        display: none;
+    }
+
+    .RowItemEmpty6 {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .RowItem5 {
+        display: none;
+    }
+
+    .RowItemEmpty5 {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .RowItem4 {
+        display: none;
+    }
+
+    .RowItemEmpty4 {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .RowItem3 {
+        display: none;
+    }
+
+    .RowItemEmpty3 {
+        display: none;
+    }
+}
+
+.RowItem1,
+.RowItem2,
+.RowItem3,
+.RowItem4,
+.RowItem5,
+.RowItem6,
+.RowItem7,
+.RowItem8,
+.RowItem9,
+.RowItem10 {
+    height: min-content;
+    width: 100%;
+    max-width: 200px;
+    padding: 1vmin;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.RowItem1:hover,
+.RowItem2:hover,
+.RowItem3:hover,
+.RowItem4:hover,
+.RowItem5:hover,
+.RowItem6:hover,
+.RowItem7:hover,
+.RowItem8:hover,
+.RowItem9:hover,
+.RowItem10:hover {
+    background-color: var(--gray);
+}
+
+.RowItemEmpty1,
+.RowItemEmpty2,
+.RowItemEmpty3,
+.RowItemEmpty4,
+.RowItemEmpty5,
+.RowItemEmpty6,
+.RowItemEmpty7,
+.RowItemEmpty8,
+.RowItemEmpty9,
+.RowItemEmpty10 {
+    height: min-content;
+    width: 100%;
+    max-width: 200px;
+    padding: 1vmin;
+}
+
+
+.Inner {
+    width: 100%;
+}
+
+.RowItemMainText,
+.RowItemSubText {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-align: left;
+}
+
+
+
+.RowItem1:hover .PContainer1 {
+    opacity: 1;
+}
+
+.RowItem2:hover .PContainer2 {
+    opacity: 1;
+}
+
+.RowItem3:hover .PContainer3 {
+    opacity: 1;
+}
+
+.RowItem4:hover .PContainer4 {
+    opacity: 1;
+}
+
+.RowItem5:hover .PContainer5 {
+    opacity: 1;
+}
+
+.RowItem6:hover .PContainer6 {
+    opacity: 1;
+}
+
+.RowItem7:hover .PContainer7 {
+    opacity: 1;
+}
+
+.RowItem8:hover .PContainer8 {
+    opacity: 1;
+}
+
+.RowItem9:hover .PContainer9 {
+    opacity: 1;
+}
+
+.RowItem10:hover .PContainer10 {
+    opacity: 1;
+}
+
+
+.Image {
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    position: relative;
+}
+
+.Image img {
+    height: 100%;
+    width: 100%;
+}
+
+
+.PContainer1,
+.PContainer2,
+.PContainer3,
+.PContainer4,
+.PContainer5,
+.PContainer6,
+.PContainer7,
+.PContainer8,
+.PContainer9,
+.PContainer10 {
+    opacity: 0;
+    color: black;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.PlayIcon {
+    background-color: var(--green);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

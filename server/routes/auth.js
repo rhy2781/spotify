@@ -87,10 +87,10 @@ router.get('/refresh', function (req, res) {
     }
     request.post(authOptions, function (error, response, body) {
         if (!error && response.statusCode === 200) {
+            console.log("refresh granted")
             credentials.setSpotifyToken(body.access_token)
             res.json({
                 access_token: body.access_token,
-                expiresIn: body.expires_in
             })
         }
     })

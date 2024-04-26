@@ -1,57 +1,62 @@
 .Canvas {
-    padding: 1vmin;
+    padding: 10px;
+    /* width: calc(100% - 30px); */
 }
 
 /* Top Section */
 .Top {
-    height: calc(100vh - 70px - 3vmin);
-    width: 100%;
+    height: calc(100vh - 70px - 4 * var(--spacer));
+    width: calc(100% - var(--spacer));
+
     display: flex;
     flex-direction: row;
-    /* outline: white solid 1px; */
 }
 
-.Playlists {
-    height: 100%;
+.Panel {
+    display: flex;
+    flex-direction: column;
     width: 33%;
-    overflow-y: scroll;
-    /* padding-left: 1vmin; */
-    /* outline: yellow solid 1px; */
+    min-width: 300px;
 }
+
 
 .Content {
     display: flex;
-    flex-direction: column;
-    width: 67%;
-    height: 100%;
-    padding-left: 1vmin;
-    /* outline: yellow solid 1px; */
+
+
+    flex-direction: row;
+    width: 66%;
+    min-width: calc(100% - 300px);
+    height: calc(100%);
+    padding-left: var(--spacer);
+    /* outline: red dotted 1px; */
+
 }
 
 /* Bottom Section*/
 .Bottom {
     display: flex;
     flex-direction: row;
-    height: 70px;
-    padding-top: 1vmin;
-    /* outline: white solid 1px; */
+    width: 100%;
+    height: 80px;
+
+    padding-top: var(--spacer);
+
 }
 
 
 .Current {
     width: 25%;
-    /* outline: yellow solid 1px; */
+    overflow-x: hidden;
 }
 
 .Controls {
     width: 50%;
-    /* outline: yellow solid 1px; */
 }
 
 .SideControls {
     width: 25%;
     display: flex;
-    /* outline: yellow solid 1px; */
 }
 
 

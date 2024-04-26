@@ -5,10 +5,9 @@ const router = express.Router()
 const credentials = require('../credentials')
 
 router.get('/', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    console.log(artist_spotify_id)
+    const artist_id = req.query.id
 
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}`,
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}`,
         {
             method: 'GET',
             headers: {
@@ -20,7 +19,7 @@ router.get('/', async (req, res) => {
             res.json({
                 followers: response.followers.total,
                 genre: response.genres,
-                images: response.images,
+                image: response.images[0].url,
                 name: response.name,
                 type: response.type
             })
@@ -30,10 +29,11 @@ router.get('/', async (req, res) => {
         })
 })
 
-router.get('/tracks', async (req, res) => {
-    const artist_spotify_id = req.query.id
 
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/top-tracks`,
+router.get('/tracks', async (req, res) => {
+    const artist_id = req.query.id
+
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/top-tracks`,
         {
             method: 'GET',
             headers: {
@@ -55,7 +55,7 @@ router.get('/tracks', async (req, res) => {
                     "time": `${min}:${sec}`
                 }
             })
-            res.json({ "tracks": temp })
+            res.json({ "items": temp })
         })
         .catch(err => {
             console.log(err)
@@ -64,8 +64,8 @@ router.get('/tracks', async (req, res) => {
 
 
 router.get('/popular', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -73,25 +73,44 @@ router.get('/popular', async (req, res) => {
     })
         .then((response) => response.json())
         .then((response) => {
-            const temp = response.items.sort((a, b) => b.release_date.localeCompare(a.release_date))
-            const temp1 = temp.map((element) => {
-                return {
-                    "uri": element.uri,
-                    "image": element.images[0].url,
-                    "mainText": element.name,
-                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+            var ids = 'ids='
+            response.items.forEach((element, index) => {
+                if (index == 3) {
+                    return ids;
+                }
+                ids = ids + element.uri.split(":")[2]
+                ids = ids + ','
+            });
+            return ids
+        })
+        .then(async (ids) => {
+            await fetch(`https://api.spotify.com/v1/albums?${ids}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${credentials.getSpotifyToken()}`
                 }
             })
-            res.json({ "popular": temp1 })
+                .then((response) => response.json())
+                .then((response) => {
+                    const temp = response.albums.filter(element => element)
+                    const temp1 = temp.sort((a, b) => b.popularity - a.popularity)
+                    const temp2 = temp1.map((element) => {
+                        return {
+                            "uri": element.uri,
+                            "image": element.images[0].url,
+                            "mainText": element.name,
+                            "subText": `${element.release_date.slice(0, 4)} • ${element.album_type.charAt(0).toUpperCase() + element.album_type.slice(1)}`
+                        }
+                    })
+                    res.json({ "items": temp2 })
+                })
         })
-        .catch(err => {
-            console.log(err)
-        })
+        .catch(err => console.log(err))
 })
 
 router.get('/albums', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=album`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=album`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -105,10 +124,10 @@ router.get('/albums', async (req, res) => {
                     "uri": element.uri,
                     "image": element.images[0].url,
                     "mainText": element.name,
-                    "subText": `${element.release_date.slice(0, 4)} • ${element.type}`
+                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type.charAt(0).toUpperCase() + element.album_type.slice(1)}`
                 }
             })
-            res.json({ "album": temp1 })
+            res.json({ "items": temp1 })
         })
         .catch(err => {
             console.log(err)
@@ -116,8 +135,8 @@ router.get('/albums', async (req, res) => {
 })
 
 router.get('/singles', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=single`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=single`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -131,10 +150,10 @@ router.get('/singles', async (req, res) => {
                     "uri": element.uri,
                     "image": element.images[0].url,
                     "mainText": element.name,
-                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type.charAt(0).toUpperCase() + element.album_type.slice(1)}`
                 }
             })
-            res.json({ "singles": temp1 })
+            res.json({ "items": temp1 })
         })
         .catch(err => {
             console.log(err)
@@ -142,8 +161,8 @@ router.get('/singles', async (req, res) => {
 })
 
 router.get('/appear', async (req, res) => {
-    const artist_spotify_id = req.query.id
-    await fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?include_groups=appears_on`, {
+    const artist_id = req.query.id
+    await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=appears_on`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -157,10 +176,10 @@ router.get('/appear', async (req, res) => {
                     "uri": element.uri,
                     "image": element.images[0].url,
                     "mainText": element.name,
-                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type}`
+                    "subText": `${element.release_date.slice(0, 4)} • ${element.album_type.charAt(0).toUpperCase() + element.album_type.slice(1)}`
                 }
             })
-            res.json({"appear" : temp1 })
+            res.json({ "items": temp1 })
         })
         .catch(err => {
             console.log(err)

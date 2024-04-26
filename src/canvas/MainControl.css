@@ -1,0 +1,32 @@
+.MainControl {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    padding: 1%;
+}
+
+
+.Play,
+.SkipBackward,
+.SkipForward,
+.Shuffle,
+.Repeat {
+    padding-inline: 2%;
+    font-size: 25px;
+}
+
+.PlayButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 3px;
+    border-radius: 50%;
+}
+
+.ProgressBar {
+    display: flex;
+    flex-direction: row;
+}

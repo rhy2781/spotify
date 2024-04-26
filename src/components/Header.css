@@ -1,0 +1,58 @@
+.Header {
+    display: flex;
+    flex-direction: row;
+    padding: 1vmin;
+    align-items: flex-end;
+    max-width: 100%;
+
+    overflow: hidden;
+
+
+}
+
+.HeaderImage {
+    height: 150px;
+    width: 150px;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    position: relative;
+    z-index: 1;
+}
+
+.HeaderImage img {
+    height: 100%;
+}
+
+.HeaderPlayContainer {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    z-index: 5;
+}
+
+
+.HeaderPlay {
+    background-color: var(--green);
+    border-radius: 50%;
+    width: max-content;
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.HeaderDetails {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2vmin;
+    text-align: left;
+    justify-content: flex-end;
+}
+
+.HeaderMain {
+    font-size: 60px;
+    font-weight: bolder
+}

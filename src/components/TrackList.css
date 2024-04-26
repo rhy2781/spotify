@@ -1,0 +1,117 @@
+.Track {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.TrackNumber {
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+
+.TrackImageContainer {
+    flex-grow: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: inherit;
+}
+
+.TrackImageContainer img {
+    height: 100%;
+}
+
+.TrackMainDescription {
+    padding-left: 1vmin;
+
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: inherit;
+}
+
+.TrackName {
+    text-align: left;
+
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.TrackArtists {
+    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.TrackAlbumContainer {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    height: inherit;
+}
+
+.TrackAlbum {
+    text-align: left;
+    font-size: 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.TrackAlbum:hover {
+    text-decoration: underline;
+}
+
+.TrackDate {
+    height: inherit;
+    display: flex;
+    flex-grow: 1;
+    text-align: left;
+    align-items: center;
+}
+
+@media (max-width: 1300px) {
+    .TrackDate {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .TrackAlbumContainer {
+        display: none;
+    }
+}
+
+
+.TrackTimeContainer {
+    display: flex;
+    flex-grow: 0;
+    height: inherit;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.TrackTime {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ShowText {
+    display: flex;
+    align-items: flex-start;
+    padding: 1vmin;
+    padding-bottom: 2vmin;
+}

@@ -2,13 +2,15 @@ import { React, useState, useEffect } from "react";
 
 import './Canvas.css'
 
-import ProgressBar from "./trackProgress/TrackProgress";
-import Current from "./currentTrack/CurrentTrack";
-import MainControl from "./mainControl/MainControl";
-import SideControl from "./sideControl/SideControl";
-import Playlists from "./playlistPanel/PlaylistPanel";
-import MainContent from "./mainContent/MainContent";
+import TrackProgress from "./TrackProgress";
+import CurrentTrack from "./CurrentTrack";
+import MainControl from "./MainControl";
+import SideControl from "./SideControl";
+import MainContent from "./MainContent";
+import PlaylistPanel from "./PlaylistPanel";
+import NavigationPanel from "./NavgiationPanel";
 
+// default track
 const track = {
     name: "",
     album: {
@@ -21,15 +23,24 @@ const track = {
     ]
 }
 
-
+/**
+ * The Canvas component is the main component that is used for format of the web clone
+ * @param {Object} props 
+ * @param {String} props.token The OAuthToken used to interact with the Spotify Web Playback SDK
+ * @returns {JSX.Element}
+ */
 function Canvas(props) {
     // web playback
     const [player, setPlayer] = useState(undefined)
     const [active, setActive] = useState(false)
+
+
     const [device, setDevice] = useState(null)
 
     // state variables to manage controls
     const [pause, setPause] = useState(false)
+
+
     const [currentTrack, setCurrentTrack] = useState(track)
     const [shuffle, setShuffle] = useState(false)
     const [repeat, setRepeat] = useState(0)
@@ -42,20 +53,32 @@ function Canvas(props) {
     const [pageIndex, setPageIndex] = useState(0)
 
     /**
-     * @typedef {AddPageFunction} 
-     * @param {string} uri – the uri of the page the user wants to navigate to
-     * @return void
+     * @function
+     * @param {String} uri The string of the spotify uri
+     * @description Adds a page to the pages history state variable.
+     * @returns {void}
      */
     const addPage = (uri) => {
-        if (uri.localeCompare(pages[pageIndex]) == 0) return;
+        if (pages[pageIndex] === uri) return;
         setPages([...pages.slice(0, pageIndex + 1), uri])
         setPageIndex(pageIndex + 1)
     }
 
+    /**
+     * @function
+     * @description Decrements the current pointer in the page history by 1
+     * @returns {void}
+     */
     const prevPage = () => {
         if (pageIndex == 0) return
         setPageIndex(pageIndex - 1)
     }
+
+    /**
+     * @function
+     * @description Increments the current pointer in the page history by 1
+     * @returns {void}
+     */
     const nextPage = () => {
         if (pageIndex == pages.length - 1) return
         setPageIndex(pageIndex + 1)
@@ -70,6 +93,7 @@ function Canvas(props) {
         document.body.appendChild(script);
 
         window.onSpotifyWebPlaybackSDKReady = () => {
+
             const player = new window.Spotify.Player({
                 name: 'Web Playback Player -' + new Date().getTime(),
                 getOAuthToken: cb => cb(props.token),
@@ -127,6 +151,13 @@ function Canvas(props) {
         // eslint-disable-next-line
     }, []);
 
+
+    /**
+     * @async
+     * @function
+     * @description Request to transfer the playback of the Spotify Player to the current web app
+     * @returns {Promise<void>}
+     */
     const handleTransfer = async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/transfer`, {
             method: "POST",
@@ -141,47 +172,71 @@ function Canvas(props) {
     }
 
     /**
-     * @typedef {RequestFunction} 
-     * @param {string} uri - the string uri of the song to request to play
-     * @param {string} [offset] – optional, the number of to offset the play request
-     * @return void 
+     * @function
+     * @param {String} uri The string uri of a spotify object to play
+     * @param {Number} [offset] The number of tracks to offset the playing of an album or a playlist. 1-indexed
+     * @return {void}
      */
     const submitRequest = (uri, offset) => {
-        fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                uri: uri,
-                device: device,
-                offset: offset - 1
+        // if the uri is an artist then submit our request to /requestArtist without a offset value
+        if (uri.split(':')[1].localeCompare("artist") == 0) {
+            fetch(`${process.env.REACT_APP_BACKEND}/controls/requestArtist`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uri: uri,
+                    device: device
+                })
             })
-        })
-            .catch(err => {
-                console.log(err)
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+        // otherwise submit a request to /request with the offset value
+        // offset should be passed in as a 1-based indexed number
+        else {
+            fetch(`${process.env.REACT_APP_BACKEND}/controls/request`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uri: uri,
+                    device: device,
+                    offset: offset - 1
+                })
             })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 
+    // if the component is active, render the format of Canvas
     if (active) {
         return (
             <div className="Canvas">
                 <div className="Top">
-                    <div className="Playlists">
-                        <Playlists
+                    <div className="Panel">
+                        <NavigationPanel
                             addPage={addPage}
-                            pages={pages}
-                            pageIndex={pageIndex}
+                            currentPageUri={pages[pageIndex]}
+                        />
+                        <PlaylistPanel
+                            addPage={addPage}
+                            currentPageUri={pages[pageIndex]}
                         />
                     </div>
+
                     <div className="Content">
                         <MainContent
                             addPage={addPage}
-                            pages={pages}
-                            pageIndex={pageIndex}
                             prevPage={prevPage}
                             nextPage={nextPage}
                             submitRequest={submitRequest}
+                            currentPageUri={pages[pageIndex]}
                             currentTrack={currentTrack}
                         />
                     </div>
@@ -189,38 +244,40 @@ function Canvas(props) {
 
                 <div className="Bottom">
                     <div className="Current">
-                        <Current
-                            track={currentTrack}
+                        <CurrentTrack
                             addPage={addPage}
+                            currentTrack={currentTrack}
                         />
                     </div>
                     <div className="Controls">
                         <MainControl
+                            setPause={setPause}
                             player={player}
                             pause={pause}
                             shuffle={shuffle}
                             repeat={repeat}
-                            durationMS={durationMS}
-                            ms={progressMS}
                         />
-                        < ProgressBar
+                        < TrackProgress
+                            setPause={setPause}
                             player={player}
                             pause={pause}
                             durationMS={durationMS}
-                            ms={progressMS}
+                            progressMS={progressMS}
                         />
                     </div>
                     <div className="SideControls">
                         <SideControl
+                            setVolume={setVolume}
                             player={player}
                             volume={volume}
-                            setVolume={setVolume}
                         />
                     </div>
                 </div>
             </div>
         )
     }
+    // otherwise render a component to inform the user to transfer and provide the capability to transfer
+    // the playback to the browser
     else {
         return (
             <div className="NoPlayback">

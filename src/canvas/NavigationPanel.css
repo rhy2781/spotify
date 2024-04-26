@@ -1,0 +1,21 @@
+.NavigationPanel {
+    padding-bottom: 10px;
+}
+
+.NavigationContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background-color: var(--dark-gray);
+    border-radius: 10px;
+    font-size: 20px;
+    padding: var(--spacer);
+}
+
+.NavigationButton {
+    text-align: left;
+    width: calc(100% - 2 * var(--spacer));
+    border-radius: 10px;
+    padding: 10px;
+}

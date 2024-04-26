@@ -1,0 +1,65 @@
+{
+  album_type: 'single',
+  artists: [
+    {
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/artists/3iNL7rw7fpmysjZvhB8vi7',
+      id: '3iNL7rw7fpmysjZvhB8vi7',
+      name: 'MC Virgins',
+      type: 'artist',
+      uri: 'spotify:artist:3iNL7rw7fpmysjZvhB8vi7'
+    },
+    {
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/artists/3nIuVGstklsvoHOIvULcCe',
+      id: '3nIuVGstklsvoHOIvULcCe',
+      name: 'Yun Head',
+      type: 'artist',
+      uri: 'spotify:artist:3nIuVGstklsvoHOIvULcCe'
+    }
+  ],
+  available_markets: [],
+  copyrights: [
+    { text: '(C) 2020 MC Virgins', type: 'C' },
+    { text: '(P) 2020 MC Virgins', type: 'P' }
+  ],
+  external_ids: { upc: '196006511821' },
+  external_urls: { spotify: 'https://open.spotify.com/album/5db36PPlKbmmNubnutMJEx' },
+  genres: [],
+  href: 'https://api.spotify.com/v1/albums/5db36PPlKbmmNubnutMJEx',
+  id: '5db36PPlKbmmNubnutMJEx',
+  images: [
+    {
+      height: 640,
+      url: 'https://i.scdn.co/image/ab67616d0000b2733065f92e067a18d3a4e2ff3d',
+      width: 640
+    },
+    {
+      height: 300,
+      url: 'https://i.scdn.co/image/ab67616d00001e023065f92e067a18d3a4e2ff3d',
+      width: 300
+    },
+    {
+      height: 64,
+      url: 'https://i.scdn.co/image/ab67616d000048513065f92e067a18d3a4e2ff3d',
+      width: 64
+    }
+  ],
+  label: 'MC Virgins Catalog Takeover',
+  name: 'Trap Anthem',
+  popularity: 0,
+  release_date: '2020-02-25',
+  release_date_precision: 'day',
+  total_tracks: 1,
+  tracks: {
+    href: 'https://api.spotify.com/v1/albums/5db36PPlKbmmNubnutMJEx/tracks?offset=0&limit=50&locale=*',
+    items: [ [Object] ],
+    limit: 50,
+    next: null,
+    offset: 0,
+    previous: null,
+    total: 1
+  },
+  type: 'album',
+  uri: 'spotify:album:5db36PPlKbmmNubnutMJEx'
+}

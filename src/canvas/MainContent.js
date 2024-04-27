@@ -40,6 +40,18 @@ function MainContent(props) {
      * @param {Number[]} c The RGB Color array gained from the child components
      */
     const handleColorChange = (c) => {
+        var sum = 0
+        c.forEach((value) => sum += value)
+        console.log(sum)
+        if (sum >= 500) {
+            for (var i = 0; i < c.length; i++) {
+                c[i] -= 50
+            }
+        } else if (sum < 150) {
+            for (var i = 0; i < c.length; i++) {
+                c[i] += 50
+            }
+        }
         setColor(c)
     }
 
@@ -47,14 +59,19 @@ function MainContent(props) {
     return (
         <div
             className="MainContent"
-            style={{ backgroundImage: `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` }}
+            style={{ background: (page != "home" && page != "search") ? `linear-gradient(rgb(${color[0]}, ${color[1]}, ${color[2]}), #000000)` : "#141414" }}
         >
             <PageNavigation
                 prevPage={props.prevPage}
                 nextPage={props.nextPage}
             />
             <div className="MainContentView">
-                {page === "home" && <HomeView />}
+                {page === "home" && <HomeView
+                    addPage={props.addPage}
+                    submitRequest={props.submitRequest}
+                    currentTrack={props.currentTrack}
+
+                />}
                 {page === "search" && <SearchView />}
                 {page === "playlist" && <PlaylistView
                     onColorChange={handleColorChange}

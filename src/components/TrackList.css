@@ -44,6 +44,11 @@
     align-items: center;
 }
 
+.TrackName:hover{
+    text-decoration: underline;
+}
+
+
 .TrackArtists {
     text-align: left;
 

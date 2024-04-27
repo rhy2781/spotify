@@ -13,8 +13,6 @@ router.get('/', async (req, res) => {
     })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response)
-
             const tracks = response.tracks.items.map((element) => {
 
                 const min = Math.floor((element.duration_ms / 1000) / 60)

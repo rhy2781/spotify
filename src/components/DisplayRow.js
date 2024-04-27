@@ -16,9 +16,10 @@ import './DisplayRow.css'
  * @param {RowItem[]} props.data An array of objects representing items to display.
  * @param {Function} props.submitRequest Submits a request to play a desired spotify uri
  * @param {Function} props.addPage Adds a spotify uri string page history
+ * @param {boolean} props.circle Choose to display the image in a circle
  * @return {JSX.Element}
  */
-function RowContent(props) {
+function DisplayRow(props) {
 
     const [display, setDisplay] = useState([])
 
@@ -28,12 +29,12 @@ function RowContent(props) {
             return (
                 <div className={`RowItem${index + 1}`} key={index} onClick={() => props.addPage(element.uri)}>
                     <div className="Inner">
-                        <div className="Image">
+                        <div className="Image" style={{ "borderRadius": (props.circle == true) ? "50%" : "10px" }}>
                             <img src={element.image} />
-                            <div className={`PContainer${index + 1}`}>
-                                <div className="PlayIcon" onClick={(e) => e.stopPropagation()}>
-                                    <IoPlaySharp onClick={() => props.submitRequest(element.uri)} />
-                                </div>
+                        </div>
+                        <div className={`PContainer${index + 1}`}>
+                            <div className="PlayIcon" onClick={(e) => e.stopPropagation()}>
+                                <IoPlaySharp onClick={() => props.submitRequest(element.uri)} />
                             </div>
                         </div>
                         <div className="RowItemMainText">
@@ -65,4 +66,4 @@ function RowContent(props) {
     )
 }
 
-export default RowContent
+export default DisplayRow

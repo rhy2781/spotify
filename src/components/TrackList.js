@@ -57,7 +57,7 @@ function TrackList(props) {
                 <div className="Track"
                     key={element.uri}
                     style={{
-                        "padding": props.padding + "vmin",
+                        "padding": props.padding + "px",
                         "height": props.height + "px",
                         "color": element.uri.localeCompare(props.currentTrack.uri) == 0 ? "#44c767" : "white",
                     }}
@@ -87,7 +87,7 @@ function TrackList(props) {
                             "width": `calc(((100% - ${3 * props.height}px - 2vmin) / 5)* 2`
                         }}
                     >
-                        <div className="TrackName">
+                        <div className="TrackName" onClick={() => props.addPage(element.album_uri)}>
                             {element.name}
                         </div>
                         {element.artists &&

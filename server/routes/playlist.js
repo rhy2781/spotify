@@ -40,7 +40,6 @@ const getMore = async (more) => {
 
 router.use('/', async (req, res) => {
     const playlist_id = req.query.id;
-    console.log(`request received ${playlist_id}`);
     const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}`, {
         method: 'GET',
         headers: {
@@ -73,15 +72,13 @@ router.use('/', async (req, res) => {
             "track_number": element.track.track_number
         }
     })
-    // console.log(JSON.stringify(formatted, null, 2))
 
-
-    // var more = tracks.next;
-    // while (more != null) {
-    //     const temp = await getMore(more);
-    //     formatted = formatted.concat(temp[0])
-    //     more = temp[1];
-    // }
+    var more = tracks.next;
+    while (more != null) {
+        const temp = await getMore(more);
+        formatted = formatted.concat(temp[0])
+        more = temp[1];
+    }
 
     res.json({
         "name": playlist.name,

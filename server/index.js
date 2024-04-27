@@ -53,6 +53,9 @@ app.use('/playlists', playlists)
 const album = require('./routes/album')
 app.use('/album', album)
 
+const home = require('./routes/home')
+app.use('/home', home)
+
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)
 })

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PageNavigation from '../components/PageNavigation'
 import './ArtistView.css'
 import { IoPlaySharp } from "react-icons/io5";
-import RowContent from "../components/DisplayRow";
+import DisplayRow from "../components/DisplayRow";
 import TrackList from "../components/TrackList";
 import Header from "../components/Header";
 
@@ -96,7 +96,7 @@ function ArtistView(props) {
                             submitRequest={props.submitRequest}
                             split={true}
                             currentTrack={props.currentTrack}
-                            padding={1}
+                            padding={10}
                             height={70}
                         />
                     </div>
@@ -122,15 +122,15 @@ function ArtistView(props) {
                         </div>
                     </div>
                     <div className="ContentDisplay">
-                        {render == 0 && popularData && <RowContent data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
-                        {render == 1 && albumData && <RowContent data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
-                        {render == 2 && singleData && <RowContent data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                        {render == 0 && popularData && <DisplayRow data={popularData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                        {render == 1 && albumData && <DisplayRow data={albumData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                        {render == 2 && singleData && <DisplayRow data={singleData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                     </div>
                     <div className="ArtistHeading">
                         Appears On
                     </div>
                     <div className="ContentDisplay">
-                        {appearData && <RowContent data={appearData} addPage={props.addPage} submitRequest={props.submitRequest} />}
+                        {appearData && <DisplayRow data={appearData} addPage={props.addPage} submitRequest={props.submitRequest} />}
                     </div>
                 </div>
             }

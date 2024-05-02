@@ -3,13 +3,29 @@ import { React, useEffect, useState } from "react";
 import DisplayRow from "../components/DisplayRow";
 import TrackList from "../components/TrackList";
 import Button from '@mui/material/Button';
+
+import { createTheme, useTheme, ThemeProvider } from '@mui/material/styles';
+
 import { BarChart } from "@mui/x-charts";
 import { PieChart } from "@mui/x-charts/PieChart";
+
+import './HomeView.css'
 
 function HomeView(props) {
 
     const [artistData, setArtistData] = useState([])
     const [trackData, setTrackData] = useState([])
+
+    const [stats, setStats] = useState([ {"id": 1, "value": 10, "label": "sample"} ])
+
+    useEffect(async ()=>{
+        await fetch(`${process.env.REACT_APP_BACKEND}/home/statistics`)
+        .then((response) => response.json())
+        .then((response) => {setStats(response.data)
+            console.log(response.data)
+        })
+        .catch(err => console.log(err))
+    }, [])
 
 
     useEffect(async () => {
@@ -49,19 +65,25 @@ function HomeView(props) {
                 xAxis={[{ data: ['Q1', 'Q2', 'Q3', 'Q4'], scaleType: 'band' }]}
                 margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
                 />
-            <PieChart
-                series={[
-                    {
-                    data: [
-                        { id: 0, value: 10, label: 'series A' },
-                        { id: 1, value: 15, label: 'series B' },
-                        { id: 2, value: 20, label: 'series C' },
-                    ],
-                    },
-                ]}
-                width={400}
-                height={200}
+            <div className="pl">
+                <PieChart
+                    series={[
+                        {
+                        data:stats.map(item => ({ label: item.label, value: item.value })),
+                        highlightScope: { faded: 'global', highlighted: 'item' },
+                        faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+                        },
+                    ]}
+                    style={{
+                        backgroundColor: "white"
+                    }}
+                    labelStyle={{
+                        color: "white"
+                    }}
+
+                    height={200}
                 />
+            </div>
 
 
             <TrackList

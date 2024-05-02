@@ -19,7 +19,10 @@ var generateRandomString = function (length) {
 // request code through the spotify accounts service
 var stateCheck = ''
 router.get('/login', (req, res) => {
-    const scope = 'user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state playlist-read-private user-top-read'
+    const scope = `user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state 
+        playlist-read-private user-top-read user-read-recently-played
+
+    `
     var state = generateRandomString(16);
     var auth_query_parameters = new URLSearchParams({
         response_type: "code",

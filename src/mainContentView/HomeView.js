@@ -16,8 +16,9 @@ function HomeView(props) {
     const [artistData, setArtistData] = useState([])
     const [trackData, setTrackData] = useState([])
 
-    const [stats, setStats] = useState([ {"id": 1, "value": 10, "label": "sample"} ])
+    const [stats, setStats] = useState([])
 
+    // gather statistics for pie chart
     useEffect(async ()=>{
         await fetch(`${process.env.REACT_APP_BACKEND}/home/statistics`)
         .then((response) => response.json())
@@ -66,6 +67,8 @@ function HomeView(props) {
                 margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
                 />
             <div className="pl">
+                {Object.keys(stats).length > 1 
+                &&
                 <PieChart
                     series={[
                         {
@@ -83,6 +86,7 @@ function HomeView(props) {
 
                     height={200}
                 />
+                }
             </div>
 
 

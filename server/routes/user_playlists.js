@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
         .then((response) => response.json())
         .then((response) => {
             var temp = response.items
-                .filter(x => x.public === true)
+                .filter(x => x.public == true)
                 .map((x) => ({
                     href: x.href,
                     name: x.name,

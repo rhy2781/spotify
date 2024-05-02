@@ -79,21 +79,65 @@ router.get('/tracks', async (req, res) => {
  * 
  * 
  */
+
+
+const distinct_ids = []
+const occurrences = new Map();
+
+
 const getMore = async (more) => {
-
-}
-
-router.get('/statistics', (req, res) => {
-    const tag_data = new Map()
-
-    fetch('https://api.spotify.com/v1/me/player/recently-played', {
+    const response = await fetch(more, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
         }
     })
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
+
+        data.items.forEach(item => {
+            item.track.artists.forEach((artist) =>{
+                if(!distinct_ids.includes(artist.id)){
+                    distinct_ids.push(artist.id)
+                }
+            })
+        })
+        return data.next
+    })
+
+    return response
+
+
+};
+
+function flattenArray(arr) {
+    return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flattenArray(val)) : acc.concat(val), []);
+}
+
+router.get('/statistics', async (req, res) => {
+    const temp = await getMore('https://api.spotify.com/v1/me/player/recently-played?limit=50')
+    console.log(temp)
+    console.log(distinct_ids)
+    // res.json(flattenArray(temp))
+
+})
+
+module.exports = router;
+
+
+
+/// previous version
+/**const getMore = async () => {
+    try {
+        const response = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            }
+        });
+
+        const data = await response.json();
+
         const artistPromises = data.items.map(element => {
             return Promise.all(element.track.artists.map(artist => {
                 return fetch(artist.href, {
@@ -104,46 +148,18 @@ router.get('/statistics', (req, res) => {
                 })
                 .then(response => response.json())
                 .then(artistData => {
-                    artistData.genres.forEach(genre => {
-                        if(tag_data.has(genre)){
-                            tag_data.set(genre, tag_data.get(genre) + 1)
-                        }
-                        else{
-                            tag_data.set(genre, 1)
-                        }
-                    });
+                    return artistData.genres;
                 });
             }));
         });
 
-        return Promise.all(artistPromises);
-    })
-    .then(() => {
+        const tags = await Promise.all(artistPromises);
 
-
-        console.log(tag_data)
-        var data = []
-        var i = 0
-        tag_data.forEach((value, key) => {
-            data.push(
-                {
-                    "id": i,
-                    "value": value,
-                    "label": key
-                }
-            )
-            i += 1
-        })
-
-
-        res.json({"data": data});
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    });
-});
-
-
-
-module.exports = router;
+        // Flatten array of arrays into a single array
+        return {"tags": flattenArray(tags), "next": data.next}
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+};
+ */

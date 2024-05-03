@@ -81,9 +81,15 @@ router.get('/tracks', async (req, res) => {
  */
 
 
-const distinct_ids = []
-const occurrences = new Map();
+// stores distinct artists in top tracks
+const distinct_artists = []
+// stores artist occurrences in top tracks
+const artist_occurrences = new Map();
 
+// want to return 
+const tag_occurrences = new Map();
+// tags for artists
+const artist_genres = new Map()
 
 const getMore = async (more) => {
     const response = await fetch(more, {
@@ -94,32 +100,101 @@ const getMore = async (more) => {
     })
     .then((response) => response.json())
     .then((data) => {
+        console.log(data.items.length)
 
         data.items.forEach(item => {
-            item.track.artists.forEach((artist) =>{
-                if(!distinct_ids.includes(artist.id)){
-                    distinct_ids.push(artist.id)
+            item.artists.forEach((artist) =>{
+                if(!distinct_artists.includes(artist.id)){
+                    distinct_artists.push(artist.id)
+                }
+
+                if(artist_occurrences.has(artist.id)){
+                    artist_occurrences.set(artist.id, artist_occurrences.get(artist.id) + 1)
+                }
+                else{
+                    artist_occurrences.set(artist.id, 1)
                 }
             })
         })
         return data.next
     })
-
     return response
-
-
 };
 
-function flattenArray(arr) {
-    return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flattenArray(val)) : acc.concat(val), []);
+const getArtistGenres = async(start, end) =>{
+    var request = distinct_artists.slice(start, end)
+    console.log("request length -" + request.length)
+    var query = ''
+    request.forEach(element => {
+        query += element + ","
+    })
+
+    query = query.substring(0, query.length - 1)
+
+    
+    await fetch(`https://api.spotify.com/v1/artists?ids=${query}`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        data.artists.forEach((a) =>{
+            a.genres.forEach((g) =>{
+                if(tag_occurrences.has(g)){
+                    tag_occurrences.set(g, tag_occurrences.get(g) + artist_occurrences.get(a.id))
+                }
+                else{
+                    tag_occurrences.set(g, artist_occurrences.get(a.id))
+                }
+            })
+
+        })
+    })
 }
 
+const formatted = []
 router.get('/statistics', async (req, res) => {
-    const temp = await getMore('https://api.spotify.com/v1/me/player/recently-played?limit=50')
-    console.log(temp)
-    console.log(distinct_ids)
-    // res.json(flattenArray(temp))
+    if(formatted.length > 0) res.json({"data": formatted})
+    var counter = 1
 
+    // var next = await getMore('https://api.spotify.com/v1/me/player/recently-played')
+    var next = await getMore('https://api.spotify.com/v1/me/top/tracks?limit=50')
+
+    console.log("====")
+
+    console.log(next)
+    console.log("^^^^")
+    while(counter != 20){
+        var temp = await getMore(next) 
+        if(temp == null) break
+        next = temp
+        counter += 1
+    }
+
+    console.log(distinct_artists.length)
+    await getArtistGenres(0, 50) // todo iterate through all artists
+
+
+    console.log(tag_occurrences)
+
+    tag_occurrences.forEach((value, key) => {
+        formatted.push({"label": key, "value": value})
+    })
+
+    var sum = 0
+    tag_occurrences.forEach(value => {
+        sum += value;
+    })
+    console.log("tags" + sum)
+
+    sum = 0
+    artist_occurrences.forEach(value => {
+        sum += value;
+    })
+    console.log("artists" + sum)
+    res.json({"data": formatted})
 })
 
 module.exports = router;

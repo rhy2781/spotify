@@ -2,8 +2,20 @@
     background-color: var(--dark-gray);
 } */
 
-.pl {
-    color: gold;
-    /* text-decoration-color: white; */
-    /* background-color: white; */
+
+.Welcome{
+    display: flex;
+    flex-direction: row;
+    outline: red dotted 1px;
+    height: 500px;
+
+}
+.test{
+    outline: blue dotted 1px;
+    width: 100%;
+    justify-content: center;
+    height: 500px;
+}
+.test2{
+    width: min-content;
 }

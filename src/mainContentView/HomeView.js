@@ -9,14 +9,18 @@ import { createTheme, useTheme, ThemeProvider } from '@mui/material/styles';
 import { BarChart } from "@mui/x-charts";
 import { PieChart } from "@mui/x-charts/PieChart";
 
+import Box from '@mui/material/Box';
+import { LineChart } from '@mui/x-charts/LineChart';
+
 import './HomeView.css'
+
 
 function HomeView(props) {
 
     const [artistData, setArtistData] = useState([])
     const [trackData, setTrackData] = useState([])
 
-    const [stats, setStats] = useState([])
+    const [stats, setStats] = useState([{"label": "loading", "value": 10}])
 
     // gather statistics for pie chart
     useEffect(async ()=>{
@@ -46,6 +50,9 @@ function HomeView(props) {
     }, [])
 
 
+
+    const newTheme = createTheme({ palette: { mode: "dark" } });
+
     return (
         <div className="HomeView">
             <DisplayRow
@@ -54,39 +61,39 @@ function HomeView(props) {
                 submitRequest={props.submitRequest}
                 circle={true}
             />
-                  <Button variant="text">Text</Button>
-                  <BarChart
-                series={[
-                    { data: [35, 44, 24, 34] },
-                    { data: [51, 6, 49, 30] },
-                    { data: [15, 25, 30, 50] },
-                    { data: [60, 50, 15, 25] },
-                ]}
-                height={290}
-                xAxis={[{ data: ['Q1', 'Q2', 'Q3', 'Q4'], scaleType: 'band' }]}
-                margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
-                />
-            <div className="pl">
-                {Object.keys(stats).length > 1 
-                &&
-                <PieChart
-                    series={[
-                        {
-                        data:stats.map(item => ({ label: item.label, value: item.value })),
-                        highlightScope: { faded: 'global', highlighted: 'item' },
-                        faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-                        },
-                    ]}
-                    style={{
-                        backgroundColor: "white"
-                    }}
-                    labelStyle={{
-                        color: "white"
-                    }}
-
-                    height={200}
-                />
-                }
+            <div className="Welcome">
+                <div className="test">
+                    Welcome 
+                </div>
+                <div className="test2">
+                    <ThemeProvider theme={newTheme} >
+                        <PieChart
+                            series={[
+                                {
+                                    data: stats, 
+                                    highlightScope: { faded: 'global', highlighted: 'item' },
+                                    faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+                                    cy: '50%',
+                                    cx: '50%'
+                                }
+                            ]}
+                            slotProps={{
+                                legend: {
+                                    hidden: true
+                                },      
+                                "loading": true                          
+                            }}
+                            margin={
+                                {
+                                left: 50,
+                                right: 50
+                                }
+                            }
+                            height={500}
+                            width={500}
+                        />
+                    </ThemeProvider>
+                </div>
             </div>
 
 

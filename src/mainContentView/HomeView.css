@@ -8,6 +8,7 @@
     flex-direction: row;
     outline: red dotted 1px;
     height: 500px;
+    width: 100%;
 
 }
 .test{
@@ -17,5 +18,22 @@
     height: 500px;
 }
 .test2{
-    width: min-content;
+    min-width: 500px;
+    overflow: hidden;
+}
+
+.Tastes{
+    outline: blue dotted 1px;
+}
+
+.Pink{
+    outline: pink solid 1px;
+    opacity: 1;
+    height: 250px;
+}
+
+.Header{
+    padding-top: 10px;
+    font-size: 32px;
+    font-weight: bold;
 }

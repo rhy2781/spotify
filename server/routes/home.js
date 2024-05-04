@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const credentials = require('../credentials')
+const credentials = require('../credentials');
+const { GiConsoleController } = require('react-icons/gi');
 
 router.get('/', (req, res) => {
     res.send("temp");
@@ -88,8 +89,7 @@ const artist_occurrences = new Map();
 
 // want to return 
 const tag_occurrences = new Map();
-// tags for artists
-const artist_genres = new Map()
+const genre_to_artist = new Map()
 
 const getMore = async (more) => {
     const response = await fetch(more, {
@@ -121,9 +121,8 @@ const getMore = async (more) => {
     return response
 };
 
-const getArtistGenres = async(start, end) =>{
+const getArtistGenres = async(start, end) => {
     var request = distinct_artists.slice(start, end)
-    console.log("request length -" + request.length)
     var query = ''
     request.forEach(element => {
         query += element + ","
@@ -143,10 +142,12 @@ const getArtistGenres = async(start, end) =>{
         data.artists.forEach((a) =>{
             a.genres.forEach((g) =>{
                 if(tag_occurrences.has(g)){
+                    genre_to_artist.get(g).push(a.name)
                     tag_occurrences.set(g, tag_occurrences.get(g) + artist_occurrences.get(a.id))
                 }
                 else{
                     tag_occurrences.set(g, artist_occurrences.get(a.id))
+                    genre_to_artist.set(g, [a.name])
                 }
             })
 
@@ -154,47 +155,40 @@ const getArtistGenres = async(start, end) =>{
     })
 }
 
-const formatted = []
+let formattedData  = null
 router.get('/statistics', async (req, res) => {
-    if(formatted.length > 0) res.json({"data": formatted})
-    var counter = 1
-
-    // var next = await getMore('https://api.spotify.com/v1/me/player/recently-played')
-    var next = await getMore('https://api.spotify.com/v1/me/top/tracks?limit=50')
-
-    console.log("====")
-
-    console.log(next)
-    console.log("^^^^")
-    while(counter != 20){
-        var temp = await getMore(next) 
-        if(temp == null) break
-        next = temp
-        counter += 1
+    if(formattedData){
+        res.json({"data": formattedData.slice(0, 12)})
     }
+    else{
+        const formatted = []
+        var counter = 1
+        var next = await getMore('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term')
+        while(counter != 20){
+            var temp = await getMore(next) 
+            if(temp == null) break
+            next = temp
+            counter += 1
+        }
 
-    console.log(distinct_artists.length)
-    await getArtistGenres(0, 50) // todo iterate through all artists
 
+        // get genres for distinct artists
+        let start = -50
+        let end = -1
+        while(end < distinct_artists.length){
+            start += 50
+            end = Math.min(distinct_artists.length, end + 50)
+            await getArtistGenres(start, end)
+        }
 
-    console.log(tag_occurrences)
+        tag_occurrences.forEach((value, key) => {
+            formatted.push({"label": key, "value": value, artists: genre_to_artist.get(key).slice(0, 6)})
+        })
+        formatted.sort((a, b) => b["value"] - a["value"])
 
-    tag_occurrences.forEach((value, key) => {
-        formatted.push({"label": key, "value": value})
-    })
-
-    var sum = 0
-    tag_occurrences.forEach(value => {
-        sum += value;
-    })
-    console.log("tags" + sum)
-
-    sum = 0
-    artist_occurrences.forEach(value => {
-        sum += value;
-    })
-    console.log("artists" + sum)
-    res.json({"data": formatted})
+       formattedData = formatted
+        res.json({"data": formatted.slice(0, 12)})
+    }
 })
 
 module.exports = router;

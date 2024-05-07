@@ -47,9 +47,17 @@ function StatisticsView(){
         await fetch(`${process.env.REACT_APP_BACKEND}/home/recent`)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data.tracks.played_at)
+
+                var date_index = []
                 var dates = [] 
-                data.tracks.played_at.forEach((value) => dates.push(new Date(value)))
+                data.tracks.played_at.forEach((value, index) => {
+                    dates.push(new Date(Date.parse(value)))
+                    date_index.push(index)
+                })
                 setPlayedAt(dates)
+                console.log(date_index)
+                console.log(dates)
                 setData(data.tracks)
             })
             .catch(err => console.log(err))    
@@ -61,6 +69,7 @@ function StatisticsView(){
         res.push({data: trackData.energy, label: "energy", showMark: false})
         res.push({data: trackData.liveness, label: "liveness", showMark: false})
         setSeries1(res)
+
     }, [trackData])
 
     //update series2

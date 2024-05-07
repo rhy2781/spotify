@@ -219,7 +219,7 @@ const getRecentPlayedTracks = async() => {
     })
     .then((response) => response.json())
     .then((data) => {
-        const items = data.items.sort((a, b) => b.played_at - a.played_at)
+        const items = data.items.sort((a, b) => new Date(b.played_at) - new Date(a.played_at))
         items.forEach((element) => {
             trackData.set(element.track.id, {
                 "name": element.track.name,

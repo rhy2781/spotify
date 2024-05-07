@@ -195,14 +195,23 @@ router.get('/statistics', async (req, res) => {
 
 
 
-// get recently played tracks 50
-// get the id/time/name
-const recent_ids = [] // for query
-const recent_mappings = {}
 
-const getRecent = async(more) => {
+
+
+
+// map to record features and data associated with an id
+// id -> liveness, name, played_at, etc.
+const trackData = new Map()
+
+// list containing only 
+var queryList = []
+
+var recent_result = {}
+
+// get the last 50 played tracks
+const getRecentPlayedTracks = async() => {
     const recent =  []
-    const response = await fetch(more, {
+    const response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=50', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${credentials.getSpotifyToken()}`
@@ -210,13 +219,15 @@ const getRecent = async(more) => {
     })
     .then((response) => response.json())
     .then((data) => {
-        data.items.forEach((element) => {
-            recent_mappings[element.track.id] = {
+        const items = data.items.sort((a, b) => b.played_at - a.played_at)
+        items.forEach((element) => {
+            trackData.set(element.track.id, {
                 "name": element.track.name,
                 "id": element.track.id,
                 "played_at": element.played_at
-            }
-            recent_ids.push(element.track.id)
+            })
+
+            queryList.push({"id": element.track.id, "played_at": element.played_at})
         })
     })
     .catch(err => console.log(err))
@@ -225,10 +236,10 @@ const getRecent = async(more) => {
 }
 
 
-const getRecentAnalysis = async() => {
+const getAnalysisOnRecentTracks = async() => {
     var query = ''
-    recent_ids.forEach((id) => {
-        query += id + ','
+    queryList.forEach((element) => {
+        query += element.id + ','
     })
     query = query.substring(0, query.length - 1)
 
@@ -243,29 +254,64 @@ const getRecentAnalysis = async() => {
     .then((response) => response.json())
     .then((data) => {   
         data.audio_features.forEach((track) => {
-            recent_mappings[track.id]["features"] = {}
-            recent_mappings[track.id]["features"]["energy"] = track.energy
-            recent_mappings[track.id]["features"]["liveliness"] = track.liveliness
-            recent_mappings[track.id]["features"]["instrumentalness"] = track.instrumentalness
-            recent_mappings[track.id]["features"]["speechiness"] = track.speechiness
-            recent_mappings[track.id]["features"]["acousticness"] = track.acousticness
 
-            recent_mappings[track.id]["tempo"] = track.tempo
+            var temp = trackData.get(track.id)
+            temp["energy"] = track.energy
+            temp["liveness"] = track.liveness
+
+            temp["instrumentalness"] = track.instrumentalness
+            temp["speechiness"] = track.speechiness
+            temp["acousticness"] = track.acousticness
+
+            temp["tempo"] = track.tempo
         })
     })
 }
 
 
+// numbers should be sorted by a date time object
+// numbers appended in a sorted order
+
+/**
+{
+    energy: []
+    liveness: [] 
+    names: []
+    ...
+}
+*/
 
 router.get('/recent', async (req, res) => {
-    if(Object.keys(recent_mappings).length > 0){
-        res.send({"tracks": recent_mappings})
+    if(recent_result> 0){
+        res.send({"tracks": recent_result})
     }
     else{
-        var counter = 1
-        await getRecent('https://api.spotify.com/v1/me/player/recently-played?limit=50')
-        await getRecentAnalysis()
-        res.send({"tracks": recent_mappings})
+        // var counter = 1
+        // await getRecent('https://api.spotify.com/v1/me/player/recently-played?limit=50')
+        // await getRecentAnalysis()
+
+        await getRecentPlayedTracks()
+        await getAnalysisOnRecentTracks()
+        
+        queryList = queryList.sort((a, b) => a.played_at.localeCompare(b.played_at))
+
+
+        categories = ["energy", "liveness", "instrumentalness", "speechiness", "acousticness", "played_at", "tempo"]
+        categories.forEach((c) => recent_result[c] = [])
+
+        queryList.forEach((element) => {
+            var elementData = trackData.get(element.id)
+            recent_result["energy"].push(elementData["energy"])
+            recent_result["liveness"].push(elementData["liveness"])
+            recent_result["instrumentalness"].push(elementData["instrumentalness"])
+            recent_result["speechiness"].push(elementData["speechiness"])
+            recent_result["acousticness"].push(elementData["acousticness"])
+            recent_result["played_at"].push(elementData["played_at"])
+            recent_result["tempo"].push(elementData["tempo"])
+        })
+
+
+        res.send({"tracks": recent_result})
     }
 })
 

@@ -4,14 +4,15 @@ import DisplayRow from "../components/DisplayRow";
 import TrackList from "../components/TrackList";
 
 import { createTheme,ThemeProvider } from '@mui/material/styles';
-import { BarChart } from "@mui/x-charts";
 import { PieChart} from "@mui/x-charts/PieChart";
 import { useDrawingArea } from '@mui/x-charts/hooks';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { styled } from '@mui/material/styles';
 
-
 import './HomeView.css'
+import { GiConsoleController } from "react-icons/gi";
+
+import FeatureChart from "../components/FeatureChart";
 
 
 // PieCenter Label
@@ -39,7 +40,18 @@ function HomeView(props) {
     const [artistData, setArtistData] = useState([])
     const [trackData, setTrackData] = useState([])
 
-    const [stats, setStats] = useState([{"label": "loading", "value": 10, "artists": []}])
+    const [pieData, setPieData] = useState([{"label": "loading", "value": 10, "artists": []}])
+
+    const [audioFeaturesData, setAudioFeaturesData] = useState({})
+
+
+
+
+
+
+    const [energy, setEnergy] = useState([])
+    const [liveness, setLiveness] = useState([])
+    const [xLabels, setXLabels] = useState([])
 
     // gather statistics for pie chart
     // useEffect(async ()=>{
@@ -51,6 +63,33 @@ function HomeView(props) {
     //     .catch(err => console.log(err))
     // }, [])
 
+
+
+    // useEffect(async() =>{
+    //     const temp_energy = []
+    //     const temp_liveness = []
+    //     const temp_xLabels = []
+    //     await fetch(`${process.env.REACT_APP_BACKEND}/home/recent`)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+
+    //             data.tracks.forEach((track) => {
+    //                 temp_xLabels.push(track.id)
+    //                 temp_energy.push(track.energy)
+    //                 temp_liveness.push(track.liveness)
+    //             })
+
+    //             console.log(temp_xLabels)
+    //             console.log(temp_energy)
+    //             console.log(temp_liveness)
+
+                
+    //             setXLabels(temp_xLabels)
+    //             setEnergy(temp_energy)
+    //             setLiveness(temp_liveness)
+    //         })
+    //         .catch(err => console.log(err))    
+    // }, [])
 
     useEffect(async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/home/artists`)
@@ -72,6 +111,7 @@ function HomeView(props) {
 
     const newTheme = createTheme({ palette: { mode: "dark" } });
 
+
     return (
         <div className="HomeView">
             <div className="Welcome">
@@ -85,14 +125,14 @@ function HomeView(props) {
                             colors={['#476240', '#FF00FF', '#EDC8FF', '#FFC000', '#F5F5DC', '#40E0D0']}
                             series={[
                                 {
-                                    data: stats, 
+                                    data: pieData, 
                                     valueFormatter: (v, { dataIndex }) => {
-                                        let res = stats[dataIndex]["artists"]
+                                        let res = pieData[dataIndex]["artists"]
                                         let str = ''
                                         res.forEach(artist => str += artist + ", ")
                                         str = str.slice(0, str.length - 2)
 
-                                        if(stats.length > 1){
+                                        if(pieData.length > 1){
                                             return `Sample Artists include: ${str}`
                                         }
                                         return ""
@@ -119,30 +159,37 @@ function HomeView(props) {
                             width={500}
 
                             onItemClick={(event, d) => {
-                                console.log(JSON.stringify(stats[d.dataIndex], null, 2))
+                                console.log(JSON.stringify(pieData[d.dataIndex], null, 2))
                             }}
 
                             tooltip={{ trigger: 'item' }}
                         >
-                            {stats.length == 1 && <PieCenterLabel>Data is Loading...</PieCenterLabel>}
+                            {pieData.length == 1 && <PieCenterLabel>Data is Loading...</PieCenterLabel>}
                         </PieChart>
                     </ThemeProvider>
-                    <LineChart
-                        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-                        series={[
-                            {
-                            data: [2, 5.5, 2, 8.5, 1.5, 5],
-                            },
-                        ]}
-                        width={500}
-                        height={300}
-                    />
+
                 </div>
 
                 <div className="test">
                     Welcome 
                 </div>
             </div>
+            {/* <ThemeProvider theme={newTheme} >
+                <LineChart
+                    sx={{width: '100%'}}
+                    height={300}
+                    series={[
+                        { data: energy, label: 'energy' },
+                        { data: liveness, label: 'liveness' },
+                    ]}
+                    xAxis={[{ scaleType: 'point', data: xLabels }]}
+                />
+            </ThemeProvider>
+                */}
+
+            <FeatureChart />
+
+
 
             <div className="Header">
                 Your Top Artists

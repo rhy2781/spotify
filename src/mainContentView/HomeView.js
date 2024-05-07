@@ -54,42 +54,16 @@ function HomeView(props) {
     const [xLabels, setXLabels] = useState([])
 
     // gather statistics for pie chart
-    // useEffect(async ()=>{
-    //     await fetch(`${process.env.REACT_APP_BACKEND}/home/statistics`)
-    //     .then((response) => response.json())
-    //     .then((response) => {setStats(response.data)
-    //         console.log(response.data)
-    //     })
-    //     .catch(err => console.log(err))
-    // }, [])
+    useEffect(async ()=>{
+        await fetch(`${process.env.REACT_APP_BACKEND}/home/statistics`)
+        .then((response) => response.json())
+        .then((response) => {
+            setPieData(response.data)
+        })
+        .catch(err => console.log(err))
+    }, [])
 
 
-
-    // useEffect(async() =>{
-    //     const temp_energy = []
-    //     const temp_liveness = []
-    //     const temp_xLabels = []
-    //     await fetch(`${process.env.REACT_APP_BACKEND}/home/recent`)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-
-    //             data.tracks.forEach((track) => {
-    //                 temp_xLabels.push(track.id)
-    //                 temp_energy.push(track.energy)
-    //                 temp_liveness.push(track.liveness)
-    //             })
-
-    //             console.log(temp_xLabels)
-    //             console.log(temp_energy)
-    //             console.log(temp_liveness)
-
-                
-    //             setXLabels(temp_xLabels)
-    //             setEnergy(temp_energy)
-    //             setLiveness(temp_liveness)
-    //         })
-    //         .catch(err => console.log(err))    
-    // }, [])
 
     useEffect(async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/home/artists`)
@@ -174,18 +148,7 @@ function HomeView(props) {
                     Welcome 
                 </div>
             </div>
-            {/* <ThemeProvider theme={newTheme} >
-                <LineChart
-                    sx={{width: '100%'}}
-                    height={300}
-                    series={[
-                        { data: energy, label: 'energy' },
-                        { data: liveness, label: 'liveness' },
-                    ]}
-                    xAxis={[{ scaleType: 'point', data: xLabels }]}
-                />
-            </ThemeProvider>
-                */}
+
 
             <FeatureChart />
 

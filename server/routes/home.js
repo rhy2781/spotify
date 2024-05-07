@@ -299,7 +299,7 @@ router.get('/recent', async (req, res) => {
         categories = ["energy", "liveness", "instrumentalness", "speechiness", "acousticness", "played_at", "tempo"]
         categories.forEach((c) => recent_result[c] = [])
 
-        queryList.forEach((element) => {
+        queryList.forEach((element, index) => {
             var elementData = trackData.get(element.id)
             recent_result["energy"].push(elementData["energy"])
             recent_result["liveness"].push(elementData["liveness"])

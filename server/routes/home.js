@@ -163,7 +163,7 @@ router.get('/statistics', async (req, res) => {
     else{
         const formatted = []
         var counter = 1
-        var next = await getMore('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term')
+        var next = await getMore('https://api.spotify.com/v1/me/top/tracks?limit=50')
         while(counter != 20){
             var temp = await getMore(next) 
             if(temp == null) break
@@ -282,7 +282,7 @@ const getAnalysisOnRecentTracks = async() => {
 */
 
 router.get('/recent', async (req, res) => {
-    if(recent_result> 0){
+    if(Object.keys(recent_result).length > 0){
         res.send({"tracks": recent_result})
     }
     else{

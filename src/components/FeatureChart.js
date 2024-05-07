@@ -60,41 +60,32 @@ function FeatureChart(){
                 xAxis={[{ 
                     scaleType: 'time', 
                     data: trackData.played_at, 
-                    tickInterval: (time) => time.getHours() === 0,
+                    // tickInterval: (time) => time.getHours() === 0,
                 }]}
 
                 tooltip={false}
             />
-
-            <LineChart
-            xAxis={[{ data: [1, 2, 3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30] }]}
-            series={[
-                {
-                data:[1, 2, 3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-                },
-            ]}
-            width={500}
-            height={300}
-            />
             {/* </Stack> */}
-            {/* <LineChart
+            <LineChart
                 sx={{width: '100%'}}
-                height={300}
+                height={500}
                 series={[
-                    { data: trackData.instrumentalness, label: 'instrumentalness'},
-                    { data: trackData.speechiness, label: 'speechiness'},
-                    { data: trackData.acousticness, label: 'acousticness'}
+                    { data: trackData.instrumentalness, label: 'instrumentalness', showMark:false},
+                    { data: trackData.speechiness, label: 'speechiness',showMark:false},
+                    { data: trackData.acousticness, label: 'acousticness', showMark:false}
                 ]}
-                xAxis={[{ scaleType: 'point', data: trackData.played_at }]}
+                xAxis={[{ 
+                    scaleType: 'time', 
+                    data: trackData.played_at }]}
             />
             <LineChart
                 sx={{width: '100%'}}
                 height={500}
                 series={[
-                    { data: trackData.tempo, label: 'tempo'}
+                    { data: trackData.tempo, label: 'tempo', showMark:false}
                 ]}
-                xAxis={[{ scaleType: 'point', data: trackData.played_at }]}
-            /> */}
+                xAxis={[{ scaleType: 'time', data: trackData.played_at }]}
+            />
         </ThemeProvider>
         </div>
     )

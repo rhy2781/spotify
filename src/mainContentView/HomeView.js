@@ -148,6 +148,9 @@ function HomeView(props) {
                     Welcome 
                 </div>
             </div>
+            <div className="Header">
+                Your Recent Listening Trends
+            </div>
 
 
             <FeatureChart />

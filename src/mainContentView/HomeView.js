@@ -149,15 +149,6 @@ function HomeView(props) {
                 </div>
             </div>
             <div className="Header">
-                Your Recent Listening Trends
-            </div>
-
-
-            <FeatureChart />
-
-
-
-            <div className="Header">
                 Your Top Artists
             </div>
             <DisplayRow

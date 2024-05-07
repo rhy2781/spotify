@@ -8,6 +8,7 @@ import HomeView from "../mainContentView/HomeView"
 import ArtistView from "../mainContentView/ArtistView"
 import AlbumView from "../mainContentView/AlbumView"
 import SearchView from "../mainContentView/SearchView"
+import StatisticsView from "../mainContentView/StatisticsView"
 
 /**
  * Renders the main content of the page based on the uri of the current page
@@ -100,6 +101,7 @@ function MainContent(props) {
                     submitRequest={props.submitRequest}
                     currentTrack={props.currentTrack}
                 />}
+                {page == "statistics" && <StatisticsView />}
             </div>
         </div>
     )

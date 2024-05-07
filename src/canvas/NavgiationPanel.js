@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./NavigationPanel.css"
-import { IoHome, IoSearch } from "react-icons/io5";
+import { IoHome, IoSearch, IoStatsChart } from "react-icons/io5";
 
 
 function NavigationPanel(props) {
@@ -26,6 +26,17 @@ function NavigationPanel(props) {
                 >
                     <IoSearch /> Search
                 </div>
+
+                <div
+                    className="NavigationButton"
+                    onClick={() => props.addPage("spotify:statistics")}
+                    style={{
+                        "backgroundColor": props.currentPageUri === "spotify:statistics" ? "gray" : ""
+                    }}
+                >
+                    <IoStatsChart /> Statistics
+                </div>
+                
             </div>
         </div >
     )

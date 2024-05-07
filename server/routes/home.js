@@ -3,6 +3,7 @@ const router = express.Router()
 
 const credentials = require('../credentials');
 const { GiConsoleController } = require('react-icons/gi');
+const { GrSystem } = require('react-icons/gr');
 
 router.get('/', (req, res) => {
     res.send("temp");
@@ -100,7 +101,6 @@ const getMore = async (more) => {
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log(data.items.length)
 
         data.items.forEach(item => {
             item.artists.forEach((artist) =>{
@@ -191,44 +191,83 @@ router.get('/statistics', async (req, res) => {
     }
 })
 
-module.exports = router;
 
 
 
-/// previous version
-/**const getMore = async () => {
-    try {
-        const response = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
+
+// get recently played tracks 50
+// get the id/time/name
+const recent_ids = [] // for query
+const recent_mappings = {}
+
+const getRecent = async(more) => {
+    const recent =  []
+    const response = await fetch(more, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        data.items.forEach((element) => {
+            recent_mappings[element.track.id] = {
+                "name": element.track.name,
+                "id": element.track.id,
+                "played_at": element.played_at
+            }
+            recent_ids.push(element.track.id)
+        })
+    })
+    .catch(err => console.log(err))
+
+    return recent
+}
+
+
+const getRecentAnalysis = async() => {
+    var query = ''
+    recent_ids.forEach((id) => {
+        query += id + ','
+    })
+    query = query.substring(0, query.length - 1)
+
+    const response = await fetch(`https://api.spotify.com/v1/audio-features?ids=${query}`,
+        {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${credentials.getSpotifyToken()}`
             }
-        });
+        }
+    )
+    .then((response) => response.json())
+    .then((data) => {   
+        data.audio_features.forEach((track) => {
+            recent_mappings[track.id]["features"] = {}
+            recent_mappings[track.id]["features"]["energy"] = track.energy
+            recent_mappings[track.id]["features"]["liveliness"] = track.liveliness
+            recent_mappings[track.id]["features"]["instrumentalness"] = track.instrumentalness
+            recent_mappings[track.id]["features"]["speechiness"] = track.speechiness
+            recent_mappings[track.id]["features"]["acousticness"] = track.acousticness
 
-        const data = await response.json();
+            recent_mappings[track.id]["tempo"] = track.tempo
+        })
+    })
+}
 
-        const artistPromises = data.items.map(element => {
-            return Promise.all(element.track.artists.map(artist => {
-                return fetch(artist.href, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${credentials.getSpotifyToken()}`
-                    }
-                })
-                .then(response => response.json())
-                .then(artistData => {
-                    return artistData.genres;
-                });
-            }));
-        });
 
-        const tags = await Promise.all(artistPromises);
 
-        // Flatten array of arrays into a single array
-        return {"tags": flattenArray(tags), "next": data.next}
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
+router.get('/recent', async (req, res) => {
+    if(Object.keys(recent_mappings).length > 0){
+        res.send({"tracks": recent_mappings})
     }
-};
- */
+    else{
+        var counter = 1
+        await getRecent('https://api.spotify.com/v1/me/player/recently-played?limit=50')
+        await getRecentAnalysis()
+        res.send({"tracks": recent_mappings})
+    }
+})
+
+
+module.exports = router;

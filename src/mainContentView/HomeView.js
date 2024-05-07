@@ -2,18 +2,36 @@ import { React, useEffect, useState } from "react";
 
 import DisplayRow from "../components/DisplayRow";
 import TrackList from "../components/TrackList";
-import Button from '@mui/material/Button';
 
-import { createTheme, useTheme, ThemeProvider } from '@mui/material/styles';
-
+import { createTheme,ThemeProvider } from '@mui/material/styles';
 import { BarChart } from "@mui/x-charts";
-import { PieChart } from "@mui/x-charts/PieChart";
-
-import Box from '@mui/material/Box';
-import { Typography } from "@mui/material";
+import { PieChart} from "@mui/x-charts/PieChart";
+import { useDrawingArea } from '@mui/x-charts/hooks';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { styled } from '@mui/material/styles';
+
 
 import './HomeView.css'
+
+
+// PieCenter Label
+const StyledText = styled('text')(({ theme }) => ({
+    fill: theme.palette.text.primary,
+    textAnchor: 'middle',
+    dominantBaseline: 'central',
+    fontSize: 20,
+  }));
+  
+function PieCenterLabel({ children }) {
+    const { width, height, left, top } = useDrawingArea();
+    return (
+      <StyledText x={left + width / 2} y={top + height / 2}>
+        {children}
+      </StyledText>
+    );
+}
+
+
 
 
 function HomeView(props) {
@@ -24,14 +42,14 @@ function HomeView(props) {
     const [stats, setStats] = useState([{"label": "loading", "value": 10, "artists": []}])
 
     // gather statistics for pie chart
-    useEffect(async ()=>{
-        await fetch(`${process.env.REACT_APP_BACKEND}/home/statistics`)
-        .then((response) => response.json())
-        .then((response) => {setStats(response.data)
-            console.log(response.data)
-        })
-        .catch(err => console.log(err))
-    }, [])
+    // useEffect(async ()=>{
+    //     await fetch(`${process.env.REACT_APP_BACKEND}/home/statistics`)
+    //     .then((response) => response.json())
+    //     .then((response) => {setStats(response.data)
+    //         console.log(response.data)
+    //     })
+    //     .catch(err => console.log(err))
+    // }, [])
 
 
     useEffect(async () => {
@@ -74,7 +92,10 @@ function HomeView(props) {
                                         res.forEach(artist => str += artist + ", ")
                                         str = str.slice(0, str.length - 2)
 
-                                        return `Sample Artists include: ${str}`
+                                        if(stats.length > 1){
+                                            return `Sample Artists include: ${str}`
+                                        }
+                                        return ""
                                       },
                                     outerRadius: '200px',
                                     highlightScope: { faded: 'global', highlighted: 'item' },
@@ -102,9 +123,20 @@ function HomeView(props) {
                             }}
 
                             tooltip={{ trigger: 'item' }}
-
-                        />
+                        >
+                            {stats.length == 1 && <PieCenterLabel>Data is Loading...</PieCenterLabel>}
+                        </PieChart>
                     </ThemeProvider>
+                    <LineChart
+                        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                        series={[
+                            {
+                            data: [2, 5.5, 2, 8.5, 1.5, 5],
+                            },
+                        ]}
+                        width={500}
+                        height={300}
+                    />
                 </div>
 
                 <div className="test">

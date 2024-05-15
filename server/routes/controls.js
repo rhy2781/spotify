@@ -11,7 +11,7 @@ router.post('/shuffle', (req, res) => {
         fetch('http://api.spotify.com/v1/me/player/shuffle?state=false', {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}`
             }
         })
     }
@@ -19,7 +19,7 @@ router.post('/shuffle', (req, res) => {
         fetch('http://api.spotify.com/v1/me/player/shuffle?state=true', {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}`
             }
         })
     }
@@ -33,7 +33,7 @@ router.post('/repeat', (req, res) => {
         fetch('https://api.spotify.com/v1/me/player/repeat?state=context', {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}`
             }
         })
     }
@@ -41,7 +41,7 @@ router.post('/repeat', (req, res) => {
         fetch('https://api.spotify.com/v1/me/player/repeat?state=track', {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}`
             }
         })
     }
@@ -49,7 +49,7 @@ router.post('/repeat', (req, res) => {
         fetch('https://api.spotify.com/v1/me/player/repeat?state=off', {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}}`
             }
         })
     }
@@ -77,7 +77,7 @@ router.post('/request', (req, res) => {
     fetch(`https://api.spotify.com/v1/me/player/play?${device}`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`,
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -113,7 +113,7 @@ router.post('/requestArtist', (req, res) => {
     fetch(`https://api.spotify.com/v1/me/player/play?${device}`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`,
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({

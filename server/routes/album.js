@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     await fetch(`https://api.spotify.com/v1/albums/${album_id}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     })
         .then((response) => response.json())

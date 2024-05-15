@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     await fetch('https://api.spotify.com/v1/me', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()} `
+            'Authorization': `Bearer ${credentials.get_spotify_token()} `
         }
     })
         .then((response) => response.json())
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     await fetch(`https://api.spotify.com/v1/users/${id}/playlists`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     })
         .then((response) => response.json())

@@ -16,24 +16,47 @@ app.set('query parser',
 )
 
 /**
- * Authentication routes
+ * Authentication Routes
+ * 
+ * GET
+ * /auth/login
+ * redirect the user to login to their spotify account 
+ * 
+ * GET
+ * /auth/callback
+ * exchange code sent to front end from spotify accounts service to get token for api/playback use
+ * 
+ * GET
+ * /auth/refresh
+ * requests a new token from the spotify accounts service providing 
+ * 1. the client_id and client_secret in base64 encoding
+ * 2. the refresh token from the initial token generation
+ * 
+ * 
+ * GET
+ * /auth/token
+ * return the token used for interaction with the spotify api/playback
  */
-const auth = require('./routes/auth')
-app.use('/auth', auth)
+app.use('/auth', require('./routes/auth'))
 
-// test route
-const credentials = require('./credentials')
-app.get('/test', (req, res) => {
-    res.json({
-        'client_id': credentials.getSpotifyClientId(),
-        'client_secret': credentials.getSpotifyClientSecret(),
-        'redirect_uri': credentials.getRedirectUri(),
-    })
-})
+/**
+ * Transfer Route
+ * 
+ * POST 
+ * /transfer
+ * body: {"device": device}
+ * submit request to spotify api to transfer playback to current browser
+ */
+app.use('/transfer', require('./routes/transfer'))
 
 
-const transfer = require('./routes/transfer')
-app.use('/transfer', transfer)
+
+app.use('/album', require('./routes/album'))
+
+
+
+
+
 
 
 const controls = require('./routes/controls')
@@ -50,8 +73,7 @@ const playlists = require('./routes/playlist')
 app.use('/playlists', playlists)
 
 
-const album = require('./routes/album')
-app.use('/album', album)
+
 
 const home = require('./routes/home')
 app.use('/home', home)

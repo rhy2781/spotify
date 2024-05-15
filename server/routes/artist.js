@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}`
             }
         })
         .then((response) => response.json())
@@ -37,7 +37,7 @@ router.get('/tracks', async (req, res) => {
         {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                'Authorization': `Bearer ${credentials.get_spotify_token()}`
             }
         })
         .then((response) => response.json())
@@ -68,7 +68,7 @@ router.get('/popular', async (req, res) => {
     await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     })
         .then((response) => response.json())
@@ -87,7 +87,7 @@ router.get('/popular', async (req, res) => {
             await fetch(`https://api.spotify.com/v1/albums?${ids}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                    'Authorization': `Bearer ${credentials.get_spotify_token()}`
                 }
             })
                 .then((response) => response.json())
@@ -113,7 +113,7 @@ router.get('/albums', async (req, res) => {
     await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=album`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     })
         .then((response) => response.json())
@@ -139,7 +139,7 @@ router.get('/singles', async (req, res) => {
     await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=single`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     })
         .then((response) => response.json())
@@ -165,7 +165,7 @@ router.get('/appear', async (req, res) => {
     await fetch(`https://api.spotify.com/v1/artists/${artist_id}/albums?include_groups=appears_on`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     })
         .then((response) => response.json())

@@ -8,7 +8,7 @@ const getMore = async (more) => {
     const response = await fetch(more, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     });
     const data = await response.json();
@@ -43,7 +43,7 @@ router.use('/', async (req, res) => {
     const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            'Authorization': `Bearer ${credentials.get_spotify_token()}`
         }
     });
     const playlist = await response.json();
@@ -53,7 +53,7 @@ router.use('/', async (req, res) => {
     var formatted = tracks.items.map((element) => {
         const min = Math.floor((element.track.duration_ms / 1000) / 60)
         const sec = Math.floor((element.track.duration_ms / 1000) % 60).toString().padStart(2, '0')
-        
+
         return {
             "added_at": element.added_at,
             "album_name": element.track.album.name,

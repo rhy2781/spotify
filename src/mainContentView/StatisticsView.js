@@ -44,7 +44,7 @@ function StatisticsView(){
 
     // query backend for the data
     useEffect(async() => {
-        await fetch(`${process.env.REACT_APP_BACKEND}/home/recent`)
+        await fetch(`${process.env.REACT_APP_BACKEND}/stats/recent`)
             .then((response) => response.json())
             .then((data) => {
                 var dates = [] 

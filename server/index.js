@@ -49,13 +49,35 @@ app.use('/auth', require('./routes/auth'))
  */
 app.use('/transfer', require('./routes/transfer'))
 
+/**
+ * API Routes for HomeView.js
+ * 
+ * GET
+ * /home/artists
+ * get the top artists for the user by popularity
+ * 
+ * GET
+ * /home/tracks
+ * get the top 50 tracks played by the user
+ * 
+ * GET
+ * /home/statistics
+ * get the tags counts for the most played top 500 tracks played for by the user
+ * the top 12 tags are returned to allow the pie chart to display without lagging the browser
+ * 
+ * GET 
+ * /home/recent
+ * TODO: in progress
+ * 
+ */
+app.use('/home', require('./routes/home'))
 
 
 app.use('/album', require('./routes/album'))
 
 
 
-
+app.use('/stats', require('./routes/stats'))
 
 
 
@@ -75,8 +97,7 @@ app.use('/playlists', playlists)
 
 
 
-const home = require('./routes/home')
-app.use('/home', home)
+
 
 app.listen(port, () => {
     console.log(`Application listening on port ${port}`)

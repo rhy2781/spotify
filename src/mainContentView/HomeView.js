@@ -40,7 +40,7 @@ function HomeView(props) {
     useEffect(async () => {
         await fetch(`${process.env.REACT_APP_BACKEND}/home/artists`)
             .then((response) => response.json())
-            .then((response) => setArtistData(response.items))
+            .then((response) => setArtistData(response.artists))
             .catch(err => console.log(err))
     }, [])
 
@@ -48,7 +48,7 @@ function HomeView(props) {
         await fetch(`${process.env.REACT_APP_BACKEND}/home/tracks`)
             .then((response) => response.json())
             .then((response) => {
-                setTrackData(response.items)
+                setTrackData(response.tracks)
             })
             .catch(err => console.log(err))
     }, [])

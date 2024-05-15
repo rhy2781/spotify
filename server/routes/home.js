@@ -199,14 +199,7 @@ router.get('/statistics', async (req, res) => {
 
 
 
-// map to record features and data associated with an id
-// id -> liveness, name, played_at, etc.
-const trackData = new Map()
 
-// list containing only 
-var queryList = []
-
-var recent_result = {}
 
 // get the last 50 played tracks
 const getRecentPlayedTracks = async() => {
@@ -221,13 +214,13 @@ const getRecentPlayedTracks = async() => {
     .then((data) => {
         const items = data.items.sort((a, b) => new Date(b.played_at).getTime() - new Date(a.played_at).getTime())
         items.forEach((element) => {
-            trackData.set(element.track.id, {
+            track_features.set(element.track.id, {
                 "name": element.track.name,
                 "id": element.track.id,
                 "played_at": element.played_at
             })
 
-            queryList.push({"id": element.track.id, "played_at": element.played_at})
+            query_id_list.push({"id": element.track.id, "played_at": element.played_at})
         })
     })
     .catch(err => console.log(err))
@@ -238,7 +231,7 @@ const getRecentPlayedTracks = async() => {
 
 const getAnalysisOnRecentTracks = async() => {
     var query = ''
-    queryList.forEach((element) => {
+    query_id_list.forEach((element) => {
         query += element.id + ','
     })
     query = query.substring(0, query.length - 1)
@@ -255,7 +248,7 @@ const getAnalysisOnRecentTracks = async() => {
     .then((data) => {   
         data.audio_features.forEach((track) => {
 
-            var temp = trackData.get(track.id)
+            var temp = track_features.get(track.id)
             temp["energy"] = track.energy
             temp["liveness"] = track.liveness
 
@@ -267,6 +260,13 @@ const getAnalysisOnRecentTracks = async() => {
         })
     })
 }
+
+
+
+
+
+
+
 
 
 // numbers should be sorted by a date time object
@@ -281,46 +281,83 @@ const getAnalysisOnRecentTracks = async() => {
 }
 */
 
+const track_features = new Map()
+var sorted_id_list = [] // id and played_at
+var result = {}
 router.get('/recent', async (req, res) => {
-    if(Object.keys(recent_result).length > 0){
-        res.send({"tracks": recent_result})
+    if(Object.keys(result).length > 0){
+        res.send({"tracks": result})
     }
     else{
-        // var counter = 1
-        // await getRecent('https://api.spotify.com/v1/me/player/recently-played?limit=50')
-        // await getRecentAnalysis()
+        // fetch top 50 recently played tracks
+        await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=50', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            var items = data.items.sort((a, b) => new Date(a.played_at).getTime() - new Date(b.played_at).getTime())
+            items.forEach((element) => {
+                track_features.set(element.track.id, {
+                    "name": element.track.name,
+                    "id": element.track.id,
+                })
+                sorted_id_list.push({"id": element.track.id, "played_at": element.played_at})
+            })
+        })
+        .catch(err => console.log(err))
 
-        await getRecentPlayedTracks()
-        await getAnalysisOnRecentTracks()
-        
-        // queryList = queryList.sort((a, b) => a.played_at.localeCompare(b.played_at))
+
+        // construct queries for unique track ids
+        var query = ''
+        track_features.forEach((data, id) => {
+            query += id + ","
+        })
+        query = query.substring(0, query.length - 1)
 
 
-        console.log(queryList)
-        queryList = queryList.sort((a, b) => new Date(b.played_at).getTime() - new Date(a.played_at).getTime())
-
-
-
-        categories = ["energy", "liveness", "instrumentalness", "speechiness", "acousticness", "played_at", "tempo"]
-        categories.forEach((c) => recent_result[c] = [])
-
-        queryList.forEach((element, index) => {
-            var elementData = trackData.get(element.id)
-            recent_result["energy"].push(elementData["energy"])
-            recent_result["liveness"].push(elementData["liveness"])
-            recent_result["instrumentalness"].push(elementData["instrumentalness"])
-            recent_result["speechiness"].push(elementData["speechiness"])
-            recent_result["acousticness"].push(elementData["acousticness"])
-            recent_result["played_at"].push(elementData["played_at"])
-            // recent_result["played_at"].push(index)
-
-            recent_result["tempo"].push(elementData["tempo"])
+        // request data for unique track ids
+        await fetch(`https://api.spotify.com/v1/audio-features?ids=${query}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${credentials.getSpotifyToken()}`
+                }
+            }
+        )
+        .then((response) => response.json())
+        .then((data) => {   
+            data.audio_features.forEach((track) => {
+                var track_data = track_features.get(track.id)
+                track_data["energy"] = track.energy
+                track_data["liveness"] = track.liveness
+                track_data["instrumentalness"] = track.instrumentalness
+                track_data["speechiness"] = track.speechiness
+                track_data["acousticness"] = track.acousticness
+                track_data["tempo"] = track.tempo
+            })
         })
 
-        console.log(recent_result.played_at)
+        // assign categories to results as empty arrays
+        categories = ["energy", "liveness", "instrumentalness", "speechiness", "acousticness", "played_at", "tempo"]
+        categories.forEach((c) => result[c] = [])
 
+        // append data in sorted order
+        sorted_id_list.forEach((track) => {
+            var track_data = track_features.get(track.id)
+            result["energy"].push(track_data["energy"])
+            result["liveness"].push(track_data["liveness"])
+            result["instrumentalness"].push(track_data["instrumentalness"])
+            result["speechiness"].push(track_data["speechiness"])
+            result["acousticness"].push(track_data["acousticness"])
+            result["tempo"].push(track_data["tempo"])
 
-        res.send({"tracks": recent_result})
+            result["played_at"].push(track.played_at)
+        })
+
+        res.send({"tracks": result})
     }
 })
 

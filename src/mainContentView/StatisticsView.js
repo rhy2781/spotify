@@ -47,14 +47,17 @@ function StatisticsView(){
         await fetch(`${process.env.REACT_APP_BACKEND}/home/recent`)
             .then((response) => response.json())
             .then((data) => {
+                var dates = [] 
+                data.tracks.played_at.forEach((date) => dates.push(new Date(date)))
+                setPlayedAt(dates)
                 // console.log(data)
                 // data.tracks.sort( (a, b) => new Date(a.played_at).getTime() - new Date(b.played_at).getTime())
-                var dates = [] 
-                data.tracks.played_at.forEach((value, index) => {
-                    dates.push(new Date(value).getTime())
-                })
+                // var dates = [] 
+                // data.tracks.played_at.forEach((value, index) => {
+                //     dates.push(new Date(value))
+                // })
                 // console.log(dates)
-                setPlayedAt(dates)
+                // setPlayedAt(dates)
                 setData(data.tracks)
             })
             .catch(err => console.log(err))    

@@ -89,10 +89,6 @@ function HomeView(props) {
                 submitRequest={props.submitRequest}
                 addPage={props.addPage}
             />
-
-            <div>
-                This is the home view
-            </div>
         </div>
     )
 }

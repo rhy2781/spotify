@@ -219,7 +219,7 @@ const getRecentPlayedTracks = async() => {
     })
     .then((response) => response.json())
     .then((data) => {
-        const items = data.items.sort((a, b) => new Date(b.played_at) - new Date(a.played_at))
+        const items = data.items.sort((a, b) => new Date(b.played_at).getTime() - new Date(a.played_at).getTime())
         items.forEach((element) => {
             trackData.set(element.track.id, {
                 "name": element.track.name,
@@ -293,7 +293,12 @@ router.get('/recent', async (req, res) => {
         await getRecentPlayedTracks()
         await getAnalysisOnRecentTracks()
         
-        queryList = queryList.sort((a, b) => a.played_at.localeCompare(b.played_at))
+        // queryList = queryList.sort((a, b) => a.played_at.localeCompare(b.played_at))
+
+
+        console.log(queryList)
+        queryList = queryList.sort((a, b) => new Date(b.played_at).getTime() - new Date(a.played_at).getTime())
+
 
 
         categories = ["energy", "liveness", "instrumentalness", "speechiness", "acousticness", "played_at", "tempo"]
@@ -307,8 +312,12 @@ router.get('/recent', async (req, res) => {
             recent_result["speechiness"].push(elementData["speechiness"])
             recent_result["acousticness"].push(elementData["acousticness"])
             recent_result["played_at"].push(elementData["played_at"])
+            // recent_result["played_at"].push(index)
+
             recent_result["tempo"].push(elementData["tempo"])
         })
+
+        console.log(recent_result.played_at)
 
 
         res.send({"tracks": recent_result})
@@ -316,4 +325,23 @@ router.get('/recent', async (req, res) => {
 })
 
 
+
+
+// todo
+router.get('/queue', async(req, res) => {
+    const response = await fetch('https://api.spotify.com/v1/me/player/queue',
+    {
+        method: 'GET',
+        headers: {
+            'Authorization' : `Bearer ${credentials.getSpotifyToken()}`
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data)
+        return data
+    })
+
+    res.send({"queue": response})
+})
 module.exports = router;

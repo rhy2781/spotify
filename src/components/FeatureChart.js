@@ -20,7 +20,7 @@ function FeatureChart(props){
                 height={500}
                 series={props.data}
                 xAxis={[{ 
-                    scaleType: 'time', 
+                    scaleType: 'utc', 
                     data: props.playedAt }]}
             />
         </ThemeProvider>

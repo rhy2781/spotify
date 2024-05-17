@@ -203,20 +203,7 @@ router.get('/statistics', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
 // TODO: still yet to be fully implemented
-
-
-
-
-
-// todo
 router.get('/queue', async (req, res) => {
     const response = await fetch('https://api.spotify.com/v1/me/player/queue',
         {

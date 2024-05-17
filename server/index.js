@@ -66,11 +66,23 @@ app.use('/transfer', require('./routes/transfer'))
  * the top 12 tags are returned to allow the pie chart to display without lagging the browser
  * 
  * GET 
- * /home/recent
+ * /home/queue
  * TODO: in progress
- * 
  */
 app.use('/home', require('./routes/home'))
+
+/**
+ * API Routes for a user's playlist
+ * 
+ * 
+ * GET
+ * /playlist/
+ * get the playlists for the user
+ */
+app.use('/playlists', require('./routes/playlist'))
+
+
+
 
 
 app.use('/album', require('./routes/album'))
@@ -91,8 +103,7 @@ app.use('/user-playlists', user_playlists)
 const artist = require('./routes/artist')
 app.use('/artist', artist)
 
-const playlists = require('./routes/playlist')
-app.use('/playlists', playlists)
+
 
 
 

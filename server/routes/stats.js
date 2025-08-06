@@ -50,6 +50,7 @@ router.get('/recent', async (req, res) => {
             query += id + ","
         })
         query = query.substring(0, query.length - 1)
+        console.log(query)
 
 
         // request data for unique track ids
@@ -63,6 +64,8 @@ router.get('/recent', async (req, res) => {
         )
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
+
                 data.audio_features.forEach((track) => {
                     var track_data = track_features.get(track.id)
                     track_data["energy"] = track.energy
